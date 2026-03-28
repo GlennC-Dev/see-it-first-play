@@ -1,16 +1,34 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useRef } from "react";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import Stats from "@/components/Stats";
+import Skills from "@/components/Skills";
+import Experience from "@/components/Experience";
+import ProjectsSection from "@/components/ProjectsSection";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import ChatWidget, { type ChatWidgetHandle } from "@/components/ChatWidget";
 
-// IMPORTANT: Fully REPLACE this with your own code
-const PlaceholderIndex = () => {
-  // PLACEHOLDER: Replace this entire return statement with the user's app.
-  // The inline background color is intentionally not part of the design system.
+const Index = () => {
+  const chatRef = useRef<ChatWidgetHandle>(null);
+
+  const openChat = () => chatRef.current?.open();
+
   return (
-    <div className="flex min-h-screen items-center justify-center" style={{ backgroundColor: '#fcfbf8' }}>
-      <img data-lovable-blank-page-placeholder="REMOVE_THIS" src="/placeholder.svg" alt="Your app will live here!" />
-    </div>
+    <>
+      <Navbar />
+      <div className="bg-background transition-colors duration-300">
+        <Hero onOpenChat={openChat} />
+        <Stats />
+      </div>
+      <Skills />
+      <Experience />
+      <ProjectsSection />
+      <Contact onOpenChat={openChat} />
+      <Footer />
+      <ChatWidget ref={chatRef} />
+    </>
   );
 };
-
-const Index = PlaceholderIndex;
 
 export default Index;

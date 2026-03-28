@@ -1,4 +1,6 @@
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 interface ProjectCard {
@@ -9,89 +11,122 @@ interface ProjectCard {
   icon: string;
 }
 
-interface Category {
-  title: string;
-  desc: string;
-  count: string;
-  cards: ProjectCard[];
-}
-
-const categories: Category[] = [
-  {
-    title: "Tableau Visualizations",
-    desc: "Dashboards, scorecards, and subscription-optimized infographic reports built to turn raw data into decisions — not just displays.",
-    count: "2 projects",
-    cards: [
-      { title: "Tableau BI Dashboard Suite", desc: "Multi-report visualization suite eliminating repetitive manual data prep — analysts spend their time on insights, not transformation.", impact: "🔁 Manual prep fully eliminated", tags: ["Tableau", "Python", "BI"], icon: "📊" },
-      { title: "Subscription-Ready Infographic Reports", desc: "Redesigned reports with static sizing and infographic-style layouts engineered for Tableau's Subscription email feature. Stakeholders receive the full, polished report on a schedule — no login, no friction.", impact: "📧 Zero-click delivery to stakeholders", tags: ["Tableau", "Subscriptions", "Infographic Design"], icon: "📬" },
-    ],
-  },
-  {
-    title: "Workflow Automation",
-    desc: "End-to-end automated systems across Google Workspace, Power Query, Apps Script, and n8n — replacing hours of manual work with pipelines that run themselves.",
-    count: "3 projects",
-    cards: [
-      { title: "Automated Data Collection Platform", desc: "Fully automated, scalable data collection system built in Google Workspace — backbone of cross-team performance tracking across multiple business units.", impact: "📈 90% staff utilization achieved", tags: ["Apps Script", "Google Workspace", "Automation"], icon: "🗂️" },
-      { title: "Scorecard Automation System", desc: "End-to-end scorecard pipeline using Power Query enabling D-1 data availability — transformed a hours-long daily process into something that just runs.", impact: "⚡ Hours → Minutes processing time", tags: ["Power Query", "MS Office", "Automation"], icon: "📊" },
-      { title: "Automated eNPS Reporting System", desc: "Replaced a weeks-long manual eNPS process with a fully automated Google Workspace pipeline — leadership shifted from waiting to reacting in real time.", impact: "⏱️ Weeks → Near real-time", tags: ["Apps Script", "Google Sheets", "HR Analytics"], icon: "📋" },
-    ],
-  },
-  {
-    title: "Case Study & Technical Writing",
-    desc: "Process documentation, training curriculum design, and decision-support systems — turning complex workflows into clear, actionable frameworks.",
-    count: "2 projects",
-    cards: [
-      { title: "Neural-Style Troubleshooting Workflows", desc: "Decision-tree troubleshooting flows modeled like a neural network — guiding support agents through complex product issues in real time while pushing CSAT to consistent highs.", impact: "🎯 25% AHT reduction", tags: ["Process Design", "Technical Writing", "LSS"], icon: "🧠" },
-      { title: "Operations Training Curriculum Overhaul", desc: "Ground-up redesign of the full operations training curriculum — halved required training time without reducing coverage, with 20+ knowledge articles for new hire onboarding.", impact: "📚 Training time cut by 50%", tags: ["Curriculum Design", "Technical Writing", "Knowledge Base"], icon: "📖" },
-    ],
-  },
+const TOP_PROJECTS: ProjectCard[] = [
+  { title: "Automated Data Collection Platform", desc: "Fully automated, scalable data collection system built in Google Workspace — backbone of cross-team performance tracking across multiple business units.", impact: "📈 90% staff utilization achieved", tags: ["Apps Script", "Google Workspace", "Automation"], icon: "🗂️" },
+  { title: "Scorecard Automation System", desc: "End-to-end scorecard pipeline using Power Query enabling D-1 data availability — transformed a hours-long daily process into something that just runs.", impact: "⚡ Hours → Minutes processing time", tags: ["Power Query", "MS Office", "Automation"], icon: "📊" },
+  { title: "Neural-Style Troubleshooting Workflows", desc: "Decision-tree troubleshooting flows modeled like a neural network — guiding support agents through complex product issues in real time while pushing CSAT to consistent highs.", impact: "🎯 25% AHT reduction", tags: ["Process Design", "Technical Writing", "LSS"], icon: "🧠" },
 ];
 
-const ProjectCardComponent = ({ card }: { card: ProjectCard }) => (
-  <div className="border border-border rounded-[4px] bg-background flex flex-col transition-all duration-200 relative overflow-hidden group hover:shadow-[0_12px_40px_rgba(26,108,255,0.1)] hover:-translate-y-[3px] hover:border-blue-dim">
-    <div className="absolute top-0 left-0 right-0 h-[3px] bg-primary scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300" />
-    <div className="w-full aspect-video bg-border flex items-center justify-center transition-colors duration-300 overflow-hidden">
-      <div className="text-[2rem] opacity-20">{card.icon}</div>
-    </div>
-    <div className="p-5 flex-1 flex flex-col">
-      <div className="text-[0.95rem] font-semibold mb-1.5 text-foreground transition-colors duration-300">{card.title}</div>
-      <div className="text-[0.82rem] text-ink-soft leading-[1.65] font-light flex-1 mb-3.5">{card.desc}</div>
-      <div className="font-mono-dm text-[0.68rem] tracking-[0.08em] text-primary px-3 py-1.5 bg-blue-dim rounded-sm inline-block mb-3 self-start">{card.impact}</div>
-      <div className="flex flex-wrap gap-1.5">
-        {card.tags.map((t) => (
-          <span key={t} className="text-[0.68rem] font-medium px-2 py-1 rounded-sm bg-border text-ink-muted transition-colors duration-300">{t}</span>
-        ))}
-      </div>
-    </div>
-  </div>
-);
+const ProjectsSection = () => {
+  const [current, setCurrent] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
-const ProjectsSection = () => (
-  <section id="projects" className="py-24 px-[5vw] bg-card border-t border-b border-border transition-colors duration-300">
-    <ScrollReveal>
-      <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// featured work</div>
-      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-12 text-foreground transition-colors duration-300">Projects & Builds</h2>
-    </ScrollReveal>
-    {categories.map((cat) => (
-      <ScrollReveal key={cat.title} className="mb-[4.5rem] last:mb-0">
-        <div className="flex items-baseline gap-6 mb-6 pb-4 border-b border-border flex-wrap transition-colors duration-300">
-          <div className="font-serif-dm text-[1.6rem] text-foreground whitespace-nowrap transition-colors duration-300">{cat.title}</div>
-          <div className="text-[0.85rem] text-ink-soft font-light leading-[1.6] flex-1 min-w-[200px]">{cat.desc}</div>
-          <div className="font-mono-dm text-[0.68rem] tracking-[0.1em] text-ink-muted whitespace-nowrap px-2.5 py-1 border border-border rounded-sm">{cat.count}</div>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {cat.cards.map((c) => (
-            <ProjectCardComponent key={c.title} card={c} />
-          ))}
+  const next = useCallback(() => {
+    setCurrent((c) => (c + 1) % TOP_PROJECTS.length);
+  }, []);
+
+  const prev = useCallback(() => {
+    setCurrent((c) => (c - 1 + TOP_PROJECTS.length) % TOP_PROJECTS.length);
+  }, []);
+
+  useEffect(() => {
+    if (!isAutoPlaying) return;
+    const timer = setInterval(next, 5000);
+    return () => clearInterval(timer);
+  }, [isAutoPlaying, next]);
+
+  const handleManualNav = (fn: () => void) => {
+    setIsAutoPlaying(false);
+    fn();
+  };
+
+  return (
+    <section id="projects" className="py-24 px-[5vw] bg-card border-t border-b border-border transition-colors duration-300">
+      <ScrollReveal>
+        <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// featured work</div>
+        <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-4 text-foreground transition-colors duration-300">Projects & Builds</h2>
+        <p className="text-[0.9rem] text-ink-soft font-light max-w-[55ch] leading-[1.7] mb-12">
+          A selection of high-impact projects spanning automation, visualization, and process design.
+        </p>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <div className="relative max-w-4xl mx-auto">
+          {/* Carousel viewport */}
+          <div className="overflow-hidden rounded-[4px] border border-border">
+            <div
+              className="flex transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${current * 100}%)` }}
+            >
+              {TOP_PROJECTS.map((card) => (
+                <div key={card.title} className="min-w-full">
+                  <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr]">
+                    {/* Image area */}
+                    <div className="w-full aspect-video md:aspect-auto md:min-h-[320px] bg-border flex items-center justify-center">
+                      <div className="text-[3.5rem] opacity-20">{card.icon}</div>
+                    </div>
+                    {/* Info */}
+                    <div className="p-8 flex flex-col justify-center bg-background">
+                      <div className="text-[1.15rem] font-semibold mb-2 text-foreground">{card.title}</div>
+                      <div className="text-[0.85rem] text-ink-soft leading-[1.7] font-light mb-4">{card.desc}</div>
+                      <div className="font-mono-dm text-[0.7rem] tracking-[0.08em] text-primary px-3 py-1.5 bg-blue-dim rounded-sm inline-block mb-4 self-start">{card.impact}</div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {card.tags.map((t) => (
+                          <span key={t} className="text-[0.68rem] font-medium px-2 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-between mt-6">
+            <div className="flex gap-2">
+              <button
+                onClick={() => handleManualNav(prev)}
+                className="w-9 h-9 rounded-full border border-border bg-background flex items-center justify-center text-ink-soft hover:border-primary hover:text-primary transition-colors duration-200"
+                aria-label="Previous project"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => handleManualNav(next)}
+                className="w-9 h-9 rounded-full border border-border bg-background flex items-center justify-center text-ink-soft hover:border-primary hover:text-primary transition-colors duration-200"
+                aria-label="Next project"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Dots */}
+            <div className="flex gap-2">
+              {TOP_PROJECTS.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setIsAutoPlaying(false); setCurrent(i); }}
+                  className={`w-2 h-2 rounded-full transition-all duration-300 ${i === current ? "bg-primary scale-125" : "bg-border hover:bg-ink-muted"}`}
+                  aria-label={`Go to project ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <div className="font-mono-dm text-[0.68rem] tracking-[0.1em] text-ink-muted">
+              {String(current + 1).padStart(2, "0")} / {String(TOP_PROJECTS.length).padStart(2, "0")}
+            </div>
+          </div>
         </div>
       </ScrollReveal>
-    ))}
-    <ScrollReveal className="text-center mt-14">
-      <Link to="/projects" className="inline-flex items-center gap-2.5 font-mono-dm text-[0.78rem] tracking-[0.12em] uppercase text-primary border border-primary px-7 py-3 rounded-sm no-underline hover:bg-primary hover:text-primary-foreground transition-colors duration-200">
-        See all projects & galleries →
-      </Link>
-    </ScrollReveal>
-  </section>
-);
+
+      <ScrollReveal className="text-center mt-14">
+        <Link to="/projects" className="inline-flex items-center gap-2.5 font-mono-dm text-[0.78rem] tracking-[0.12em] uppercase text-primary border border-primary px-7 py-3 rounded-sm no-underline hover:bg-primary hover:text-primary-foreground transition-colors duration-200">
+          See all projects & galleries →
+        </Link>
+      </ScrollReveal>
+    </section>
+  );
+};
 
 export default ProjectsSection;

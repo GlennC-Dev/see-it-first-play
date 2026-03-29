@@ -10,12 +10,20 @@ export interface ChatWidgetHandle {
   open: () => void;
 }
 
+// Expose this globally so n8n or external integrations can hook into chat messages
+declare global {
+  interface Window {
+    __chatMessageHandler?: (data: { message: string; history: { role: string; text: string }[] }) => Promise<{ reply: string }>;
+  }
+}
+
 const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [formShown, setFormShown] = useState(false);
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
   const messagesRef = useRef<HTMLDivElement>(null);
 
   useImperativeHandle(ref, () => ({
@@ -40,21 +48,37 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
     if (messagesRef.current) messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }, [messages]);
 
-  const sendMessage = () => {
+  const sendMessage = async () => {
     if (!input.trim()) return;
     const text = input.trim();
     setInput("");
-    setMessages((prev) => [...prev, { role: "user", text, time: now() }]);
+    const updatedMessages = [...messages, { role: "user" as const, text, time: now() }];
+    setMessages(updatedMessages);
 
     const shouldShowForm = /hire|work|contact|reach|available|project|consult|freelance|email|message/i.test(text);
 
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        { role: "bot", text: "Thanks for reaching out! Glenn specializes in automation, BI dashboards, and workflow optimization. Feel free to leave your contact details and he'll get back to you soon! 🚀", time: now() },
-      ]);
-      if (shouldShowForm && !formShown) setFormShown(true);
-    }, 1000);
+    // If an external handler (n8n) is attached, use it
+    if (window.__chatMessageHandler) {
+      setIsTyping(true);
+      try {
+        const history = updatedMessages.map((m) => ({ role: m.role, text: m.text }));
+        const result = await window.__chatMessageHandler({ message: text, history });
+        setMessages((prev) => [...prev, { role: "bot", text: result.reply, time: now() }]);
+      } catch {
+        setMessages((prev) => [...prev, { role: "bot", text: "Sorry, something went wrong. Please try again.", time: now() }]);
+      } finally {
+        setIsTyping(false);
+      }
+    } else {
+      // Default fallback response
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          { role: "bot", text: "Thanks for reaching out! Glenn specializes in automation, BI dashboards, and workflow optimization. Feel free to leave your contact details and he'll get back to you soon! 🚀", time: now() },
+        ]);
+        if (shouldShowForm && !formShown) setFormShown(true);
+      }, 1000);
+    }
   };
 
   return (
@@ -90,6 +114,13 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
               <div className={`text-[0.68rem] text-ink-muted font-mono-dm ${m.role === "user" ? "text-right" : ""}`}>{m.time}</div>
             </div>
           ))}
+          {isTyping && (
+            <div className="self-start max-w-[82%]">
+              <div className="bg-card border border-border text-foreground rounded-[10px] rounded-bl-[3px] px-3.5 py-2.5 text-[0.85rem]">
+                <span className="animate-pulse">Typing…</span>
+              </div>
+            </div>
+          )}
           {formShown && !formSubmitted && (
             <div className="self-start max-w-[82%]">
               <div className="bg-card border border-border rounded-[10px] p-3.5 transition-colors duration-300">

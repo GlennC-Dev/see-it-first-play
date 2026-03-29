@@ -31,17 +31,17 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           </a>
         </div>
       </div>
-      <div className="relative z-[1] animate-fade-up-delay-2 hidden md:block">
-        <div className="w-full aspect-[3/4] bg-border rounded-[4px] overflow-hidden border border-border flex items-center justify-center transition-colors duration-300">
-          <div className="flex flex-col items-center gap-3 text-ink-muted text-[0.8rem] font-mono-dm tracking-[0.1em] text-center">
-            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-              <circle cx="24" cy="18" r="10" stroke="currentColor" strokeWidth="2" />
-              <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-            </svg>
-            <span>Add your photo here</span>
-          </div>
-        </div>
-      </div>
+<div className="relative z-[1] animate-fade-up-delay-2 hidden md:block">
+  <div className="w-[280px] h-[360px] bg-border rounded-[4px] overflow-hidden border border-border flex items-center justify-center transition-colors duration-300 ml-auto">
+    <div className="flex flex-col items-center gap-3 text-ink-muted text-[0.8rem] font-mono-dm tracking-[0.1em] text-center">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+        <circle cx="24" cy="18" r="10" stroke="currentColor" strokeWidth="2" />
+        <path d="M6 42c0-9.941 8.059-18 18-18s18 8.059 18 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+      </svg>
+      <span>Add your photo here</span>
+    </div>
+  </div>
+</div>
     </section>
   );
 };

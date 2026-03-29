@@ -15,6 +15,7 @@ const TOP_PROJECTS: ProjectCard[] = [
   { title: "Automated Data Collection Platform", desc: "Fully automated, scalable data collection system built in Google Workspace — backbone of cross-team performance tracking across multiple business units.", impact: "📈 90% staff utilization achieved", tags: ["Apps Script", "Google Workspace", "Automation"], icon: "🗂️" },
   { title: "Scorecard Automation System", desc: "End-to-end scorecard pipeline using Power Query enabling D-1 data availability — transformed a hours-long daily process into something that just runs.", impact: "⚡ Hours → Minutes processing time", tags: ["Power Query", "MS Office", "Automation"], icon: "📊" },
   { title: "Neural-Style Troubleshooting Workflows", desc: "Decision-tree troubleshooting flows modeled like a neural network — guiding support agents through complex product issues in real time while pushing CSAT to consistent highs.", impact: "🎯 25% AHT reduction", tags: ["Process Design", "Technical Writing", "LSS"], icon: "🧠" },
+  { title: "Placeholder Project Title", desc: "Replace this with your project description. Explain the problem solved, approach taken, and tools used.", impact: "📌 Add impact metric here", tags: ["Tag 1", "Tag 2", "Tag 3"], icon: "🔧" },
 ];
 
 const ProjectsSection = () => {

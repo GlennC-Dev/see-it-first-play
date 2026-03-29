@@ -1,6 +1,6 @@
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (
-    <section id="hero" className="min-h-screen px-[5vw] grid grid-cols-1 md:grid-cols-2 items-center gap-16 pt-20 relative overflow-hidden">
+    <section id="hero" className="min-h-[85vh] px-[5vw] grid grid-cols-1 md:grid-cols-2 items-center gap-16 pt-16 pb-8 relative overflow-hidden">
       {/* Grid background */}
       <div
         className="absolute inset-0 z-0 opacity-40 pointer-events-none"

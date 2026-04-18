@@ -49,6 +49,65 @@ const App = () => {
     };
     
     console.log('[App] Handler initialized successfully');
+
+    // Chat widget → n8n chatbot handler
+    window.__chatMessageHandler = async ({ message, history }) => {
+      console.log('[Chat] Message received:', message);
+
+      const webhookUrl = import.meta.env.VITE_N8N_CHAT_WEBHOOK_URL;
+      console.log('[Chat] Chat webhook URL:', webhookUrl);
+
+      if (!webhookUrl) {
+        console.warn('[Chat] No VITE_N8N_CHAT_WEBHOOK_URL configured');
+        return { reply: "I'm not connected to my brain just yet — please leave your details and Glenn will get back to you!" };
+      }
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ message, history }),
+        });
+
+        console.log('[Chat] Response status:', response.status);
+
+        if (!response.ok) {
+          console.error('[Chat] Webhook returned non-OK status:', response.status);
+          return { reply: 'Hmm, I had trouble reaching the server. Mind trying again?' };
+        }
+
+        // Tolerate multiple response shapes: {reply}, {output}, {message}, plain text, or array
+        const contentType = response.headers.get('content-type') || '';
+        let reply = '';
+
+        if (contentType.includes('application/json')) {
+          const data = await response.json();
+          console.log('[Chat] Response payload:', data);
+          const payload = Array.isArray(data) ? data[0] : data;
+          reply =
+            payload?.reply ??
+            payload?.output ??
+            payload?.message ??
+            payload?.text ??
+            (typeof payload === 'string' ? payload : '');
+        } else {
+          reply = await response.text();
+          console.log('[Chat] Response text:', reply);
+        }
+
+        if (!reply) {
+          console.warn('[Chat] Empty reply from webhook');
+          reply = "Got it — I'll pass that along to Glenn.";
+        }
+
+        return { reply };
+      } catch (error) {
+        console.error('[Chat] Error:', error);
+        return { reply: 'Sorry, something went wrong on my end. Please try again in a moment.' };
+      }
+    };
+
+    console.log('[App] Chat handler initialized');
   }, []);
 
   return (

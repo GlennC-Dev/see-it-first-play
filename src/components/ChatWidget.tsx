@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect, forwardRef, useImperativeHandle } from "react";
+import { getChatSessionId } from "@/lib/chatSession";
 
 interface Message {
   role: "bot" | "user";
@@ -13,7 +14,7 @@ export interface ChatWidgetHandle {
 // Expose this globally so n8n or external integrations can hook into chat messages
 declare global {
   interface Window {
-    __chatMessageHandler?: (data: { message: string; history: { role: string; text: string }[] }) => Promise<{ reply: string }>;
+    __chatMessageHandler?: (data: { sessionId: string; message: string; history: { role: string; text: string }[] }) => Promise<{ reply: string }>;
   }
 }
 
@@ -55,29 +56,22 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
     const updatedMessages = [...messages, { role: "user" as const, text, time: now() }];
     setMessages(updatedMessages);
 
-    const shouldShowForm = /hire|work|contact|reach|available|project|consult|freelance|email|message/i.test(text);
+    // All replies come from n8n via __chatMessageHandler. No templated fallback.
+    if (!window.__chatMessageHandler) {
+      console.warn("[ChatWidget] No __chatMessageHandler attached — message not sent.");
+      return;
+    }
 
-    // If an external handler (n8n) is attached, use it
-    if (window.__chatMessageHandler) {
-      setIsTyping(true);
-      try {
-        const history = updatedMessages.map((m) => ({ role: m.role, text: m.text }));
-        const result = await window.__chatMessageHandler({ message: text, history });
-        setMessages((prev) => [...prev, { role: "bot", text: result.reply, time: now() }]);
-      } catch {
-        setMessages((prev) => [...prev, { role: "bot", text: "Sorry, something went wrong. Please try again.", time: now() }]);
-      } finally {
-        setIsTyping(false);
-      }
-    } else {
-      // Default fallback response
-      setTimeout(() => {
-        setMessages((prev) => [
-          ...prev,
-          { role: "bot", text: "Thanks for reaching out! Glenn specializes in automation, BI dashboards, and workflow optimization. Feel free to leave your contact details and he'll get back to you soon! 🚀", time: now() },
-        ]);
-        if (shouldShowForm && !formShown) setFormShown(true);
-      }, 1000);
+    setIsTyping(true);
+    try {
+      const sessionId = getChatSessionId();
+      const history = updatedMessages.map((m) => ({ role: m.role, text: m.text }));
+      const result = await window.__chatMessageHandler({ sessionId, message: text, history });
+      setMessages((prev) => [...prev, { role: "bot", text: result.reply, time: now() }]);
+    } catch {
+      setMessages((prev) => [...prev, { role: "bot", text: "Sorry, something went wrong. Please try again.", time: now() }]);
+    } finally {
+      setIsTyping(false);
     }
   };
 

@@ -58,8 +58,9 @@ const App = () => {
     // .env.local → VITE_N8N_CHAT_WEBHOOK_URL
     // Watch the browser console for "[Chat]" prefixed logs.
     // ─────────────────────────────────────────────────────────────
-    window.__chatMessageHandler = async ({ message, history }) => {
+    window.__chatMessageHandler = async ({ sessionId, message, history }) => {
       console.log('[Chat] 📨 Message received from widget:', message);
+      console.log('[Chat] 🆔 Session ID:', sessionId);
       console.log('[Chat] 🧵 History length:', history?.length ?? 0);
 
       // 🔗 Webhook URL is loaded from .env.local at build time.
@@ -76,7 +77,7 @@ const App = () => {
         const response = await fetch(webhookUrl, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message, history }),
+          body: JSON.stringify({ sessionId, message, history }),
         });
 
         console.log('[Chat] Response status:', response.status);

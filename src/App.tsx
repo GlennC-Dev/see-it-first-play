@@ -50,12 +50,22 @@ const App = () => {
     
     console.log('[App] Handler initialized successfully');
 
-    // Chat widget → n8n chatbot handler
+    // ─────────────────────────────────────────────────────────────
+    // 🐞 DEBUG ENTRY POINT — Chat widget → n8n chatbot handler
+    // File: src/App.tsx
+    // This is where every chat message from <ChatWidget /> lands
+    // before being POSTed to the n8n webhook defined in
+    // .env.local → VITE_N8N_CHAT_WEBHOOK_URL
+    // Watch the browser console for "[Chat]" prefixed logs.
+    // ─────────────────────────────────────────────────────────────
     window.__chatMessageHandler = async ({ message, history }) => {
-      console.log('[Chat] Message received:', message);
+      console.log('[Chat] 📨 Message received from widget:', message);
+      console.log('[Chat] 🧵 History length:', history?.length ?? 0);
 
+      // 🔗 Webhook URL is loaded from .env.local at build time.
+      // To swap URLs, edit .env.local and restart the dev server.
       const webhookUrl = import.meta.env.VITE_N8N_CHAT_WEBHOOK_URL;
-      console.log('[Chat] Chat webhook URL:', webhookUrl);
+      console.log('[Chat] 🌐 Posting to webhook:', webhookUrl);
 
       if (!webhookUrl) {
         console.warn('[Chat] No VITE_N8N_CHAT_WEBHOOK_URL configured');

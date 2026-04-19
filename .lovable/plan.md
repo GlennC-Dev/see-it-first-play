@@ -1,47 +1,53 @@
 
-The user wants to wire up the existing chat widget to an n8n chatbot workflow. The widget already exposes `window.__chatMessageHandler` (same pattern as the working contact form via `window.__contactFormHandler`). This is mostly a configuration + handler-wiring task that mirrors what already works for the contact form.
+Two changes:
 
-## Plan: Connect Chat Widget to n8n Chatbot
+## 1. Drop the templated fallback reply
 
-### How it will work
+In `src/components/ChatWidget.tsx`, the `sendMessage` function has an `else` branch (when no `__chatMessageHandler` is attached) that auto-replies with:
+> "Thanks for reaching out! Glenn specializes in automation, BI dashboards…"
 
-The chat widget already has a hook (`window.__chatMessageHandler`) ready for an external integration. We'll wire it up the same way the contact form is wired — register a handler in `App.tsx` that POSTs to your n8n chat webhook and feeds the bot reply back into the chat UI.
+Since n8n is now wired up via `__chatMessageHandler`, this branch is what produces the unwanted templated message in some cases. I'll remove the entire `else` block so:
+- The greeting on open stays (that's the only canned message left).
+- Every subsequent user message goes through n8n only — no fallback templated bubble.
+- I'll also drop the `shouldShowForm` regex + `formShown` auto-trigger logic tied to it (no longer needed; n8n decides what to say).
 
-```text
-User types in chat → ChatWidget → window.__chatMessageHandler
-                                        ↓
-                              POST { message, history } → n8n webhook
-                                        ↓
-                              n8n chatbot workflow (LLM / logic)
-                                        ↓
-                              Response { reply: "..." } → chat bubble
+The lead-capture form UI itself stays in the file (so we can re-trigger it later from n8n if you want), but it won't auto-pop based on keywords anymore.
+
+## 2. Expose a unique session key
+
+Generate a per-visitor session ID and send it with every chat payload so n8n's Memory node can scope conversations.
+
+**Format:** `sess_{YYYYMMDD}_{8-char-random}` — e.g. `sess_20260419_a3f9c2e1`
+- No IP / no PII
+- Date prefix makes it human-scannable in n8n logs
+- Random suffix (crypto.randomUUID slice) makes it unique per browser
+
+**Where it lives:**
+- Stored in `localStorage` under key `glenn_chat_session_id`
+- Created on first chat open, reused for the lifetime of that browser
+- A small helper `getChatSessionId()` in `src/lib/chatSession.ts` (new file) handles get-or-create
+
+**Where it's sent:**
+- `src/components/ChatWidget.tsx` → includes `sessionId` when calling `__chatMessageHandler`
+- `src/App.tsx` → forwards `sessionId` in the POST body to n8n alongside `message` and `history`
+- Also logged in the `[Chat]` console block so you can copy it for debugging
+
+**On the n8n side**, the webhook payload becomes:
+```json
+{
+  "sessionId": "sess_20260419_a3f9c2e1",
+  "message": "user text",
+  "history": [...]
+}
 ```
+Use `{{ $json.body.sessionId }}` as the session key in your Memory node.
 
-### What you need on the n8n side
+## Files to change
 
-A workflow with:
-1. **Webhook node** — POST, "Respond: When last node finishes"
-2. **AI Agent / LLM node** (OpenAI, Anthropic, Ollama, etc.) — receives `{{ $json.message }}` and optionally `{{ $json.history }}` for context. Add a Memory node if you want n8n to manage context instead of the frontend.
-3. **Respond to Webhook node** returning JSON: `{ "reply": "the bot's answer" }`
+| File | Change |
+|---|---|
+| `src/lib/chatSession.ts` | **New** — `getChatSessionId()` helper (localStorage, generate if missing) |
+| `src/components/ChatWidget.tsx` | Remove `else` fallback + keyword regex; pass `sessionId` to handler; update the global type |
+| `src/App.tsx` | Accept `sessionId` in handler args; include it in the POST body; log it |
 
-You'll give me the production webhook URL the same way you did for the contact form.
-
-### What I'll change in the code
-
-1. **`.env.local`** — add `VITE_N8N_CHAT_WEBHOOK_URL=<your n8n chat webhook>`
-2. **`src/App.tsx`** — register `window.__chatMessageHandler` that:
-   - POSTs `{ message, history }` to the chat webhook
-   - Reads `{ reply }` from the response and returns it to the widget
-   - Logs requests/errors in the console (same style as the contact form handler) so we can debug
-   - Tolerates a few common response shapes (`reply`, `output`, `message`, or plain text) so it works no matter how you build the n8n workflow
-3. **`src/components/ChatWidget.tsx`** — no logic changes needed. It already calls the handler, shows a "Typing…" indicator while waiting, and renders the reply. I'll just sanity-check error fallback copy.
-
-### Open questions before I build
-
-A few things I need from you to wire this correctly:
-
-1. **Webhook URL** — do you already have the n8n chat webhook URL ready to paste, or do you need to build the workflow first? (If you need help, I can give you a step-by-step n8n recipe.)
-2. **Response shape** — what JSON will your n8n workflow return? `{ "reply": "..." }`, `{ "output": "..." }` (n8n AI Agent default), or are you not sure yet? If unsure, I'll make the handler tolerant of multiple shapes.
-3. **Conversation memory** — should we send the full conversation history with each message (bot remembers context, more tokens), or just the latest message and let n8n manage memory via a session ID + Memory node?
-
-Once you answer these, I'll switch out of plan mode and wire it up.
+No `.env.local` changes. No n8n URL changes.

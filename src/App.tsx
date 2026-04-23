@@ -87,28 +87,65 @@ const App = () => {
           return { reply: 'Hmm, I had trouble reaching the server. Mind trying again?' };
         }
 
-        // Tolerate multiple response shapes: {reply}, {output}, {message}, plain text, or array
+        // 🪵 Always log the RAW response body before parsing — copy this from
+        // the browser console to confirm exactly what n8n is sending back.
+        const raw = await response.clone().text();
+        console.log('[Chat] 🪵 RAW response body:', raw);
+
+        // Tolerate many response shapes from n8n / AI Agent / Respond to Webhook
         const contentType = response.headers.get('content-type') || '';
-        let reply = '';
+        let reply: string = '';
+
+        const pickString = (v: unknown): string => {
+          if (typeof v === 'string') return v;
+          if (typeof v === 'number' || typeof v === 'boolean') return String(v);
+          return '';
+        };
 
         if (contentType.includes('application/json')) {
-          const data = await response.json();
-          console.log('[Chat] Response payload:', data);
+          let data: any;
+          try {
+            data = JSON.parse(raw);
+          } catch (e) {
+            console.warn('[Chat] JSON parse failed, falling back to raw text');
+            data = raw;
+          }
+          console.log('[Chat] Parsed payload:', data);
           const payload = Array.isArray(data) ? data[0] : data;
+
+          // Walk common shapes: top-level, nested under data/body/result/response,
+          // and OpenAI-style choices[0].message.content
           reply =
-            payload?.reply ??
-            payload?.output ??
-            payload?.message ??
-            payload?.text ??
+            pickString(payload?.reply) ||
+            pickString(payload?.output) ||
+            pickString(payload?.message) ||
+            pickString(payload?.text) ||
+            pickString(payload?.response) ||
+            pickString(payload?.answer) ||
+            pickString(payload?.content) ||
+            pickString(payload?.data?.reply) ||
+            pickString(payload?.data?.output) ||
+            pickString(payload?.data?.message) ||
+            pickString(payload?.data?.text) ||
+            pickString(payload?.body?.reply) ||
+            pickString(payload?.body?.output) ||
+            pickString(payload?.body?.message) ||
+            pickString(payload?.body?.text) ||
+            pickString(payload?.result?.output) ||
+            pickString(payload?.result?.text) ||
+            pickString(payload?.output?.text) ||
+            pickString(payload?.message?.content) ||
+            pickString(payload?.choices?.[0]?.message?.content) ||
+            pickString(payload?.choices?.[0]?.text) ||
             (typeof payload === 'string' ? payload : '');
         } else {
-          reply = await response.text();
-          console.log('[Chat] Response text:', reply);
+          reply = raw;
+          console.log('[Chat] Non-JSON response text:', reply);
         }
 
         if (!reply) {
-          console.warn('[Chat] Empty reply from webhook');
-          reply = "Got it — I'll pass that along to Glenn.";
+          console.warn('[Chat] ⚠️ Could not extract a reply from webhook response. Raw body above.');
+          reply = "⚠️ Couldn't parse n8n reply — check console for [Chat] 🪵 RAW response body";
         }
 
         return { reply };

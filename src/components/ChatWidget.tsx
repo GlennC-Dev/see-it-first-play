@@ -49,7 +49,8 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
     if (messagesRef.current) messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }, [messages]);
 
-  const sendMessage = async () => {
+  const sendMessage = async (e?: React.FormEvent) => {
+    if (e) e.preventDefault();
     if (!input.trim()) return;
     const text = input.trim();
     setInput("");
@@ -85,7 +86,7 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
         {isOpen ? "✕" : "💬"}
       </button>
 
-      <div className={`fixed bottom-[6.5rem] right-8 z-[999] w-[360px] max-h-[540px] bg-card rounded-xl border border-border shadow-[0_16px_64px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden transition-all duration-[250ms] ${isOpen ? "translate-y-0 scale-100 opacity-100 pointer-events-auto" : "translate-y-4 scale-[0.97] opacity-0 pointer-events-none"}`}>
+      <div className={`fixed bottom-[6.5rem] right-8 z-[999] w-[360px] max-w-[calc(100vw-2rem)] max-h-[min(540px,calc(100vh-8rem))] bg-card rounded-xl border border-border shadow-[0_16px_64px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden transition-all duration-[250ms] ${isOpen ? "translate-y-0 scale-100 opacity-100 pointer-events-auto" : "translate-y-4 scale-[0.97] opacity-0 pointer-events-none"}`}>
         {/* Header */}
         <div className="bg-primary text-primary-foreground p-4 flex items-center gap-3 flex-shrink-0">
           <div className="w-[2.2rem] h-[2.2rem] rounded-full bg-[rgba(255,255,255,0.2)] flex items-center justify-center text-[0.85rem] font-semibold flex-shrink-0">G</div>
@@ -141,19 +142,21 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
         </div>
 
         {/* Input */}
-        <div className="px-4 py-3 border-t border-border flex gap-2 flex-shrink-0 bg-card transition-colors duration-300">
+        <form onSubmit={sendMessage} className="px-4 py-3 border-t border-border flex gap-2 flex-shrink-0 bg-card transition-colors duration-300">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
             placeholder="Ask me anything…"
+            enterKeyHint="send"
+            inputMode="text"
+            autoComplete="off"
             className="flex-1 border border-border rounded-[20px] px-4 py-2 text-[0.85rem] text-foreground bg-background outline-none focus:border-primary transition-colors duration-200"
           />
-          <button onClick={sendMessage} className="bg-primary text-primary-foreground border-none rounded-full w-[2.2rem] h-[2.2rem] cursor-pointer flex items-center justify-center text-[0.9rem] flex-shrink-0 hover:brightness-110 transition-all duration-200">
+          <button type="submit" aria-label="Send message" className="bg-primary text-primary-foreground border-none rounded-full min-w-[44px] min-h-[44px] cursor-pointer flex items-center justify-center text-[0.9rem] flex-shrink-0 hover:brightness-110 transition-all duration-200">
             ➤
           </button>
-        </div>
+        </form>
       </div>
     </>
   );

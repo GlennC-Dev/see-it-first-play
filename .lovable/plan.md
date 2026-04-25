@@ -1,52 +1,51 @@
+## Why the chat doesn't fire on mobile
 
+Looking at `ChatWidget.tsx`, the input/send wiring has two mobile-specific gaps. The webhook itself works fine — the frontend just never calls it on mobile.
 
-## Diagnosis: why n8n's reply isn't reaching the chat bubble
+### Cause 1 — `onKeyDown="Enter"` does not fire on mobile keyboards
 
-The widget IS receiving a reply from `App.tsx` — but it's the **fallback string** on line 111: `"Got it — I'll pass that along to Glenn."` That fires whenever the parser can't find a recognizable text field in n8n's response. So the symptom ("only automated messages") = the parser is returning empty.
-
-Two common culprits with n8n's "Respond to Webhook" node:
-
-1. **Wrong key.** AI Agent output is usually under `output`, but if you wrapped it (e.g. returned `{ data: { output: "..." } }` or `{ response: "..." }` or `{ choices: [...] }`), none of `reply / output / message / text` match → empty → fallback fires.
-2. **Nested / non-string value.** If `output` is an object (e.g. `{ output: { text: "..." } }`) or an array, `payload.output` is truthy but not a string, and React renders nothing meaningful — or the `??` chain picks up an object and the bubble shows `[object Object]` / blank.
-3. **"Respond to Webhook" mode.** If set to "First Incoming Item" with no body mapping, n8n returns the entire item including `headers`, `params`, etc., and the actual model text is buried under `body.output` or similar.
-
-## Plan
-
-### Step 1 — Confirm the exact response shape (no code change yet)
-
-Before changing parsing logic, I need to see what n8n is actually sending back. I'll add **one extra console log** in `src/App.tsx` that prints the **raw response text** before any JSON parsing:
-
-```ts
-const raw = await response.clone().text();
-console.log('[Chat] 🪵 RAW response body:', raw);
+Line 149:
+```tsx
+onKeyDown={(e) => e.key === "Enter" && sendMessage()}
 ```
 
-You then:
-1. Open the chat, send a message.
-2. Open the browser console, copy the `[Chat] 🪵 RAW response body:` line.
-3. Paste it back to me.
+On iOS Safari and most Android keyboards, the on-screen "return/send/Go" key on a plain `<input type="text">` either:
+- inserts a newline / dismisses the keyboard without firing a `keydown` "Enter" event, or
+- fires it with `e.key === "Unidentified"` / `keyCode 229` (IME composition).
 
-That tells us definitively which key holds the model's text.
+Result: tapping the send/return key on the phone keyboard does **nothing** — no fetch, no log, no message added. The desktop Enter key works because real keyboards always emit `key === "Enter"`.
 
-### Step 2 — Make the parser bulletproof
+The fix is to wrap the input + send button in a `<form onSubmit={...}>`. Mobile keyboards reliably submit forms when the user taps the on-screen "Go/Send/Return" key (the browser converts it to a native form submit). This is the standard mobile-safe pattern.
 
-Once we know the shape, I'll update the `??` chain in `src/App.tsx` (lines 98–103) to:
-- Walk nested objects (`payload.data?.output`, `payload.body?.output`, `payload.response`, `payload.choices?.[0]?.message?.content`, etc.)
-- Coerce non-string values to string safely
-- Replace the silent `"Got it — I'll pass that along to Glenn."` fallback with a **visible debug message** like `"⚠️ Couldn't parse n8n reply — check console"` so this never silently masquerades as a templated reply again.
+### Cause 2 — The send button (➤) may not be tappable
 
-### Step 3 — (Optional) Recommend the cleanest n8n setup
+Line 153 — the send arrow button:
+- `w-[2.2rem] h-[2.2rem]` ≈ **35×35 px**, below Apple's 44×44 and Google's 48×48 minimum tap target.
+- It's an inline `<button>` without `type="button"`, so inside a form it would submit; outside, on iOS, small buttons with no explicit type sometimes get swallowed by the browser's input focus handling.
 
-In your **Respond to Webhook** node, set:
-- **Respond With:** `JSON`
-- **Response Body:** `{ "reply": "{{ $json.output }}" }` (or wherever your AI Agent puts the text)
+We'll bump the minimum touch area and add `type="submit"` (since it'll live in a form).
 
-That guarantees the frontend's first lookup (`payload.reply`) hits.
+### Cause 3 (minor) — Bottom of widget can be hidden under iOS Safari's URL bar
 
-### Files to change
-| File | Change |
-|---|---|
-| `src/App.tsx` | Add raw-body log (Step 1); after you share the log, expand the parser + change empty-reply fallback to a visible debug string (Step 2). |
+Widget uses `bottom-[6.5rem]` and `max-h-[540px]`. On a 375×667 iPhone with the URL bar showing, the widget can extend past the visible viewport, hiding the input. Not the root cause, but worth fixing while we're in there with a `max-h-[min(540px,calc(100vh-8rem))]` cap.
 
-No changes to `ChatWidget.tsx`, `chatSession.ts`, or `.env.local`.
+## Changes
 
+### File: `src/components/ChatWidget.tsx`
+
+1. Convert `sendMessage` to accept an optional `FormEvent` and call `e.preventDefault()`.
+2. Wrap the input + send button (lines 144–156) in a `<form onSubmit={sendMessage}>`.
+3. Remove the `onKeyDown` Enter handler (form submit replaces it).
+4. Add `type="submit"` to the send button and bump it to `min-w-[44px] min-h-[44px]`.
+5. Change input `type="text"` → keep as text but add `enterKeyHint="send"` so mobile keyboards show a "Send" key instead of "return".
+6. Add `inputMode="text"` and `autoComplete="off"` for cleaner mobile UX.
+7. Cap widget height responsively so the input is never hidden behind iOS chrome.
+
+No changes needed to `App.tsx`, `chatSession.ts`, the webhook URL, or `.env.local`. Once mobile actually fires the handler, the existing n8n flow (which you've already confirmed works on desktop) will return replies the same way.
+
+## How to verify after the fix
+
+1. Open the published site on your phone.
+2. Open the chat, type "hi", tap the on-screen **Send** key (or the ➤ button).
+3. You should see "Typing…" appear, then n8n's reply within a few seconds — same as desktop.
+4. If it still fails, open Safari → Settings → Advanced → Web Inspector and connect to your Mac, OR check the n8n executions panel: if no execution shows up, the click still isn't reaching the handler; if it does and reply doesn't appear, it's a response-parsing issue (separate fix).

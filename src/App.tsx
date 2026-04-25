@@ -10,16 +10,25 @@ import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 
 const queryClient = new QueryClient();
+const FALLBACK_CONTACT_WEBHOOK_URL = "https://n8n.srv1432950.hstgr.cloud/webhook/topgcontactform_sendmessage";
+const FALLBACK_CHAT_WEBHOOK_URL = "https://n8n.srv1432950.hstgr.cloud/webhook/topgcontactform_sendchat";
 
 const App = () => {
   useEffect(() => {
     console.log('[App] Initializing contact form handler...');
+    const envContactWebhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL?.trim();
+    const envChatWebhookUrl = import.meta.env.VITE_N8N_CHAT_WEBHOOK_URL?.trim();
+    const contactWebhookUrl = envContactWebhookUrl || FALLBACK_CONTACT_WEBHOOK_URL;
+    const chatWebhookUrl = envChatWebhookUrl || FALLBACK_CHAT_WEBHOOK_URL;
+
+    console.log('[App] Contact webhook source:', envContactWebhookUrl ? 'env' : 'fallback');
+    console.log('[App] Chat webhook source:', envChatWebhookUrl ? 'env' : 'fallback');
     
     window.__contactFormHandler = async (formData) => {
       console.log('[Handler] Form submission received:', formData);
       
       try {
-        const webhookUrl = import.meta.env.VITE_N8N_WEBHOOK_URL;
+        const webhookUrl = contactWebhookUrl;
         console.log('[Handler] Webhook URL:', webhookUrl);
         
         if (!webhookUrl) {
@@ -65,7 +74,7 @@ const App = () => {
 
       // 🔗 Webhook URL is loaded from .env.local at build time.
       // To swap URLs, edit .env.local and restart the dev server.
-      const webhookUrl = import.meta.env.VITE_N8N_CHAT_WEBHOOK_URL;
+      const webhookUrl = chatWebhookUrl;
       console.log('[Chat] 🌐 Posting to webhook:', webhookUrl);
 
       if (!webhookUrl) {

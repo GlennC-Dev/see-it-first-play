@@ -13,9 +13,11 @@ const mainExperience: ExpItem[] = [
   {
     role: "Reports and Automation Specialist",
     period: "AUG 2023 — PRESENT",
-    company: "Company Latest",
+    company: "Acquire Intelligence",
     bullets: [
       "Built Tableau dashboards that <strong>eliminated hours of manual data transformation</strong>, freeing analysts to focus on insights.",
+      "Prepared dashboards that utilizes Tableau's Subscriptions function, sending <strong>tailored reports straight to stakeholder's inbox</strong> on cue.",
+      "Developed tools for checking data availability every morning, taking advantage of subscriptions to send alerts to Data Engineering team in case of issues",
       "Applied scripting to streamline complex data processing outside Tableau — <strong>reducing processing time from hours to minutes</strong>.",
       "Leveraged Power Query for Scorecard Automation, enabling <strong>D-1 scorecard availability</strong> at a fraction of previous processing time.",
       "Developed scorecards, automated reports, and data collection systems using <strong>Google Apps Script</strong> within Google Workspace.",
@@ -25,7 +27,7 @@ const mainExperience: ExpItem[] = [
   {
     role: "Operational Business Insights Analyst",
     period: "OCT 2022 — AUG 2023",
-    company: "Company Latest",
+    company: "Acquire BPO",
     bullets: [
       "Designed a fully automated data collection system via Google Workspace — driving <strong>90% staff utilization and 92% employee efficiency</strong> across multiple teams.",
       "Built neural-network-style troubleshooting workflows for agents, <strong>reducing AHT by 25%</strong> while improving CSAT and resolution rates.",
@@ -38,29 +40,36 @@ const hiddenExperience: ExpItem[] = [
   {
     role: "Project Specialist",
     period: "MAR 2022 — OCT 2022",
-    company: "Company Latest",
+    company: "Acquire BPO",
     bullets: [
-      "Redesigned entire training curricula for operations — cutting required training time <strong>by 50%</strong> while improving coverage.",
-      "Authored 20+ knowledge articles and led training sessions for multiple new hire classes transitioning to operations.",
+      "Redesigned entire training curricula for operations — cutting required training time <strong>by 50%</strong> while improving coverage and promoting troubleshooting based on how technologies work.",
+      "Authored 20+ knowledge articles and led training sessions for four new hire classes during their transition to operations.",
     ],
   },
   {
-    role: "Tech Escalations → Business Faults → ADSL/Fiber Support",
+    role: "ADSL/Fiber Support → Business Faults → Tech Escalations",
     period: "JAN 2017 — MAR 2022",
-    company: "Company Latest",
-    bullets: ["Progressed through technical support roles over five years, handling escalations, business faults, and fiber/ADSL support."],
+    company: "Acquire BPO",
+    bullets: ["Primarily worked on manager escalations, client escalations, or cases involving Australia's Telecommunication Industry Ombudsman (TIO).",
+              "Acted as SME for new hire classes, assisted with team level reporting, wrote processes for new products and spearheaded discovery sessions for optimizing troubleshooting flow.",
+              "Acted on cases needing supplier intervention -- coordinating technician dispatches, equipment delivery and outage status.",
+    ],
   },
   {
     role: "Residential ADSL/PSTN Technical Support",
     period: "FEB 2016 — JAN 2017",
-    company: "Company 2",
-    muted: true,
+    company: "Acquire BPO",
+    bullets: ["Frontline Technical Support Staff answering and assisting residential customers with concerns related to ADSL and technologies.",
+              "Assisted with minor billing concerns, technician dispatch and outage status.",
+    ],
   },
   {
     role: "High Speed Internet Technical Support Agent",
     period: "AUG 2014 — JUN 2015",
-    company: "Company 3",
-    muted: true,
+    company: "Sykes Asia Incorporated",
+    bullets: ["Frontline Technical Support Staff answering and assisting residential customers with concerns related to ADSL internet and related technologies at the time.",
+              "Assisted with minor billing concerns, technician dispatch and outage status.",
+    ],
   },
 ];
 

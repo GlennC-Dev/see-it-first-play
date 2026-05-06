@@ -2,19 +2,32 @@ import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
+import enpsDashboard from "@/assets/projects/enps-dashboard.png";
+import improveFmea from "@/assets/projects/improve-fmea.png";
+import chatEtl from "@/assets/projects/chat-etl.png";
+import appsScript from "@/assets/projects/apps-script.png";
+import jiraWorkflow from "@/assets/projects/jira-workflow.png";
+import functionTracking from "@/assets/projects/function-tracking.png";
+import measureFlowchart from "@/assets/projects/measure-flowchart.png";
+import formsAutomation from "@/assets/projects/forms-automation.png";
 
 interface ProjectCard {
   title: string;
   desc: string;
-  impact: string;
-  tags: string[];
-  icon: string;
+  impact?: string;
+  tags?: string[];
+  image: string;
 }
 
 const TOP_PROJECTS: ProjectCard[] = [
-  { title: "Automated Data Collection Platform", desc: "Fully automated, scalable data collection system built in Google Workspace — backbone of cross-team performance tracking across multiple business units.", impact: "📈 90% staff utilization achieved", tags: ["Apps Script", "Google Workspace", "Automation"], icon: "🗂️" },
-  { title: "Scorecard Automation System", desc: "End-to-end scorecard pipeline using Power Query enabling D-1 data availability — transformed a hours-long daily process into something that just runs.", impact: "⚡ Hours → Minutes processing time", tags: ["Power Query", "MS Office", "Automation"], icon: "📊" },
-  { title: "Neural-Style Troubleshooting Workflows", desc: "Decision-tree troubleshooting flows modeled like a neural network — guiding support agents through complex product issues in real time while pushing CSAT to consistent highs.", impact: "🎯 25% AHT reduction", tags: ["Process Design", "Technical Writing", "LSS"], icon: "🧠" },
+  { title: "ENPS Live Dashboard", desc: "Real-time Employee Net Promoter Score monitoring dashboard providing instant insights into employee satisfaction and engagement metrics.", image: enpsDashboard },
+  { title: "IMPROVE: FMEA", desc: "Failure Mode and Effects Analysis demonstrating risk assessment methodology and mitigation strategies for process improvement.", image: improveFmea },
+  { title: "Chat ETL Workflow", desc: "Automated data extraction, transformation, and loading process built in Tableau for streamlined chat data analytics.", image: chatEtl },
+  { title: "Apps Script Code", desc: "Custom Google Apps Script implementation for automated data cleaning and processing.", image: appsScript },
+  { title: "JIRA Workflow Management", desc: "Custom JIRA project configuration with optimized workflows, issue types, and field configurations for operational efficiency.", image: jiraWorkflow },
+  { title: "Function Execution Tracking", desc: "Automated function monitoring system showing execution logs, duration tracking, and status monitoring for time-driven automation processes.", image: functionTracking },
+  { title: "MEASURE: Integrated Flowchart", desc: "Process mapping and measurement framework showing data collection points and validation methods for comprehensive process analysis.", image: measureFlowchart },
+  { title: "Google Forms Workflow Automation", desc: "Automated workflow for monitoring Google Forms response counts, alerting stakeholders, and managing response limits to prevent data loss.", image: formsAutomation },
 ];
 
 const ProjectsSection = () => {

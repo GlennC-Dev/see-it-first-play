@@ -75,19 +75,28 @@ const ProjectsSection = () => {
                 <div key={card.title} className="min-w-full">
                   <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr]">
                     {/* Image area */}
-                    <div className="w-full aspect-video md:aspect-auto md:min-h-[320px] bg-border flex items-center justify-center">
-                      <div className="text-[3.5rem] opacity-20">{card.icon}</div>
+                    <div className="w-full aspect-video md:aspect-auto md:min-h-[320px] bg-border flex items-center justify-center overflow-hidden">
+                      <img
+                        src={card.image}
+                        alt={card.title}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
                     </div>
                     {/* Info */}
                     <div className="p-8 flex flex-col justify-center bg-background">
                       <div className="text-[1.15rem] font-semibold mb-2 text-foreground">{card.title}</div>
                       <div className="text-[0.85rem] text-ink-soft leading-[1.7] font-light mb-4">{card.desc}</div>
-                      <div className="font-mono-dm text-[0.7rem] tracking-[0.08em] text-primary px-3 py-1.5 bg-blue-dim rounded-sm inline-block mb-4 self-start">{card.impact}</div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {card.tags.map((t) => (
-                          <span key={t} className="text-[0.68rem] font-medium px-2 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
-                        ))}
-                      </div>
+                      {card.impact && (
+                        <div className="font-mono-dm text-[0.7rem] tracking-[0.08em] text-primary px-3 py-1.5 bg-blue-dim rounded-sm inline-block mb-4 self-start">{card.impact}</div>
+                      )}
+                      {card.tags && card.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1.5">
+                          {card.tags.map((t) => (
+                            <span key={t} className="text-[0.68rem] font-medium px-2 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

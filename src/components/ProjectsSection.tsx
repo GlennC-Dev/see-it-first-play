@@ -27,7 +27,6 @@ const TOP_PROJECTS: ProjectCard[] = [
   { title: "JIRA Workflow Management", desc: "Custom JIRA project configuration with optimized workflows, issue types, and field configurations for operational efficiency.", image: jiraWorkflow },
   { title: "Function Execution Tracking", desc: "Automated function monitoring system showing execution logs, duration tracking, and status monitoring for time-driven automation processes.", image: functionTracking },
   { title: "MEASURE: Integrated Flowchart", desc: "Process mapping and measurement framework showing data collection points and validation methods for comprehensive process analysis.", image: measureFlowchart },
-  { title: "Google Forms Workflow Automation", desc: "Automated workflow for monitoring Google Forms response counts, alerting stakeholders, and managing response limits to prevent data loss.", image: formsAutomation },
 ];
 
 const ProjectsSection = () => {

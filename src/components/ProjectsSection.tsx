@@ -9,7 +9,6 @@ import appsScript from "@/assets/projects/apps-script.png";
 import jiraWorkflow from "@/assets/projects/jira-workflow.png";
 import functionTracking from "@/assets/projects/function-tracking.png";
 import measureFlowchart from "@/assets/projects/measure-flowchart.png";
-import formsAutomation from "@/assets/projects/forms-automation.png";
 
 interface ProjectCard {
   title: string;
@@ -19,19 +18,23 @@ interface ProjectCard {
   image: string;
 }
 
+const PLACEHOLDER_IMPACT = "TBD — add impact metric";
+const PLACEHOLDER_TAGS = ["TBD tag 1", "TBD tag 2"];
+
 const TOP_PROJECTS: ProjectCard[] = [
-  { title: "ENPS Live Dashboard", desc: "Real-time Employee Net Promoter Score monitoring dashboard providing instant insights into employee satisfaction and engagement metrics.", image: enpsDashboard },
-  { title: "IMPROVE: FMEA", desc: "Failure Mode and Effects Analysis demonstrating risk assessment methodology and mitigation strategies for process improvement.", image: improveFmea },
-  { title: "Chat ETL Workflow", desc: "Automated data extraction, transformation, and loading process built in Tableau for streamlined chat data analytics.", image: chatEtl },
-  { title: "Apps Script Code", desc: "Custom Google Apps Script implementation for automated data cleaning and processing.", image: appsScript },
-  { title: "JIRA Workflow Management", desc: "Custom JIRA project configuration with optimized workflows, issue types, and field configurations for operational efficiency.", image: jiraWorkflow },
-  { title: "Function Execution Tracking", desc: "Automated function monitoring system showing execution logs, duration tracking, and status monitoring for time-driven automation processes.", image: functionTracking },
-  { title: "MEASURE: Integrated Flowchart", desc: "Process mapping and measurement framework showing data collection points and validation methods for comprehensive process analysis.", image: measureFlowchart },
+  { title: "ENPS Live Dashboard", desc: "Real-time Employee Net Promoter Score monitoring dashboard providing instant insights into employee satisfaction and engagement metrics.", image: enpsDashboard, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "IMPROVE: FMEA", desc: "Failure Mode and Effects Analysis demonstrating risk assessment methodology and mitigation strategies for process improvement.", image: improveFmea, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "Chat ETL Workflow", desc: "Automated data extraction, transformation, and loading process built in Tableau for streamlined chat data analytics.", image: chatEtl, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "Apps Script Code", desc: "Custom Google Apps Script implementation for automated data cleaning and processing.", image: appsScript, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "JIRA Workflow Management", desc: "Custom JIRA project configuration with optimized workflows, issue types, and field configurations for operational efficiency.", image: jiraWorkflow, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "Function Execution Tracking", desc: "Automated function monitoring system showing execution logs, duration tracking, and status monitoring for time-driven automation processes.", image: functionTracking, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "MEASURE: Integrated Flowchart", desc: "Process mapping and measurement framework showing data collection points and validation methods for comprehensive process analysis.", image: measureFlowchart, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
 ];
 
 const ProjectsSection = () => {
   const [current, setCurrent] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
 
   const next = useCallback(() => {
     setCurrent((c) => (c + 1) % TOP_PROJECTS.length);
@@ -42,15 +45,38 @@ const ProjectsSection = () => {
   }, []);
 
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || lightboxIdx !== null) return;
     const timer = setInterval(next, 5000);
     return () => clearInterval(timer);
-  }, [isAutoPlaying, next]);
+  }, [isAutoPlaying, next, lightboxIdx]);
+
+  useEffect(() => {
+    if (lightboxIdx === null) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxIdx(null);
+      if (e.key === "ArrowRight") setLightboxIdx((i) => (i === null ? i : (i + 1) % TOP_PROJECTS.length));
+      if (e.key === "ArrowLeft") setLightboxIdx((i) => (i === null ? i : (i - 1 + TOP_PROJECTS.length) % TOP_PROJECTS.length));
+    };
+    window.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [lightboxIdx]);
 
   const handleManualNav = (fn: () => void) => {
     setIsAutoPlaying(false);
     fn();
   };
+
+  const openLightbox = (i: number) => {
+    setIsAutoPlaying(false);
+    setLightboxIdx(i);
+  };
+
+  const lbProject = lightboxIdx !== null ? TOP_PROJECTS[lightboxIdx] : null;
 
   return (
     <section id="projects" className="py-24 px-[5vw] bg-card border-t border-b border-border transition-colors duration-300">
@@ -64,25 +90,25 @@ const ProjectsSection = () => {
 
       <ScrollReveal>
         <div className="relative max-w-4xl mx-auto">
-          {/* Carousel viewport */}
           <div className="overflow-hidden rounded-[4px] border border-border">
             <div
               className="flex transition-transform duration-500 ease-out"
               style={{ transform: `translateX(-${current * 100}%)` }}
             >
-              {TOP_PROJECTS.map((card) => (
+              {TOP_PROJECTS.map((card, i) => (
                 <div key={card.title} className="min-w-full">
-                  <div className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr]">
-                    {/* Image area */}
+                  <div
+                    onClick={() => openLightbox(i)}
+                    className="grid grid-cols-1 md:grid-cols-[1fr_1.2fr] cursor-pointer group"
+                  >
                     <div className="w-full aspect-video md:aspect-auto md:min-h-[320px] bg-border flex items-center justify-center overflow-hidden">
                       <img
                         src={card.image}
                         alt={card.title}
                         loading="lazy"
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                       />
                     </div>
-                    {/* Info */}
                     <div className="p-8 flex flex-col justify-center bg-background">
                       <div className="text-[1.15rem] font-semibold mb-2 text-foreground">{card.title}</div>
                       <div className="text-[0.85rem] text-ink-soft leading-[1.7] font-light mb-4">{card.desc}</div>
@@ -90,12 +116,15 @@ const ProjectsSection = () => {
                         <div className="font-mono-dm text-[0.7rem] tracking-[0.08em] text-primary px-3 py-1.5 bg-blue-dim rounded-sm inline-block mb-4 self-start">{card.impact}</div>
                       )}
                       {card.tags && card.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-1.5 mb-3">
                           {card.tags.map((t) => (
                             <span key={t} className="text-[0.68rem] font-medium px-2 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
                           ))}
                         </div>
                       )}
+                      <div className="font-mono-dm text-[0.62rem] tracking-[0.12em] uppercase text-ink-muted opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                        Click to view larger →
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -103,7 +132,6 @@ const ProjectsSection = () => {
             </div>
           </div>
 
-          {/* Controls */}
           <div className="flex items-center justify-between mt-6">
             <div className="flex gap-2">
               <button
@@ -122,7 +150,6 @@ const ProjectsSection = () => {
               </button>
             </div>
 
-            {/* Dots */}
             <div className="flex gap-2">
               {TOP_PROJECTS.map((_, i) => (
                 <button
@@ -146,6 +173,56 @@ const ProjectsSection = () => {
           See all projects & galleries →
         </Link>
       </ScrollReveal>
+
+      {lightboxIdx !== null && lbProject && (
+        <div
+          className="fixed inset-0 z-[1000] bg-[rgba(10,10,10,0.92)] flex items-center justify-center p-6 animate-in fade-in duration-200"
+          onClick={(e) => e.target === e.currentTarget && setLightboxIdx(null)}
+        >
+          <div className="bg-card rounded-lg overflow-hidden max-w-[1000px] w-full grid grid-cols-1 md:grid-cols-[1.4fr_1fr] max-h-[90vh]">
+            <div className="bg-[#111] relative flex items-center justify-center min-h-[360px]">
+              <img src={lbProject.image} alt={lbProject.title} className="w-full h-full object-contain max-h-[80vh]" />
+              <button
+                onClick={() => setLightboxIdx((lightboxIdx - 1 + TOP_PROJECTS.length) % TOP_PROJECTS.length)}
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                aria-label="Previous"
+              >←</button>
+              <button
+                onClick={() => setLightboxIdx((lightboxIdx + 1) % TOP_PROJECTS.length)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                aria-label="Next"
+              >→</button>
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-[2]">
+                {TOP_PROJECTS.map((_, i) => (
+                  <div
+                    key={i}
+                    onClick={() => setLightboxIdx(i)}
+                    className={`w-[7px] h-[7px] rounded-full cursor-pointer transition-all duration-200 ${i === lightboxIdx ? "bg-[#fff] scale-[1.3]" : "bg-[rgba(255,255,255,0.35)]"}`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="p-8 overflow-y-auto flex flex-col border-l border-border md:border-l md:border-t-0 border-t">
+              <button onClick={() => setLightboxIdx(null)} className="self-end bg-transparent border border-border rounded-sm w-8 h-8 cursor-pointer text-ink-soft flex items-center justify-center text-base mb-6 hover:border-foreground hover:text-foreground transition-colors duration-200">✕</button>
+              <div className="font-serif-dm text-[1.5rem] leading-[1.15] mb-3 text-foreground">{lbProject.title}</div>
+              {lbProject.impact && (
+                <div className="font-mono-dm text-[0.72rem] tracking-[0.08em] text-primary px-3 py-1.5 bg-blue-dim rounded-sm inline-block mb-5 self-start">{lbProject.impact}</div>
+              )}
+              <div className="text-[0.875rem] text-ink-soft leading-[1.7] font-light mb-5 flex-1">{lbProject.desc}</div>
+              {lbProject.tags && lbProject.tags.length > 0 && (
+                <>
+                  <div className="font-mono-dm text-[0.65rem] tracking-[0.12em] uppercase text-ink-muted mb-2.5">Tools used</div>
+                  <div className="flex flex-wrap gap-1.5 mb-2">
+                    {lbProject.tags.map((t) => (
+                      <span key={t} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

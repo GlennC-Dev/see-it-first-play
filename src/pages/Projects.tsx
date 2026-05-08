@@ -11,7 +11,10 @@ interface Project {
   tags: string[];
   icon: string;
   photos: (string | null)[];
+  photoCaptions?: string[]; // optional, parallel to photos[]
   category: string;
+  link?: string;
+  linkLabel?: string;
 }
 
 interface Category {
@@ -39,25 +42,260 @@ const CATEGORIES: Category[] = [
 ];
 
 const PROJECTS: Project[] = [
-  // Tableau Visualizations — 3
+  // ============================================================
+  // Tableau Visualizations — 3 (unchanged)
+  // ============================================================
   { id: 0, title: "Tableau BI Dashboard Suite", desc: "A multi-report Tableau visualization suite built to eliminate repetitive manual data transformation. Analysts stopped spending hours on data prep and started spending that time on the insights that actually matter.", impact: "🔁 Manual prep fully eliminated", tags: ["Tableau", "BI", "Python"], icon: "📉", photos: [null, null, null, null], category: "Tableau Visualizations" },
   { id: 1, title: "Subscription-Ready Infographic Reports", desc: "Redesigned reports with static sizing and infographic-style layouts engineered for Tableau's Subscription email feature. Stakeholders receive the full, polished report on a schedule — no login, no friction.", impact: "📧 Zero-click delivery to stakeholders", tags: ["Tableau", "Subscriptions", "Infographic Design"], icon: "📬", photos: [null, null], category: "Tableau Visualizations" },
   { id: 2, title: "Tableau Visualization Project 3", desc: "Placeholder project for an upcoming Tableau visualization. Details and screenshots will be added soon.", impact: "📊 Coming soon", tags: ["Tableau", "BI"], icon: "📊", photos: [null], category: "Tableau Visualizations" },
 
-  // Workflow Automation — 5
-  { id: 3, title: "Scorecard Automation System", desc: "End-to-end scorecard pipeline using Power Query that enabled D-1 data availability across operations. Previously manual and hours-long, the process was reduced to a matter of minutes — transforming how leadership consumed daily performance data.", impact: "⚡ Hours → Minutes processing time", tags: ["Power Query", "MS Office", "Automation"], icon: "📊", photos: [null, null, null], category: "Workflow Automation" },
-  { id: 4, title: "Automated Data Collection Platform", desc: "A fully automated, scalable data collection system built entirely within Google Workspace using Apps Script. Became the backbone of cross-team performance tracking — driving 90% staff utilization and 92% employee efficiency across several business units.", impact: "📈 90% staff utilization achieved", tags: ["Apps Script", "Google Workspace", "BI", "Automation"], icon: "🗂️", photos: [null, null], category: "Workflow Automation" },
-  { id: 5, title: "Automated eNPS Reporting System", desc: "Replaced a weeks-long manual employee NPS process with a fully automated pipeline in Google Workspace. Leadership went from waiting weeks for reports to receiving near real-time sentiment insights, enabling faster people decisions.", impact: "⏱️ Weeks → Near real-time delivery", tags: ["Apps Script", "Google Sheets", "HR Analytics", "Google Workspace"], icon: "📬", photos: [null, null, null], category: "Workflow Automation" },
-  { id: 6, title: "Workflow Automation Project 4", desc: "Placeholder project for an upcoming workflow automation build. Details and screenshots will be added soon.", impact: "⚙️ Coming soon", tags: ["Automation"], icon: "⚙️", photos: [null], category: "Workflow Automation" },
-  { id: 7, title: "Workflow Automation Project 5", desc: "Placeholder project for an upcoming workflow automation build. Details and screenshots will be added soon.", impact: "⚙️ Coming soon", tags: ["Automation"], icon: "🔧", photos: [null], category: "Workflow Automation" },
+  // ============================================================
+  // Workflow Automation — 6 ported items + 1 placeholder
+  // To add another item: copy the PLACEHOLDER block at the bottom
+  // of this section and edit the fields.
+  // ============================================================
+  {
+    id: 3,
+    title: "Script-Driven Report Generation",
+    desc: "Cut report generation time by over 90% using Apps Script and smart cell logic in Google Sheets, reducing a 1-hour manual workflow to a streamlined, sub-5-minute process. Comprehensive solution that automates report generation by performing data cleaning, standardization, duplicate removal, and formatting.",
+    impact: "⚡ 1 hour → under 5 minutes",
+    tags: ["Apps Script", "Google Sheets", "Automation"],
+    icon: "📊",
+    photos: [
+      "/lovable-uploads/a737e0bf-ca8d-465b-a1ed-59c528ddc573.png",
+      "/lovable-uploads/3e9f78c1-acea-4fd3-8dd5-62ed5cbacb35.png",
+      "/lovable-uploads/40bd7441-88e5-4417-8db8-98c456091cca.png",
+      "/lovable-uploads/ae323709-74a6-4981-82e8-8f6f31f3b9ca.png",
+      "/lovable-uploads/70580fba-0ee6-42ca-af20-278084b2390f.png",
+    ],
+    photoCaptions: [
+      "Apps Script function for automated data replacement and cell updating with processing counter",
+      "Data filtering and deletion logic for removing rows based on column criteria",
+      "Find and replace automation for standardizing data across spreadsheet ranges",
+      "Duplicate removal algorithm with unique value tracking and automated cleanup",
+      "Master checker function orchestrating the complete automation workflow",
+    ],
+    category: "Workflow Automation",
+  },
+  {
+    id: 4,
+    title: "ENPS Automation",
+    desc: "Designed and deployed a fully automated Employee Net Promoter Score system that runs bi-monthly, sends surveys via script, and calculates scores in real time — delivering hands-free insights for leadership without manual intervention.",
+    impact: "⏱️ Bi-monthly, fully hands-free",
+    tags: ["Apps Script", "Google Workspace", "HR Analytics"],
+    icon: "📬",
+    photos: [
+      "/lovable-uploads/f3a360d0-8a74-4a99-b2c2-77ddae39f9a8.png",
+      "/lovable-uploads/ad346f37-c2d1-4c5d-a9e0-1d1b2dae4de1.png",
+      "/lovable-uploads/65527ee2-75a8-4c13-afc6-7ade896d0eaf.png",
+    ],
+    photoCaptions: [
+      "Apps Script automation code for ENPS data processing",
+      "Live ENPS dashboard with real-time score calculation and breakdown",
+      "Detailed ENPS analysis by category and department",
+    ],
+    category: "Workflow Automation",
+  },
+  {
+    id: 5,
+    title: "JIRA Project Management",
+    desc: "Built and customized a JIRA project from scratch using self-guided tutorials, replicating operational workflows across departments to simulate real-world admin-level configuration. Includes custom workflows, issue types, and field configurations.",
+    impact: "🛠️ Admin-level config from scratch",
+    tags: ["JIRA", "Workflow Design", "Process"],
+    icon: "🗂️",
+    photos: [
+      "/lovable-uploads/0572075e-c8b8-4025-abc1-5fed2c95a2d4.png",
+      "/lovable-uploads/5e04d1bd-e0b2-4158-ba4c-2933fb0219e2.png",
+    ],
+    photoCaptions: [
+      "JIRA project configuration showing custom issue types and field management",
+      "Workflow diagram for customer service requests with status transitions and approval processes",
+    ],
+    category: "Workflow Automation",
+  },
+  {
+    id: 6,
+    title: "Google Forms Maintenance",
+    desc: "Engineered a self-monitoring Apps Script system that auto-polls Google Forms response counts, alerts stakeholders at threshold, and clears entries preemptively to prevent sync failures past the 100K cap — fully automated across multiple forms.",
+    impact: "🛡️ Zero sync failures past 100K cap",
+    tags: ["Apps Script", "Google Forms", "Monitoring"],
+    icon: "📋",
+    photos: [
+      "/lovable-uploads/8343aa5d-877e-46af-a94f-25ded19011d7.png",
+      "/lovable-uploads/3eb1fdb2-12e9-4fc9-bbb1-0b1715cfbff3.png",
+      "/lovable-uploads/b36c299e-accf-4e5c-b342-b49ff6f282e6.png",
+      "/lovable-uploads/c8d40977-2e76-4e14-b652-ca62897cab64.png",
+    ],
+    photoCaptions: [
+      "Automated workflow diagram for Google Forms response monitoring and maintenance",
+      "Apps Script function for retrieving Google Forms response count and timestamp tracking",
+      "Automated response clearing logic with email notification system for form oversight",
+      "Time-based triggers configuration for automated form monitoring and maintenance",
+    ],
+    category: "Workflow Automation",
+  },
+  {
+    id: 7,
+    title: "DBMS with Version Control",
+    desc: "Built a rule-enforced Google Sheets database system with input validation, version tracking, and automated change alerts — transforming a chaotic flat file into a controlled, traceable platform with email notifications and full audit trails.",
+    impact: "🧾 Full audit trail + change alerts",
+    tags: ["Apps Script", "Google Sheets", "DBMS"],
+    icon: "🗃️",
+    photos: [
+      "/lovable-uploads/8b8f6ca2-9dd4-4a35-b743-2cd1fae1cc50.png",
+      "/lovable-uploads/8fb6f209-3b1c-4399-a77d-ecca2001dad3.png",
+      "/lovable-uploads/072b11fd-2030-4070-b161-88a524beebba.png",
+      "/lovable-uploads/2ac587d0-ceca-4814-a979-0ac42a4901ed.png",
+    ],
+    photoCaptions: [
+      "Apps Script function for database error handling and input validation with automated notification system",
+      "Database management workflow showing data extraction, validation, and automated email population for change requests",
+      "Request processing automation with status tracking, range manipulation, and email notification system for database updates",
+      "Version control tracking spreadsheet showing request status, dates, ticket references, and change history for database management",
+    ],
+    category: "Workflow Automation",
+  },
+  {
+    id: 8,
+    title: "N8N-Powered Personal Assistant",
+    desc: "Created a modular AI-powered Telegram bot workflow via n8n that delivers daily weather, news, and finance insights through secure intent-based routing. Integrates OpenWeather API, RSS feeds, and Google Sheets, with AI agents (Google Gemini) for intent classification and personalized responses.",
+    impact: "🤖 Modular AI routing in Telegram",
+    tags: ["n8n", "AI Agents", "Telegram", "APIs"],
+    icon: "🧠",
+    photos: [
+      "/lovable-uploads/n8n-workflow-overview.png",
+      "/lovable-uploads/n8n-telegram-trigger.png",
+      "/lovable-uploads/n8n-weather-module.png",
+      "/lovable-uploads/n8n-news-module.png",
+      "/lovable-uploads/n8n-finance-module.png",
+    ],
+    photoCaptions: [
+      "Complete n8n workflow architecture showing modular design with Telegram trigger, AI agents, and specialized modules for weather, news, and finance analytics",
+      "Core routing logic with Telegram trigger, AI Agent for intent classification, and conditional switching for modular message handling",
+      "Weather Module: Fetches data from OpenWeather API, processes through AI agent with Google Gemini, and sends interpreted forecasts via Telegram",
+      "Current Events Module: Aggregates RSS feeds from multiple sources, filters by interests, and delivers curated news summaries through LLM chains",
+      "Finance Analytics Module: Connects to Google Sheets for transaction tracking, forecasting, and personalized financial insights via AI agent",
+    ],
+    category: "Workflow Automation",
+  },
+  // PLACEHOLDER — duplicate this block to add a new workflow automation project
+  {
+    id: 9,
+    title: "Workflow Automation Project (Placeholder)",
+    desc: "Placeholder slot for an upcoming workflow automation build. Replace this entry with title, desc, impact, tags, photos, and photoCaptions when ready.",
+    impact: "⚙️ Coming soon",
+    tags: ["Automation"],
+    icon: "⚙️",
+    photos: [null],
+    category: "Workflow Automation",
+  },
 
-  // Case Study & Technical Writing — 6
-  { id: 8, title: "Neural-Style Troubleshooting Workflows", desc: "Decision-tree workflows modeled like a neural network to guide support agents through product troubleshooting in real time. Reduced AHT by 25% while consistently pushing CSAT and resolution rates to their highest levels.", impact: "🎯 25% AHT reduction", tags: ["Process Design", "Workflow", "LSS"], icon: "🧠", photos: [null, null], category: "Case Study & Technical Writing" },
-  { id: 9, title: "Operations Training Curriculum Overhaul", desc: "A ground-up redesign of the entire operations training curriculum. Addressed core technical topics and complaints handling while cutting required training time by half — without reducing coverage or quality.", impact: "📚 Training time cut by 50%", tags: ["Process Design", "Curriculum Design"], icon: "🎓", photos: [null, null], category: "Case Study & Technical Writing" },
-  { id: 10, title: "Case Study Project 3", desc: "Placeholder project for an upcoming case study. Details and screenshots will be added soon.", impact: "📝 Coming soon", tags: ["Technical Writing"], icon: "📝", photos: [null], category: "Case Study & Technical Writing" },
-  { id: 11, title: "Case Study Project 4", desc: "Placeholder project for an upcoming case study. Details and screenshots will be added soon.", impact: "📝 Coming soon", tags: ["Technical Writing"], icon: "📄", photos: [null], category: "Case Study & Technical Writing" },
-  { id: 12, title: "Case Study Project 5", desc: "Placeholder project for an upcoming case study. Details and screenshots will be added soon.", impact: "📝 Coming soon", tags: ["Case Study"], icon: "📋", photos: [null], category: "Case Study & Technical Writing" },
-  { id: 13, title: "Case Study Project 6", desc: "Placeholder project for an upcoming case study. Details and screenshots will be added soon.", impact: "📝 Coming soon", tags: ["Case Study"], icon: "🗒️", photos: [null], category: "Case Study & Technical Writing" },
+  // ============================================================
+  // Case Study & Technical Writing — 4 ported items + 1 placeholder
+  // To add another item: copy the PLACEHOLDER block at the bottom
+  // of this section and edit the fields.
+  // ============================================================
+  {
+    id: 10,
+    title: "Lean Six Sigma for Financial Analysis",
+    desc: "Applied DMAIC-driven Lean Six Sigma methodology to a hypothetical financial crisis, designing a budget control system that reversed projected hardship through asset and resource optimization. Identified root causes of budget variances, implemented structured controls, and achieved sustained budget adherence across all categories.",
+    impact: "📉 Sustained budget adherence post-DMAIC",
+    tags: ["Lean Six Sigma", "DMAIC", "FMEA", "Process"],
+    icon: "🧮",
+    photos: [
+      "/lovable-uploads/2f1d9041-059a-4f11-9653-919c3fff6018.png",
+      "/lovable-uploads/cb5eaa9b-eb68-4297-8294-b8514bc4579c.png",
+      "/lovable-uploads/97922668-30ac-4553-9533-2db62c4d7cc2.png",
+      "/lovable-uploads/bb22afa5-94ce-4303-9973-d641859c164f.png",
+      "/lovable-uploads/d2cf294c-1e29-439e-b863-3c186d9337d5.png",
+      "/lovable-uploads/2c311872-e2aa-4768-b86a-74f2087633fd.png",
+      "/lovable-uploads/c69851d7-984a-4534-805c-51aa29982dec.png",
+    ],
+    photoCaptions: [
+      "DEFINE: Risk Assessment and Response Plan — comprehensive risk matrix identifying financial challenges and mitigation strategies",
+      "MEASURE: Integrated Flowchart — process flow analysis showing current financial management cycle and inefficiencies",
+      "ANALYSE: Budget vs Actual via Paired Sample T-Test — statistical analysis revealing significant budget variances across expenditure categories",
+      "ANALYSE: Validated Root Causes — identification of key factors including risk management, overspending, and planning gaps",
+      "IMPROVE: Implementation Plan — baseline performance tracking showing alignment of actual spending with budgeted expectations",
+      "IMPROVE: FMEA on Implementation Plan — Failure Mode and Effects Analysis ensuring robust implementation of financial controls",
+      "CONTROL: Post-Implementation Performance — sustained budget adherence across all expense categories post-implementation",
+    ],
+    category: "Case Study & Technical Writing",
+  },
+  {
+    id: 11,
+    title: "Training Deck for Time Management Techniques",
+    desc: "Created a time management training deck for analysts, blending research and firsthand experience into a practical guide for improving focus, prioritization, and daily workflow discipline. Covers proven methodologies like 'Eat That Frog' and Time Blocking.",
+    impact: "🎯 Practical focus + prioritization toolkit",
+    tags: ["Training", "Curriculum", "Productivity"],
+    icon: "🎓",
+    photos: [
+      "/lovable-uploads/1b3f7872-ed8b-4046-a4f7-9e0d69386b3d.png",
+      "/lovable-uploads/210c13ce-6684-489a-91d3-ad58432ab7b9.png",
+      "/lovable-uploads/6f3201aa-b2f1-4d27-8066-09aaf66edf94.png",
+    ],
+    photoCaptions: [
+      "Title slide: Mastering the Art of Time — Professional Techniques for Effective Time Management",
+      "Technique 2: Eat That Frog — tackling the most challenging task first to overcome procrastination and boost productivity",
+      "Technique 4: Time Blocking — allocating specific time blocks to tasks for prioritization and focused, uninterrupted work",
+    ],
+    link: "https://docs.google.com/presentation/d/13qrHcai4HhWmjIRKk5eMt6jfP0OCQZDVu0VybFjZCiU/edit?usp=sharing",
+    linkLabel: "View full slideshow",
+    category: "Case Study & Technical Writing",
+  },
+  {
+    id: 12,
+    title: "AI-Assisted Online Portfolio Building for Analysts",
+    desc: "Developed a training deck to teach associates prompt engineering and no-code tools, empowering them to build personalized online portfolios that showcase their skills without needing web development experience. Covers the full workflow from Lovable.dev creation to GitHub Pages deployment.",
+    impact: "🚀 No-code portfolio enablement",
+    tags: ["Training", "AI", "Lovable.dev", "GitHub"],
+    icon: "🧰",
+    photos: [
+      "/lovable-uploads/3af5696e-3da1-4d80-a7e3-2abc61e97f87.png",
+      "/lovable-uploads/6eef3621-65c7-4ada-82f4-395829308ae6.png",
+      "/lovable-uploads/cc9dbf2d-ffab-41d6-bfeb-e706c6865811.png",
+    ],
+    photoCaptions: [
+      "Title slide: Building Online Portfolios for Business Insights Analysts using AI, Lovable.dev and GitHub",
+      "Workflow overview: three-step process from Lovable.dev AI creation to manual customization to GitHub Pages deployment",
+      "Implementation guide: four-step process from prompt creation to live portfolio deployment with GitHub integration",
+    ],
+    link: "https://docs.google.com/presentation/d/1a64xQIAgWnZJ03lF7aFuHV_2zsB5NDLU6uvUPovmBUM/edit?usp=sharing",
+    linkLabel: "View full slideshow",
+    category: "Case Study & Technical Writing",
+  },
+  {
+    id: 13,
+    title: "Knowledge Article for SIP101",
+    desc: "Authored a SIP101 training article and companion deck to establish core VoIP fundamentals, equipping agents and support staff with a framework for accurate issue identification and deeper product understanding. Covers SIP call flow, registration, and end-to-end communication workflows.",
+    impact: "📞 Reusable VoIP reference for support",
+    tags: ["Technical Writing", "VoIP", "SIP", "Training"],
+    icon: "📡",
+    photos: [
+      "/lovable-uploads/ca38b033-480b-4a83-bbeb-b743cf88aecb.png",
+      "/lovable-uploads/c80d89d2-63f6-4e64-8f7b-c1339be8a031.png",
+      "/lovable-uploads/9c4470f5-d67f-45bf-9937-0d7aa1ecf717.png",
+    ],
+    photoCaptions: [
+      "SIP Call Flow: diagram illustrating SIP trapezoid architecture with proxy servers and user agent communication",
+      "The Registration Process: SIP endpoint registration workflow showing AOR binding and location service interaction",
+      "SIP Communication Flow: complete call establishment process between user agents through proxy servers and DNS resolution",
+    ],
+    link: "https://docs.google.com/document/d/1YjFRY2uslpvf3HjItRL5uxJ8mJ-IJilxvys72gEXG8g/edit?usp=sharing",
+    linkLabel: "View full article",
+    category: "Case Study & Technical Writing",
+  },
+  // PLACEHOLDER — duplicate this block to add a new case study / technical writing item
+  {
+    id: 14,
+    title: "Case Study Project (Placeholder)",
+    desc: "Placeholder slot for an upcoming case study or technical writing piece. Replace this entry with title, desc, impact, tags, photos, photoCaptions, and optional link/linkLabel when ready.",
+    impact: "📝 Coming soon",
+    tags: ["Case Study"],
+    icon: "📝",
+    photos: [null],
+    category: "Case Study & Technical Writing",
+  },
 ];
 
 const FILTERS = ["All", ...CATEGORIES.map((c) => c.key)];
@@ -129,7 +367,11 @@ const Projects = () => {
                   >
                     <div className="absolute top-0 left-0 right-0 h-[3px] bg-primary scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300" />
                     <div className="w-full aspect-video bg-border overflow-hidden flex items-center justify-center relative">
-                      <div className="text-[2.5rem] opacity-20">{p.icon}</div>
+                      {p.photos[0] ? (
+                        <img src={p.photos[0]} alt={p.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="text-[2.5rem] opacity-20">{p.icon}</div>
+                      )}
                       <div className="absolute bottom-2.5 right-2.5 bg-[rgba(0,0,0,0.6)] text-[#fff] font-mono-dm text-[0.65rem] tracking-[0.08em] px-2 py-0.5 rounded-sm">
                         {p.photos.length} photo{p.photos.length > 1 ? "s" : ""}
                       </div>
@@ -158,26 +400,33 @@ const Projects = () => {
           className="fixed inset-0 z-[1000] bg-[rgba(10,10,10,0.92)] flex items-center justify-center p-6 animate-in fade-in duration-200"
           onClick={(e) => e.target === e.currentTarget && closeLightbox()}
         >
-          <div className="bg-card rounded-lg overflow-hidden max-w-[900px] w-full grid grid-cols-1 md:grid-cols-[1fr_340px] max-h-[90vh]">
-            <div className="bg-[#111] relative flex items-center justify-center min-h-[360px]">
-              {lbProject.photos[lightbox.photoIdx] ? (
-                <img src={lbProject.photos[lightbox.photoIdx]!} alt={lbProject.title} className="w-full h-full object-contain max-h-[70vh]" />
-              ) : (
-                <div className="text-[5rem] opacity-10">{lbProject.icon}</div>
+          <div className="bg-card rounded-lg overflow-hidden max-w-[1000px] w-full grid grid-cols-1 md:grid-cols-[1fr_360px] max-h-[90vh]">
+            <div className="bg-[#111] relative flex flex-col items-center justify-center min-h-[360px]">
+              <div className="relative flex items-center justify-center w-full flex-1">
+                {lbProject.photos[lightbox.photoIdx] ? (
+                  <img src={lbProject.photos[lightbox.photoIdx]!} alt={lbProject.title} className="w-full h-full object-contain max-h-[70vh]" />
+                ) : (
+                  <div className="text-[5rem] opacity-10">{lbProject.icon}</div>
+                )}
+                {lbProject.photos.length > 1 && (
+                  <>
+                    <button
+                      onClick={() => setLightbox({ ...lightbox, photoIdx: (lightbox.photoIdx - 1 + lbProject.photos.length) % lbProject.photos.length })}
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                    >←</button>
+                    <button
+                      onClick={() => setLightbox({ ...lightbox, photoIdx: (lightbox.photoIdx + 1) % lbProject.photos.length })}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                    >→</button>
+                  </>
+                )}
+              </div>
+              {lbProject.photoCaptions?.[lightbox.photoIdx] && (
+                <div className="px-5 py-3 text-[0.75rem] italic text-[rgba(255,255,255,0.75)] text-center leading-[1.5] border-t border-[rgba(255,255,255,0.08)] w-full">
+                  {lbProject.photoCaptions[lightbox.photoIdx]}
+                </div>
               )}
-              {lbProject.photos.length > 1 && (
-                <>
-                  <button
-                    onClick={() => setLightbox({ ...lightbox, photoIdx: (lightbox.photoIdx - 1 + lbProject.photos.length) % lbProject.photos.length })}
-                    className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
-                  >←</button>
-                  <button
-                    onClick={() => setLightbox({ ...lightbox, photoIdx: (lightbox.photoIdx + 1) % lbProject.photos.length })}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
-                  >→</button>
-                </>
-              )}
-              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-[2]">
+              <div className="absolute bottom-14 left-1/2 -translate-x-1/2 flex gap-1.5 z-[2]">
                 {lbProject.photos.map((_, i) => (
                   <div
                     key={i}
@@ -198,6 +447,16 @@ const Projects = () => {
                   <span key={t} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
                 ))}
               </div>
+              {lbProject.link && (
+                <a
+                  href={lbProject.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block text-center py-2.5 mb-3 border-[1.5px] border-primary rounded-sm bg-blue-dim font-mono-dm text-[0.72rem] tracking-[0.08em] text-primary hover:bg-primary hover:text-[#fff] transition-colors duration-200"
+                >
+                  ↗ {lbProject.linkLabel ?? "View full resource"}
+                </a>
+              )}
               <div className="flex gap-3 mt-auto">
                 <button
                   disabled={PROJECTS.findIndex((p) => p.id === lbProject.id) === 0}

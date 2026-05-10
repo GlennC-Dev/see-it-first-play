@@ -81,7 +81,7 @@ const ProjectsSection = () => {
   return (
     <section id="projects" className="py-24 px-[5vw] bg-card border-t border-b border-border transition-colors duration-300">
       <ScrollReveal>
-        <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// featured work</div>
+        <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// featured works</div>
         <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-4 text-foreground transition-colors duration-300">Projects & Builds</h2>
         <p className="text-[0.9rem] text-ink-soft font-light max-w-[55ch] leading-[1.7] mb-12">
           A selection of high-impact projects spanning automation, visualization, and process design.

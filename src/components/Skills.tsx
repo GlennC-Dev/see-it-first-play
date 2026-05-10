@@ -27,7 +27,7 @@ const Skills = () => (
           A multi-disciplinary stack built across years of hands-on automation work — from visual BI dashboards to scripted data pipelines, workflow engines, and AI-powered process optimization.
         </p>
         <div className="mt-8">
-          <div className="font-mono-dm text-[0.7rem] tracking-[0.14em] uppercase text-ink-muted mb-3 pb-2 border-b border-border">Certifications</div>
+          <div className="font-mono-dm text-[0.7rem] tracking-[0.14em] uppercase text-ink-muted mb-3 pb-2 border-b border-border font-extrabold">Certifications</div>
           <div className="flex flex-wrap gap-2.5 mt-4">
             {certs.map((c) => (
               <span key={c.name} className={`font-mono-dm text-[0.7rem] tracking-[0.08em] px-3 py-1.5 rounded-sm ${c.blue ? "bg-primary text-primary-foreground" : "bg-foreground text-background"} transition-colors duration-300`}>
@@ -41,7 +41,7 @@ const Skills = () => (
         <div className="flex flex-col gap-8">
           {skillGroups.map((g) => (
             <div key={g.label}>
-              <div className="font-mono-dm text-[0.7rem] tracking-[0.14em] uppercase text-ink-muted mb-3 pb-2 border-b border-border">{g.label}</div>
+              <div className="font-mono-dm text-[0.7rem] tracking-[0.14em] uppercase text-ink-muted mb-3 pb-2 border-b border-border font-extrabold">{g.label}</div>
               <div className="flex flex-wrap gap-2">
                 {g.pills.map((p) => (
                   <span key={p.name} className={`text-[0.8rem] font-medium px-3.5 py-1.5 rounded-sm border-[1.5px] cursor-default transition-all duration-200 ${p.highlight ? "border-primary text-primary bg-blue-dim" : "border-border text-ink-soft bg-background hover:border-primary hover:text-primary hover:bg-blue-dim"}`}>

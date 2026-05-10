@@ -7,7 +7,7 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-[200] flex items-center justify-between px-[5vw] py-5 bg-background/90 backdrop-blur-[12px] border-b border-border transition-colors duration-300">
       <Link to="/" className="font-mono-dm text-[0.8rem] tracking-[0.15em] uppercase text-foreground no-underline transition-colors duration-300">
-        Glenn M. Dela Cruz
+        Glenn Charifa
       </Link>
       <div className="flex items-center gap-6">
         {isProjectsPage ? (

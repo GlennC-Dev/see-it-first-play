@@ -16,7 +16,7 @@ const mainExperience: ExpItem[] = [
     company: "Acquire Intelligence",
     bullets: [
       "Built Tableau dashboards that <strong>eliminated hours of manual data transformation</strong>, freeing analysts to focus on insights.",
-      "Identified and corrected a structural reporting error, surfacing 17,185 unrecorded interactions over 5 months and revealing a true SL of 34.4% vs the reported 37.8% — directly impacting target setting and workforce planning accuracy.",
+      "Corrected a structural reporting error, surfacing 17,185 unrecorded interactions over 5 months and <strong>revealing a true SL of 34.4% vs the reported 37.8%</strong> — impacting target setting and workforce planning.",
       "Prepared dashboards that utilizes Tableau's Subscriptions function, sending <strong>tailored reports straight to stakeholder's inbox</strong> on cue.",
       "Developed tools for checking data availability every morning, taking advantage of subscriptions to send alerts to Data Engineering team in case of issues",
       "Applied scripting to streamline complex data processing outside Tableau — <strong>reducing processing time from hours to minutes</strong>.",

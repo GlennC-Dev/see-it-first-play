@@ -59,7 +59,7 @@ const PROJECTS: Project[] = [
     title: "Script-Driven Report Generation",
     desc: "Cut report generation time by over 90% using Apps Script and smart cell logic in Google Sheets, reducing a 1-hour manual workflow to a streamlined, sub-5-minute process. Comprehensive solution that automates report generation by performing data cleaning, standardization, duplicate removal, and formatting.",
     impact: "⚡ 1 hour → under 5 minutes",
-    tags: ["Apps Script", "Google Sheets", "Automation"],
+    tags: ["Apps Script", "Google Sheets"],
     icon: "📊",
     photos: [
       "/lovable-uploads/a737e0bf-ca8d-465b-a1ed-59c528ddc573.png",
@@ -82,7 +82,7 @@ const PROJECTS: Project[] = [
     title: "ENPS Automation",
     desc: "Designed and deployed a fully automated Employee Net Promoter Score system that runs bi-monthly, sends surveys via script, and calculates scores in real time — delivering hands-free insights for leadership without manual intervention.",
     impact: "⏱️ Bi-monthly, fully hands-free",
-    tags: ["Apps Script", "Google Workspace", "HR Analytics"],
+    tags: ["Apps Script", "Google Workspace"],
     icon: "📬",
     photos: [
       "/lovable-uploads/f3a360d0-8a74-4a99-b2c2-77ddae39f9a8.png",
@@ -101,7 +101,7 @@ const PROJECTS: Project[] = [
     title: "JIRA Project Management",
     desc: "Built and customized a JIRA project from scratch using self-guided tutorials, replicating operational workflows across departments to simulate real-world admin-level configuration. Includes custom workflows, issue types, and field configurations.",
     impact: "🛠️ Admin-level config from scratch",
-    tags: ["JIRA", "Workflow Design", "Process"],
+    tags: ["JIRA", "Workflow Design"],
     icon: "🗂️",
     photos: [
       "/lovable-uploads/0572075e-c8b8-4025-abc1-5fed2c95a2d4.png",
@@ -118,7 +118,7 @@ const PROJECTS: Project[] = [
     title: "Google Forms Maintenance",
     desc: "Engineered a self-monitoring Apps Script system that auto-polls Google Forms response counts, alerts stakeholders at threshold, and clears entries preemptively to prevent sync failures past the 100K cap — fully automated across multiple forms.",
     impact: "🛡️ Zero sync failures past 100K cap",
-    tags: ["Apps Script", "Google Forms", "Monitoring"],
+    tags: ["Apps Script", "Google Workspace"],
     icon: "📋",
     photos: [
       "/lovable-uploads/8343aa5d-877e-46af-a94f-25ded19011d7.png",
@@ -139,7 +139,7 @@ const PROJECTS: Project[] = [
     title: "DBMS with Version Control",
     desc: "Built a rule-enforced Google Sheets database system with input validation, version tracking, and automated change alerts — transforming a chaotic flat file into a controlled, traceable platform with email notifications and full audit trails.",
     impact: "🧾 Full audit trail + change alerts",
-    tags: ["Apps Script", "Google Sheets", "DBMS"],
+    tags: ["Apps Script", "Google Workspace"],
     icon: "🗃️",
     photos: [
       "/lovable-uploads/8b8f6ca2-9dd4-4a35-b743-2cd1fae1cc50.png",
@@ -160,7 +160,7 @@ const PROJECTS: Project[] = [
     title: "N8N-Powered Personal Assistant",
     desc: "Created a modular AI-powered Telegram bot workflow via n8n that delivers daily weather, news, and finance insights through secure intent-based routing. Integrates OpenWeather API, RSS feeds, and Google Sheets, with AI agents (Google Gemini) for intent classification and personalized responses.",
     impact: "🤖 Modular AI routing in Telegram",
-    tags: ["n8n", "AI Agents", "Telegram", "APIs"],
+    tags: ["n8n", "API's", "RSS Feeds", "Google Workspace"],
     icon: "🧠",
     photos: [
       "/lovable-uploads/n8n-workflow-overview.png",
@@ -200,7 +200,7 @@ const PROJECTS: Project[] = [
     title: "Lean Six Sigma for Financial Analysis",
     desc: "Applied DMAIC-driven Lean Six Sigma methodology to a hypothetical financial crisis, designing a budget control system that reversed projected hardship through asset and resource optimization. Identified root causes of budget variances, implemented structured controls, and achieved sustained budget adherence across all categories.",
     impact: "📉 Sustained budget adherence post-DMAIC",
-    tags: ["Lean Six Sigma", "DMAIC", "FMEA", "Process"],
+    tags: ["Lean Six Sigma", "Stakeholder Management", "MS365"],
     icon: "🧮",
     photos: [
       "/lovable-uploads/2f1d9041-059a-4f11-9653-919c3fff6018.png",
@@ -227,7 +227,7 @@ const PROJECTS: Project[] = [
     title: "Training Deck for Time Management Techniques",
     desc: "Created a time management training deck for analysts, blending research and firsthand experience into a practical guide for improving focus, prioritization, and daily workflow discipline. Covers proven methodologies like 'Eat That Frog' and Time Blocking.",
     impact: "🎯 Practical focus + prioritization toolkit",
-    tags: ["Training", "Curriculum", "Productivity"],
+    tags: ["Training", "Project Management"],
     icon: "🎓",
     photos: [
       "/lovable-uploads/1b3f7872-ed8b-4046-a4f7-9e0d69386b3d.png",
@@ -248,7 +248,7 @@ const PROJECTS: Project[] = [
     title: "AI-Assisted Online Portfolio Building for Analysts",
     desc: "Developed a training deck to teach associates prompt engineering and no-code tools, empowering them to build personalized online portfolios that showcase their skills without needing web development experience. Covers the full workflow from Lovable.dev creation to GitHub Pages deployment.",
     impact: "🚀 No-code portfolio enablement",
-    tags: ["Training", "AI", "Lovable.dev", "GitHub"],
+    tags: ["Training", "Lovable.dev", "GitHub", "Prompt Engineering"],
     icon: "🧰",
     photos: [
       "/lovable-uploads/3af5696e-3da1-4d80-a7e3-2abc61e97f87.png",

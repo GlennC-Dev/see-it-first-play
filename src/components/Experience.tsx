@@ -40,7 +40,7 @@ const hiddenExperience: ExpItem[] = [
     company: "Acquire BPO",
     bullets: [
       "Built a web-app mapping every troubleshooting scenario from Level 1 through TIO escalations — covering manual modem configuration to cloud-based IVR routing for IP phones. Adopted and expanded by client to cover IPV and cloud hosted telephony.",
-      "Redesigned operations training curriculum — cutting required training time by 50% — and served as interim team lead for 5+ new hire classes, teaching how systems actually work rather than just what to do"
+      "Redesigned operations training curriculum — cutting required training time by 50% — and served as interim team lead for 5+ new hire classes, teaching how systems actually work rather than just what to do",
       "Authored 20+ knowledge articles and led training sessions for four new hire classes during their transition to operations.",
     ],
   },

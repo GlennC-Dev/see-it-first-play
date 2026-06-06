@@ -14,13 +14,13 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       <div className="relative z-[1]">
         <div className="animate-fade-up inline-flex items-center gap-2 font-mono-dm text-[0.75rem] tracking-[0.12em] uppercase text-primary border border-primary rounded-sm px-3 py-1 mb-6">
           <span className="w-1.5 h-1.5 bg-primary rounded-full inline-block" />
-          Reports & Automation Specialist
+          DATA VISUALIZATION & AUTOMATION SPECIALIST
         </div>
         <h1 className="animate-fade-up-delay-1 font-serif-dm text-[clamp(2.8rem,5vw,4.8rem)] leading-[1.05] text-foreground mb-6 transition-colors duration-300">
           I don't just<br />analyze data —<br /><em className="italic text-primary">I automate</em><br />the work behind it.
         </h1>
         <p className="animate-fade-up-delay-2 text-base leading-[1.7] text-ink-soft max-w-[42ch] mb-10 font-light">
-          Lean Six Sigma Green Belt certified specialist in BI, workflow automation, and intelligent reporting systems. Based in Manila, Philippines.
+          I design the systems behind the insights — and I make sure those insights are real. Based in Manila, Philippines — open to remote and international opportunities.
         </p>
         <div className="animate-fade-up-delay-3 flex gap-4 flex-wrap">
           <button onClick={onOpenChat} className="bg-primary text-primary-foreground border-none py-3.5 px-7 text-[0.85rem] font-medium tracking-[0.05em] cursor-pointer inline-block transition-all duration-200 rounded-sm hover:brightness-110 hover:-translate-y-px">

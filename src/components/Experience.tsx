@@ -18,11 +18,8 @@ const mainExperience: ExpItem[] = [
       "Built Tableau dashboards that <strong>eliminated hours of manual data transformation</strong>, freeing analysts to focus on insights.",
       "Corrected a structural reporting error, surfacing 17,185 unrecorded interactions over 5 months and <strong>revealing a true SL of 34.4% vs the reported 37.8%</strong> — impacting target setting and workforce planning.",
       "Prepared dashboards that utilizes Tableau's Subscriptions function, sending <strong>tailored reports straight to stakeholder's inbox</strong> on cue.",
-      "Developed tools for checking data availability every morning, taking advantage of subscriptions to send alerts to Data Engineering team in case of issues",
-      "Applied scripting to streamline complex data processing outside Tableau — <strong>reducing processing time from hours to minutes</strong>.",
       "Leveraged Power Query for Scorecard Automation, enabling <strong>D-1 scorecard availability</strong> at a fraction of previous processing time.",
       "Developed scorecards, automated reports, and data collection systems using <strong>Google Apps Script</strong> within Google Workspace.",
-      "Serves as primary frontline resource for data issues and Tableau support across the organization.",
     ],
   },
   {
@@ -30,8 +27,7 @@ const mainExperience: ExpItem[] = [
     period: "OCT 2022 — AUG 2023",
     company: "Acquire BPO",
     bullets: [
-      "Designed a fully automated data collection system via Google Workspace — driving <strong>90% staff utilization and 92% employee efficiency</strong> across multiple teams.",
-      "Built neural-network-style troubleshooting workflows for agents, <strong>reducing AHT by 25%</strong> while improving CSAT and resolution rates.",
+      "Engineered QRAW — a fully self-sustaining offline activity tracking system built on Google Forms, Apps Script, and Google Sheets — solving a critical blind spot in the phone system's inbound-only visibility. Overlaying QRAW data with existing phone system outputs produced the org's first-ever true agent utilization and efficiency metrics, driving 90% staff utilization and 92% employee efficiency across multiple business units. Adopted org-wide across all offline-facing campaigns.",
       "Deployed an automated eNPS system that reduced processing time <strong>from weeks to near real-time</strong>, enabling immediate insights.",
     ],
   },
@@ -43,7 +39,8 @@ const hiddenExperience: ExpItem[] = [
     period: "MAR 2022 — OCT 2022",
     company: "Acquire BPO",
     bullets: [
-      "Redesigned entire training curricula for operations — cutting required training time <strong>by 50%</strong> while improving coverage and promoting troubleshooting based on how technologies work.",
+      "Built a web-app mapping every troubleshooting scenario from Level 1 through TIO escalations — covering manual modem configuration to cloud-based IVR routing for IP phones. Adopted and expanded by client to cover IPV and cloud hosted telephony.",
+      "Redesigned operations training curriculum — cutting required training time by 50% — and served as interim team lead for 5+ new hire classes, teaching how systems actually work rather than just what to do"
       "Authored 20+ knowledge articles and led training sessions for four new hire classes during their transition to operations.",
     ],
   },

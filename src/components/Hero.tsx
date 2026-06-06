@@ -1,3 +1,5 @@
+import glennProfile from "@/assets/glenn-profile.jpeg.asset.json";
+
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (
     <section id="hero" className="px-[5vw] grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-16 pt-24 pb-12 relative overflow-hidden">

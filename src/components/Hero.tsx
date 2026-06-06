@@ -1,4 +1,4 @@
-import glennProfile from "@/assets/glenn-profile.jpeg.asset.json";
+import glennProfile from "@/assets/glenn-profile-2.jpeg.asset.json";
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (
@@ -8,12 +8,12 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       style={{ backgroundColor: "#131311" }}
     >
       {/* Full-bleed right-side photo */}
-      <div className="absolute top-0 right-0 h-full w-full md:w-1/2 pointer-events-none hidden md:block">
+      <div className="absolute top-0 right-0 h-full w-full md:w-[55%] pointer-events-none hidden md:block">
         <img
           src={glennProfile.url}
           alt="Glenn Charifa"
           className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "cover", objectPosition: "30% top" }}
+          style={{ objectFit: "cover", objectPosition: "20% top" }}
         />
         <div
           className="absolute inset-0"

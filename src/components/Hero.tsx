@@ -8,20 +8,16 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       style={{ backgroundColor: "#131311" }}
     >
       {/* Full-bleed right-side photo */}
-      <div className="absolute top-0 right-0 h-full w-full md:w-[55%] pointer-events-none hidden md:block">
+      <div className="absolute top-0 right-0 h-full w-full md:w-1/2 pointer-events-none hidden md:block">
         <img
           src={glennProfile.url}
           alt="Glenn Charifa"
           className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "cover", objectPosition: "20% top" }}
+          style={{ objectFit: "cover", objectPosition: "center top" }}
         />
         <div
           className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, #131311 0%, #131311 20%, rgba(19,19,17,0.8) 40%, rgba(19,19,17,0.3) 60%, transparent 80%)" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to left, #131311 0%, transparent 20%)" }}
+          style={{ background: "linear-gradient(to right, #131311 0%, #131311 15%, rgba(19,19,17,0.6) 35%, transparent 55%)" }}
         />
         <div
           className="absolute inset-0"

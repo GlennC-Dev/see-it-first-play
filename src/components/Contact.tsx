@@ -1,6 +1,16 @@
 import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
 import ContactFormDialog from "./ContactFormDialog";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+
+// TODO: replace with your real Google Drive share URLs
+const RESUME_HUMAN_URL = "https://drive.google.com/file/d/REPLACE_WITH_HUMAN_FILE_ID/view?usp=sharing";
+const RESUME_ATS_URL = "https://drive.google.com/file/d/REPLACE_WITH_ATS_FILE_ID/view?usp=sharing";
 
 const Contact = ({ onOpenChat }: { onOpenChat: () => void }) => {
   const [formOpen, setFormOpen] = useState(false);
@@ -49,9 +59,39 @@ const Contact = ({ onOpenChat }: { onOpenChat: () => void }) => {
             >
               ✉️ Send me a message
             </button>
-            <button onClick={onOpenChat} className="w-full bg-primary text-primary-foreground border-none py-4 text-[0.9rem] font-medium cursor-pointer rounded-sm hover:brightness-110 transition-all duration-200 text-center">
+            <button onClick={onOpenChat} className="w-full bg-primary text-primary-foreground border-none py-4 text-[0.9rem] font-medium cursor-pointer rounded-sm hover:brightness-110 transition-all duration-200 text-center mb-3">
               Open chat assistant →
             </button>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="w-full bg-[rgba(255,255,255,0.08)] text-[#f0f0ee] border border-[rgba(255,255,255,0.15)] py-4 text-[0.9rem] font-medium cursor-pointer rounded-sm hover:bg-[rgba(255,255,255,0.12)] transition-all duration-200 text-center inline-flex items-center justify-center gap-2">
+                📄 Download Resume
+                <span className="text-[0.7rem] opacity-70">▾</span>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="center" className="w-[var(--radix-dropdown-menu-trigger-width)] bg-[#1a1a18] border border-[rgba(255,255,255,0.12)] text-[#f0f0ee]">
+                <DropdownMenuItem asChild>
+                  <a
+                    href={RESUME_HUMAN_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer flex flex-col items-start gap-0.5 py-2.5 focus:bg-[rgba(255,255,255,0.08)]"
+                  >
+                    <span className="text-[0.9rem]">Human-friendly version</span>
+                    <span className="text-[0.7rem] text-[#888]">For hiring managers & recruiters</span>
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <a
+                    href={RESUME_ATS_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cursor-pointer flex flex-col items-start gap-0.5 py-2.5 focus:bg-[rgba(255,255,255,0.08)]"
+                  >
+                    <span className="text-[0.9rem]">ATS-friendly version</span>
+                    <span className="text-[0.7rem] text-[#888]">For applicant tracking systems</span>
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </ScrollReveal>
       </div>

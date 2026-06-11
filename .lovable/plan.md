@@ -1,18 +1,28 @@
-## Lock site in dark mode
+# Resume Download — Contact Card Dropdown
 
-**Changes:**
+## Goal
+Add a single "Download Resume" action to the existing "Ready to automate?" card in `src/components/Contact.tsx`. Clicking it reveals two options — a human-friendly version and an ATS-friendly version — each opening the corresponding Google Drive PDF preview in a new tab.
 
-1. **`index.html`** — add `class="dark"` to `<html>` so dark mode is applied before React mounts (prevents flash of light theme).
+## Placement
+Inside the existing card in `Contact.tsx`, directly under the two existing buttons ("Send me a message" and "Open chat assistant"). It becomes the third action, visually consistent with the other two.
 
-2. **`src/components/Navbar.tsx`** — remove:
-   - `isDark` state, `toggleTheme`, the `useEffect` that reads `localStorage`
-   - The toggle `<button>` with the Sun/Moon icons
-   - The `Moon`/`Sun` imports from lucide-react
-   
-   Keep the rest of the navbar (logo, nav links, Back-to-portfolio link) intact.
+## UI behavior
+- Default state: one button labeled `📄 Download Resume ▾`, styled to match the existing "Send me a message" button (translucent white background, same padding, same radius) so it doesn't compete with the primary blue CTA.
+- Click → opens a small dropdown menu (shadcn `DropdownMenu`, already in the project) with two items:
+  - **Human-friendly version** — for hiring managers / recruiters
+  - **ATS-friendly version** — for applicant tracking systems
+- Each item is an `<a>` with `target="_blank"` and `rel="noopener noreferrer"` pointing to the corresponding Google Drive share URL. Clicking opens the Drive PDF preview in a new tab, where the user can hit Drive's download button.
 
-3. **`src/index.css`** (optional cleanup) — leave the `:root` light tokens in place but they'll be unused; no change needed unless you want them removed.
+## What I need from you
+The two public Google Drive share URLs for the PDFs. They should look like:
+`https://drive.google.com/file/d/{FILE_ID}/view?usp=sharing`
 
-**Notes:**
-- Any previously saved `theme: "light"` in a visitor's localStorage will be ignored since nothing reads it anymore.
-- No changes to Tailwind config or design tokens — every component already uses semantic tokens that resolve correctly under `.dark`.
+I'll wire both into the component. If you don't have them ready yet, I can drop in placeholder URLs and you can swap them in later — just say the word.
+
+## Files touched
+- `src/components/Contact.tsx` — add the dropdown trigger + menu inside the existing card. No other files change. No new dependencies (shadcn `dropdown-menu` is already installed).
+
+## Out of scope
+- No Hero-section resume link (keeping it Contact-only as discussed).
+- No Google Drive API connector — using plain public links.
+- No analytics/tracking on clicks.

@@ -22,7 +22,7 @@ const PLACEHOLDER_IMPACT = "TBD — add impact metric";
 const PLACEHOLDER_TAGS = ["TBD tag 1", "TBD tag 2"];
 
 const TOP_PROJECTS: ProjectCard[] = [
-  { title: "ENPS Live Dashboard", desc: "Real-time Employee Net Promoter Score monitoring dashboard providing instant insights into employee satisfaction and engagement metrics.", image: enpsDashboard, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "ENPS Live Dashboard", desc: "Real-time Employee Net Promoter Score monitoring dashboard providing instant insights into employee satisfaction and engagement metrics.", image: enpsDashboard, impact: "Hours to Seconds • Insight on Demand", tags: ["Google Sheets", "Google AppScript"] },
   { title: "IMPROVE: FMEA", desc: "Failure Mode and Effects Analysis demonstrating risk assessment methodology and mitigation strategies for process improvement.", image: improveFmea, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
   { title: "Chat ETL Workflow", desc: "Automated data extraction, transformation, and loading process built in Tableau for streamlined chat data analytics.", image: chatEtl, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
   { title: "Apps Script Code", desc: "Custom Google Apps Script implementation for automated data cleaning and processing.", image: appsScript, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
@@ -184,12 +184,12 @@ const ProjectsSection = () => {
               <img src={lbProject.image} alt={lbProject.title} className="w-full h-full object-contain max-h-[80vh]" />
               <button
                 onClick={() => setLightboxIdx((lightboxIdx - 1 + TOP_PROJECTS.length) % TOP_PROJECTS.length)}
-                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.75)] border border-[rgba(255,255,255,0.2)] text-[#000] font-bold cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.9)] transition-colors z-[2]"
                 aria-label="Previous"
               >←</button>
               <button
                 onClick={() => setLightboxIdx((lightboxIdx + 1) % TOP_PROJECTS.length)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.75)] border border-[rgba(255,255,255,0.2)] text-[#000] font-bold cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.9)] transition-colors z-[2]"
                 aria-label="Next"
               >→</button>
               <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-[2]">

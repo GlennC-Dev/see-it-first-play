@@ -1,4 +1,4 @@
-import glennProfile from "@/assets/glenn-profile-2.jpeg.asset.json";
+import glennProfile from "@/assets/glenn-profile-3.jpg.asset.json";
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (
@@ -13,7 +13,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           src={glennProfile.url}
           alt="Glenn Charifa"
           className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "cover", objectPosition: "35% 15%" }}
+          style={{ objectFit: "cover", objectPosition: "50% 50%" }}
         />
         <div
           className="absolute inset-0"

@@ -1,4 +1,4 @@
-import glennProfile from "@/assets/glenn-profile-2.jpeg.asset.json";
+import glennProfile from "@/assets/glenn-profile-3.jpg.asset.json";
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (

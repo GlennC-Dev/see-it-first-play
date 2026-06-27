@@ -13,7 +13,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           src={glennProfile.url}
           alt="Glenn Charifa"
           className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "cover", objectPosition: "50% 20%" }}
+          style={{ objectFit: "cover", objectPosition: "65% 20%" }}
         />
         <div
           className="absolute inset-0"

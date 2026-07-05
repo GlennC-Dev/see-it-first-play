@@ -1,11 +1,11 @@
-import glennProfile from "@/assets/glenn-profile-3.jpg.asset.json";
+import glennProfile from "@/assets/glenn-profile-4.jpg.asset.json";
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (
     <section
       id="hero"
       className="relative overflow-hidden pt-24 pb-12"
-      style={{ backgroundColor: "#131311" }}
+      style={{ backgroundColor: "#000000" }}
     >
       {/* Full-bleed right-side photo */}
       <div className="absolute top-0 right-0 h-full w-full md:w-1/2 pointer-events-none hidden md:block">
@@ -13,15 +13,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           src={glennProfile.url}
           alt="Glenn Charifa"
           className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "contain", objectPosition: "50% 20%" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, #131311 0%, #131311 15%, rgba(19,19,17,0.6) 35%, transparent 55%)" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, #131311 0%, transparent 25%)" }}
+          style={{ objectFit: "contain", objectPosition: "50% 50%" }}
         />
       </div>
 

@@ -1,28 +1,20 @@
-# Resume Download — Contact Card Dropdown
+Plan: Hero section update
 
-## Goal
-Add a single "Download Resume" action to the existing "Ready to automate?" card in `src/components/Contact.tsx`. Clicking it reveals two options — a human-friendly version and an ATS-friendly version — each opening the corresponding Google Drive PDF preview in a new tab.
+1. **Create a CDN asset for the uploaded portrait**
+   - Source: `/mnt/user-uploads/Messenger_creation_EE70FF50-8E74-4A67-B404-87A6F82150B9.jpeg`
+   - Generate: `src/assets/glenn-profile-4.jpg.asset.json` via `lovable-assets create --file /mnt/user-uploads/Messenger_creation_EE70FF50-8E74-4A67-B404-87A6F82150B9.jpeg --filename glenn-profile-4.jpg > src/assets/glenn-profile-4.jpg.asset.json`
 
-## Placement
-Inside the existing card in `Contact.tsx`, directly under the two existing buttons ("Send me a message" and "Open chat assistant"). It becomes the third action, visually consistent with the other two.
+2. **Update `src/components/Hero.tsx`**
+   - Import the new asset: `import glennProfile from "@/assets/glenn-profile-4.jpg.asset.json";`
+   - Change the hero section background to black: `style={{ backgroundColor: "#000000" }}`
+   - Remove the two gradient overlay divs so the photo has no fade/blend effects
+   - Keep the photo constrained to the right half (`absolute top-0 right-0 h-full w-full md:w-1/2`, hidden on mobile)
+   - Keep `objectFit: "contain"` so the full portrait stays visible, and center it vertically with `objectPosition: "50% 50%"`
+   - Leave the left-half content and existing text animations unchanged
 
-## UI behavior
-- Default state: one button labeled `📄 Download Resume ▾`, styled to match the existing "Send me a message" button (translucent white background, same padding, same radius) so it doesn't compete with the primary blue CTA.
-- Click → opens a small dropdown menu (shadcn `DropdownMenu`, already in the project) with two items:
-  - **Human-friendly version** — for hiring managers / recruiters
-  - **ATS-friendly version** — for applicant tracking systems
-- Each item is an `<a>` with `target="_blank"` and `rel="noopener noreferrer"` pointing to the corresponding Google Drive share URL. Clicking opens the Drive PDF preview in a new tab, where the user can hit Drive's download button.
+3. **Clean up the old asset**
+   - The existing `src/assets/glenn-profile-3.jpg.asset.json` will no longer be referenced
+   - Delete it and its CDN object via `lovable-assets delete --file src/assets/glenn-profile-3.jpg.asset.json`
 
-## What I need from you
-The two public Google Drive share URLs for the PDFs. They should look like:
-`https://drive.google.com/file/d/{FILE_ID}/view?usp=sharing`
-
-I'll wire both into the component. If you don't have them ready yet, I can drop in placeholder URLs and you can swap them in later — just say the word.
-
-## Files touched
-- `src/components/Contact.tsx` — add the dropdown trigger + menu inside the existing card. No other files change. No new dependencies (shadcn `dropdown-menu` is already installed).
-
-## Out of scope
-- No Hero-section resume link (keeping it Contact-only as discussed).
-- No Google Drive API connector — using plain public links.
-- No analytics/tracking on clicks.
+4. **Verify the preview**
+   - Confirm the hero has a black background and the new portrait appears on the right half without gradient overlays

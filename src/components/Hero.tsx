@@ -13,15 +13,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
           src={glennProfile.url}
           alt="Glenn Charifa"
           className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "contain", objectPosition: "50% 20%" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to right, #131311 0%, #131311 15%, rgba(19,19,17,0.6) 35%, transparent 55%)" }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, #131311 0%, transparent 25%)" }}
+          style={{ objectFit: "contain", objectPosition: "50% 50%" }}
         />
       </div>
 

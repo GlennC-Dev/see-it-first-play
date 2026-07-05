@@ -8,7 +8,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
       style={{ backgroundColor: "#000000" }}
     >
       {/* Full-bleed right-side photo */}
-      <div className="absolute top-0 right-0 h-full w-full md:w-1/2 pointer-events-none hidden md:block">
+      <div className="absolute top-16 right-0 h-[calc(100%-4rem)] w-full md:w-1/2 pointer-events-none hidden md:block">  
         <img
           src={glennProfile.url}
           alt="Glenn Charifa"

@@ -23,12 +23,10 @@ const PLACEHOLDER_TAGS = ["TBD tag 1", "TBD tag 2"];
 
 const TOP_PROJECTS: ProjectCard[] = [
   { title: "ENPS Live Dashboard", desc: "Real-time Employee Net Promoter Score monitoring dashboard providing instant insights into employee satisfaction and engagement metrics.", image: enpsDashboard, impact: "Hours to Seconds • Insight on Demand", tags: ["Google Sheets", "Google AppScript"] },
-  { title: "IMPROVE: FMEA", desc: "Failure Mode and Effects Analysis demonstrating risk assessment methodology and mitigation strategies for process improvement.", image: improveFmea, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
-  { title: "Chat ETL Workflow", desc: "Automated data extraction, transformation, and loading process built in Tableau for streamlined chat data analytics.", image: chatEtl, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
-  { title: "Apps Script Code", desc: "Custom Google Apps Script implementation for automated data cleaning and processing.", image: appsScript, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
-  { title: "JIRA Workflow Management", desc: "Custom JIRA project configuration with optimized workflows, issue types, and field configurations for operational efficiency.", image: jiraWorkflow, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
-  { title: "Function Execution Tracking", desc: "Automated function monitoring system showing execution logs, duration tracking, and status monitoring for time-driven automation processes.", image: functionTracking, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
-  { title: "MEASURE: Integrated Flowchart", desc: "Process mapping and measurement framework showing data collection points and validation methods for comprehensive process analysis.", image: measureFlowchart, impact: PLACEHOLDER_IMPACT, tags: PLACEHOLDER_TAGS },
+  { title: "MEASURE: Integrated Flowchart", desc: "Process mapping and measurement framework showing data collection points and validation methods for comprehensive process analysis.", image: measureFlowchart, impact: "Root Cause Analysis", tags: ["Process Mapping", "Data Analytics"] },
+  { title: "IMPROVE: FMEA", desc: "Failure Mode and Effects Analysis demonstrating risk assessment methodology and mitigation strategies for process improvement.", image: improveFmea, impact: "Risk Reduction • Governance and Accountability", tags: ["Lean Six Sigma", "Data Analytics"] },
+  { title: "Chat ETL Workflow", desc: "Automated data extraction, transformation, and loading process built in Tableau for streamlined chat data analytics.", image: chatEtl, impact: "Hands Off - Scheduled Data Refresh", tags: ["Google AppScript", "Tableau"] },
+  { title: "Apps Script Code", desc: "Custom Google Apps Script implementation for automated data cleaning and processing.", image: appsScript, impact: "Hours to Seconds", tags: ["Google Sheets", "Google AppScript"] },
 ];
 
 const ProjectsSection = () => {

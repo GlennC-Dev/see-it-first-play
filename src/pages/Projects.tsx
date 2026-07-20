@@ -27,7 +27,7 @@ const CATEGORIES: Category[] = [
   {
     key: "Tableau Visualizations",
     title: "Tableau Visualizations",
-    desc: "Dashboards, scorecards, and subscription-optimized infographic reports built to turn raw data into decisions — not just displays.",
+    desc: "Subscription-optimized infographic reports built to enable self-service analytics and turn raw data into decisions — not just displays.",
   },
   {
     key: "Workflow Automation",

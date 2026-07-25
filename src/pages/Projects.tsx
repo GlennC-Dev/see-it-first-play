@@ -26,8 +26,8 @@ interface Category {
 const CATEGORIES: Category[] = [
   {
     key: "Tableau Visualizations",
-    title: "Tableau Visualizations",
-    desc: "Subscription-optimized infographic reports built to enable self-service analytics and turn raw data into decisions — not just displays.",
+    title: "Self Service Analytics and Automated Reporting",
+    desc: "Tableau and PowerBI Dashboards engineered for self-service consumption and automated delivery\u00A0— so stakeholders get accurate, scheduled insights without a single manual touchpoint.",
   },
   {
     key: "Workflow Automation",

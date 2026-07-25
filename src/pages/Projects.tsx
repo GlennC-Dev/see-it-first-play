@@ -43,8 +43,25 @@ const CATEGORIES: Category[] = [
 
 const PROJECTS: Project[] = [
   // ============================================================
-  // Tableau Visualizations — 3 (unchanged)
+  // Tableau Visualizations
   // ============================================================
+  {
+    id: 15,
+    title: "Customer Experience Dashboard",
+    desc: "TBD — add description.",
+    impact: "TBD",
+    tags: ["TBD"],
+    icon: "📊",
+    photos: [
+      "/__l5e/assets-v1/2a15514e-1ce1-488f-ab51-f0f4ec5436d7/ces-summary.jpg",
+      "/__l5e/assets-v1/3112bf16-ea8f-4a34-b32f-9b7c30ceb716/agent-summary.jpg",
+    ],
+    photoCaptions: [
+      "TBD — caption for CES Summary view.",
+      "TBD — caption for Agent Summary view.",
+    ],
+    category: "Tableau Visualizations",
+  },
   { id: 0, title: "Tableau BI Dashboard Suite", desc: "A multi-report Tableau visualization suite built to eliminate repetitive manual data transformation. Analysts stopped spending hours on data prep and started spending that time on the insights that actually matter.", impact: "🔁 Manual prep fully eliminated", tags: ["Tableau", "BI", "Python"], icon: "📉", photos: [null, null, null, null], category: "Tableau Visualizations" },
   { id: 1, title: "Subscription-Ready Infographic Reports", desc: "Redesigned reports with static sizing and infographic-style layouts engineered for Tableau's Subscription email feature. Stakeholders receive the full, polished report on a schedule — no login, no friction.", impact: "📧 Zero-click delivery to stakeholders", tags: ["Tableau", "Subscriptions", "Infographic Design"], icon: "📬", photos: [null, null], category: "Tableau Visualizations" },
   { id: 2, title: "Tableau Visualization Project 3", desc: "Placeholder project for an upcoming Tableau visualization. Details and screenshots will be added soon.", impact: "📊 Coming soon", tags: ["Tableau", "BI"], icon: "📊", photos: [null], category: "Tableau Visualizations" },

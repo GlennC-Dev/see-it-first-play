@@ -106,6 +106,29 @@ const PROJECTS: Project[] = [
     ],
     category: "Tableau Visualizations",
   },
+  {
+    id: 18,
+    title: "Manager Reports",
+    desc: "TBD — add description.",
+    impact: "TBD",
+    tags: ["TBD"],
+    icon: "🧭",
+    photos: [
+      "/__l5e/assets-v1/beb9651e-6210-4ee9-bcc0-c85c19b44e47/mgr-1-3.jpg",
+      "/__l5e/assets-v1/dc0a6a20-b85b-458b-9bf6-925f5d90efba/mgr-2-3.jpg",
+      "/__l5e/assets-v1/cdc915ff-49f8-4746-a31a-52e20bffbb76/mgr-3-3.jpg",
+      "/__l5e/assets-v1/f0943bbb-65be-42f4-ac1f-700ae3d0c9fc/mgr-4-2.jpg",
+    ],
+    photoCaptions: [
+      "TBD — caption for Technical Support manager view.",
+      "TBD — caption for Sales and Activations manager view.",
+      "TBD — caption for Customer Service manager view.",
+      "TBD — caption for Voice Service manager view.",
+    ],
+    category: "Tableau Visualizations",
+  },
+
+
 
   { id: 0, title: "Tableau BI Dashboard Suite", desc: "A multi-report Tableau visualization suite built to eliminate repetitive manual data transformation. Analysts stopped spending hours on data prep and started spending that time on the insights that actually matter.", impact: "🔁 Manual prep fully eliminated", tags: ["Tableau", "BI", "Python"], icon: "📉", photos: [null, null, null, null], category: "Tableau Visualizations" },
   { id: 1, title: "Subscription-Ready Infographic Reports", desc: "Redesigned reports with static sizing and infographic-style layouts engineered for Tableau's Subscription email feature. Stakeholders receive the full, polished report on a schedule — no login, no friction.", impact: "📧 Zero-click delivery to stakeholders", tags: ["Tableau", "Subscriptions", "Infographic Design"], icon: "📬", photos: [null, null], category: "Tableau Visualizations" },

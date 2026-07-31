@@ -86,7 +86,7 @@ const PROJECTS: Project[] = [
   {
     id: 17,
     title: "Agent and TL Productivity Suite",
-    desc: "A D-1 productivity reporting suite delivered automatically each morning — giving team leaders agent-level visibility into calls, AHT, occupancy, and aux usage, while program managers get the same view rolled up to team level alongside queue health, all without a single manual pull.",
+    desc: "A cascading D-1 productivity suite delivered daily — team leaders receive agent-level calls, AHT, occupancy, aux usage, and CES; program managers get the same rolled up to team level alongside queue health. Aux monitoring flags overages before they become a pattern.",
     impact: "Agent to Program Manager — Every Layer, Every Morning",
     tags: ["Tableau"],
     icon: "👥",
@@ -106,7 +106,7 @@ const PROJECTS: Project[] = [
   {
     id: 18,
     title: "Queue Intelligence",
-    desc: "A D-1 productivity reporting suite delivered automatically each morning — giving team leaders agent-level visibility into calls, AHT, occupancy, and aux usage, while program managers get the same view rolled up to team level alongside queue health, all without a single manual pull.",
+    desc: "A D-1 queue summary delivered every morning and a week-on-week view sent every Monday — giving operations managers a complete picture of call volume, SLA performance, abandon rates, and interval-level patterns across all business units, automatically, without a single manual pull.",
     impact: "Operational Pulse — Daily and Weekly, Before Anyone Asks",
     tags: ["Tableau"],
     icon: "🗓️",
@@ -124,26 +124,22 @@ const PROJECTS: Project[] = [
   {
     id: 19,
     title: "Manager Reports",
-    desc: "TBD — add description.",
-    impact: "TBD",
+    desc: "A bi-monthly manager briefing built so that every question in a business review is answered before it's asked. Three LOB variants — Technical Support, Sales & Activations, and Customer Service — each surfacing queue health, productivity, shift utilization, and LOB-specific KPIs across two brands simultaneously. Eight independent data sources, one question: how did the business do?",
+    impact: "Every LOB. Every Metric. One Report",
     tags: ["Tableau"],
     icon: "🧭",
     photos: [
       "/__l5e/assets-v1/beb9651e-6210-4ee9-bcc0-c85c19b44e47/mgr-1-3.jpg",
       "/__l5e/assets-v1/dc0a6a20-b85b-458b-9bf6-925f5d90efba/mgr-2-3.jpg",
       "/__l5e/assets-v1/cdc915ff-49f8-4746-a31a-52e20bffbb76/mgr-3-3.jpg",
-      "/__l5e/assets-v1/f0943bbb-65be-42f4-ac1f-700ae3d0c9fc/mgr-4-2.jpg",
     ],
     photoCaptions: [
       "Manager View for Technical Support Campaign",
       "Manager View for Sales and Activations Campaigns",
       "Manager View for Customer Service Campaigns",
-      "Customized Operational Performance View for Voice Campaign",
     ],
     category: "Tableau Visualizations",
   },
-
-
 
   // { id: 0, title: "Tableau BI Dashboard Suite", desc: "A multi-report Tableau visualization suite built to eliminate repetitive manual data transformation. Analysts stopped spending hours on data prep and started spending that time on the insights that actually matter.", impact: "🔁 Manual prep fully eliminated", tags: ["Tableau", "BI", "Python"], icon: "📉", photos: [null, null, null, null], category: "Tableau Visualizations" },
   // { id: 1, title: "Subscription-Ready Infographic Reports", desc: "Redesigned reports with static sizing and infographic-style layouts engineered for Tableau's Subscription email feature. Stakeholders receive the full, polished report on a schedule — no login, no friction.", impact: "📧 Zero-click delivery to stakeholders", tags: ["Tableau", "Subscriptions", "Infographic Design"], icon: "📬", photos: [null, null], category: "Tableau Visualizations" },

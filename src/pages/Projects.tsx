@@ -85,29 +85,44 @@ const PROJECTS: Project[] = [
   },
   {
     id: 17,
-    title: "Daily Operations Reports",
-    desc: "TBD — add description.",
-    impact: "TBD",
-    tags: ["TBD"],
-    icon: "🗓️",
+    title: "Agent and TL Productivity Suite",
+    desc: "A D-1 productivity reporting suite delivered automatically each morning — giving team leaders agent-level visibility into calls, AHT, occupancy, and aux usage, while program managers get the same view rolled up to team level alongside queue health, all without a single manual pull.",
+    impact: "Agent to Program Manager — Every Layer, Every Morning",
+    tags: ["Tableau"],
+    icon: "👥",
     photos: [
       "/__l5e/assets-v1/e44df178-1f31-41af-bac3-0daecd6af070/ops-1-2.jpg",
       "/__l5e/assets-v1/355faae6-573b-4646-b9e0-2eb54cedd9d0/ops-2-2.jpg",
-      "/__l5e/assets-v1/d463df1d-a70b-498e-a63f-2c3adfd3be12/ops-3-2.jpg",
-      "/__l5e/assets-v1/63fb73ad-4edc-46c0-9f56-3d51a9cfb1b6/ops-4.jpg",
       "/__l5e/assets-v1/30d94da5-edb3-4c4a-a91f-448fdcb28b47/ops-5.jpg",
     ],
     photoCaptions: [
       "Agent Productivity Report for Team Leaders",
       "Overall Performance Report for Program Managers",
-      "Queue Performance Report for Yesterday",
-      "Queue Performance Report for MTD",
       "Daily Aux Monitoring Report",
     ],
     category: "Tableau Visualizations",
   },
+
   {
     id: 18,
+    title: "Queue Intelligence",
+    desc: "A D-1 productivity reporting suite delivered automatically each morning — giving team leaders agent-level visibility into calls, AHT, occupancy, and aux usage, while program managers get the same view rolled up to team level alongside queue health, all without a single manual pull.",
+    impact: "Operational Pulse — Daily and Weekly, Before Anyone Asks",
+    tags: ["Tableau"],
+    icon: "🗓️",
+    photos: [
+      "/__l5e/assets-v1/d463df1d-a70b-498e-a63f-2c3adfd3be12/ops-3-2.jpg",
+      "/__l5e/assets-v1/63fb73ad-4edc-46c0-9f56-3d51a9cfb1b6/ops-4.jpg",
+    ],
+    photoCaptions: [
+      "Queue Performance Report for Yesterday",
+      "Queue Performance Report for MTD",
+    ],
+    category: "Tableau Visualizations",
+  },
+  
+  {
+    id: 19,
     title: "Manager Reports",
     desc: "TBD — add description.",
     impact: "TBD",

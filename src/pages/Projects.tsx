@@ -65,8 +65,8 @@ const PROJECTS: Project[] = [
   {
     id: 16,
     title: "Chat Operations Dashboard",
-    desc: "TBD — add description.",
-    impact: "TBD",
+    desc: "A fully automated Chat Operations reporting suite covering queue health, transfer patterns, agent productivity, and bi-hourly intraday snapshots — delivered to operations leaders on schedule, every day, without a single manual pull.",
+    impact: "Queue Health to Agent Grain — Delivered SOD",
     tags: ["Salesforce", "Tableau"],
     icon: "💬",
     photos: [

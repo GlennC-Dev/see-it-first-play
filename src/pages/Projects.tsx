@@ -443,7 +443,7 @@ const Projects = () => {
         </div>
       </ScrollReveal>
 
-      <div className="px-[5vw] py-16 pb-24">
+      <div className="px-[5vw] xl:px-[4vw] py-16 pb-24">
         {groupedByCategory.map((group) => (
           <ScrollReveal key={group.key} className="mb-16 last:mb-0">
             <div className="flex items-baseline gap-6 mb-6 pb-4 border-b border-border flex-wrap transition-colors duration-300">
@@ -454,7 +454,7 @@ const Projects = () => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {group.projects.map((p, i) => (
                 <ScrollReveal key={p.id} delay={i * 80}>
                   <div

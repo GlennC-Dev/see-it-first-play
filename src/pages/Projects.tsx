@@ -447,7 +447,7 @@ const Projects = () => {
         {groupedByCategory.map((group) => (
           <ScrollReveal key={group.key} className="mb-16 last:mb-0">
             <div className="flex items-baseline gap-6 mb-6 pb-4 border-b border-border flex-wrap transition-colors duration-300">
-              <div className="font-serif-dm text-[1.6rem] text-foreground whitespace-nowrap transition-colors duration-300">{group.title}</div>
+              <div className="font-serif-dm text-[1.6rem] text-foreground whitespace-pre-wrap transition-colors duration-300">{group.title}</div>
               <div className="text-[0.85rem] text-ink-soft font-light leading-[1.6] flex-1 min-w-[200px]">{group.desc}</div>
               <div className="font-mono-dm text-[0.68rem] tracking-[0.1em] text-ink-muted whitespace-nowrap px-2.5 py-1 border border-border rounded-sm">
                 {group.projects.length} project{group.projects.length !== 1 ? "s" : ""}

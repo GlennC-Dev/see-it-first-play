@@ -26,7 +26,7 @@ interface Category {
 const CATEGORIES: Category[] = [
   {
     key: "Tableau Visualizations",
-    title: "Self Service Analytics and Automated Reporting",
+    title: "Self Service Analytics and\u00A0\nAutomated Reporting",
     desc: "Tableau and PowerBI Dashboards engineered for self-service consumption and automated delivery\u00A0— so stakeholders get accurate, scheduled insights without a single manual touchpoint.",
   },
   {
@@ -36,7 +36,7 @@ const CATEGORIES: Category[] = [
   },
   {
     key: "Case Study & Technical Writing",
-    title: "Case Study & Technical Writing",
+    title: "Case Study & Technical\u00A0\nWriting",
     desc: "Process documentation, training curriculum design, and decision-support systems — turning complex workflows into clear, actionable frameworks.",
   },
 ];

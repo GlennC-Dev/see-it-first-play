@@ -72,7 +72,7 @@ const PROJECTS: Project[] = [
     photos: [
       "/__l5e/assets-v1/bcb8685c-f1aa-43e8-87ef-6bf775bf995a/chat-queue.jpg",
       "/__l5e/assets-v1/e08facd8-680b-4665-92e9-11dcf7937fab/chat-transfer.jpg",
-      "/__l5e/assets-v1/8907e61c-b328-4b43-973c-2b2e0444ac6d/chat-agent-productivity.jpg",
+      "/__l5e/assets-v1/564ea05e-637a-4409-8a7e-6b2727f782d2/chat-agent-productivity.png",
       "/__l5e/assets-v1/c67a73dd-da1d-473c-8974-027f17d32eca/ops-chat.jpg",
     ],
     photoCaptions: [

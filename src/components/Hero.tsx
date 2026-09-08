@@ -4,7 +4,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-24 pb-12"
+      className="relative overflow-hidden pt-12 pb-12"
       style={{ backgroundColor: "#000201" }}
     >
       {/* Full-bleed right-side photo */}

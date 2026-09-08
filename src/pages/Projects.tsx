@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import ScrollReveal from "@/components/ScrollReveal";
 
 interface Project {
@@ -415,10 +413,8 @@ const Projects = () => {
 
   return (
     <>
-      <Navbar />
-
       <ScrollReveal>
-        <div className="pt-40 pb-20 px-[5vw] border-b border-border bg-card transition-colors duration-300">
+        <div className="pt-16 pb-20 px-[5vw] border-b border-border bg-card transition-colors duration-300">
           <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// project gallery</div>
           <h1 className="font-serif-dm text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] mb-4 text-foreground transition-colors duration-300">
             Work that <em className="italic text-primary">speaks</em><br />for itself.
@@ -569,8 +565,6 @@ const Projects = () => {
           </div>
         </div>
       )}
-
-      <Footer />
     </>
   );
 };

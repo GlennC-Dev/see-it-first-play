@@ -13,9 +13,9 @@ const AboutPanel = () => {
           </h1>
           <p className="text-base text-ink-soft font-light max-w-[60ch] leading-[1.7] mb-4">
             {/* TODO: replace with your own words — this is a first draft based on your Hero copy */}
-            I don't just analyze data — I automate the work behind it. I design
-            the systems behind the insights, and make sure those insights are
-            real. 10+ years in support, escalations, and data work, now focused
+            I design the systems that turn messy processes into pipelines —
+            then make sure what comes out the other end is actually right.
+            10+ years in support, escalations, and data work, now focused
             on BI development and workflow automation.
           </p>
           <p className="text-base text-ink-soft font-light max-w-[60ch] leading-[1.7]">

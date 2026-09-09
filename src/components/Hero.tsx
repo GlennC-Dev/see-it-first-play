@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import glennProfile from "@/assets/glenn-profile-4.jpg.asset.json";
 
 const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
@@ -24,18 +25,18 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
             DATA VISUALIZATION & AUTOMATION SPECIALIST
           </div>
           <h1 className="animate-fade-up-delay-1 font-serif-dm text-[clamp(2.8rem,5vw,4.8rem)] leading-[1.05] text-foreground mb-6 transition-colors duration-300">
-            I don't just<br />analyze data —<br /><em className="italic text-primary">I automate</em><br />the work behind it.
+            Automate the<br />Build. <em className="italic text-primary">Trust</em><br />the Output.
           </h1>
           <p className="animate-fade-up-delay-2 text-base leading-[1.7] text-ink-soft max-w-[42ch] mb-10 font-light">
-            I design the systems behind the insights — and I make sure those insights are real. Based in Manila, Philippines — open to remote and international opportunities.
+            I design the systems that turn messy processes into pipelines — then make sure what comes out the other end is actually right. Based in Manila, Philippines — open to remote and international opportunities.
           </p>
           <div className="animate-fade-up-delay-3 flex gap-4 flex-wrap">
             <button onClick={onOpenChat} className="bg-primary text-primary-foreground border-none py-3.5 px-7 text-[0.85rem] font-medium tracking-[0.05em] cursor-pointer inline-block transition-all duration-200 rounded-sm hover:brightness-110 hover:-translate-y-px">
               Let's automate something
             </button>
-            <a href="#projects" className="bg-transparent text-foreground border-[1.5px] border-border py-3.5 px-7 text-[0.85rem] font-medium tracking-[0.05em] cursor-pointer inline-block no-underline transition-all duration-200 rounded-sm hover:border-primary hover:text-primary hover:-translate-y-px">
+            <Link to="/projects" className="bg-transparent text-foreground border-[1.5px] border-border py-3.5 px-7 text-[0.85rem] font-medium tracking-[0.05em] cursor-pointer inline-block no-underline transition-all duration-200 rounded-sm hover:border-primary hover:text-primary hover:-translate-y-px">
               View my work
-            </a>
+            </Link>
           </div>
         </div>
         <div className="hidden md:block" />

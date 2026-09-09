@@ -1,45 +1,19 @@
-import { Link } from "react-router-dom";
-import glennProfile from "@/assets/glenn-profile-4.jpg.asset.json";
-
-const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
+const Hero = () => {
   return (
     <section
       id="hero"
       className="relative overflow-hidden pt-12 pb-12"
       style={{ backgroundColor: "#000201" }}
     >
-      {/* Full-bleed right-side photo */}
-      <div className="absolute top-16 right-0 h-[calc(100%-4rem)] w-full md:w-1/2 pointer-events-none hidden md:block">  
-        <img
-          src={glennProfile.url}
-          alt="Glenn Charifa"
-          className="absolute inset-0 w-full h-full"
-          style={{ objectFit: "contain", objectPosition: "50% 50%" }}
-        />
-      </div>
-
-      <div className="px-[5vw] grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-16 relative z-[1]">
+      <div className="px-[5vw] grid grid-cols-1 items-center gap-10 md:gap-16 relative z-[1]">
         <div>
-          <div className="animate-fade-up inline-flex items-center gap-2 font-mono-dm text-[0.75rem] tracking-[0.12em] uppercase text-primary border border-primary rounded-sm px-3 py-1 mb-6">
-            <span className="w-1.5 h-1.5 bg-primary rounded-full inline-block" />
-            DATA VISUALIZATION & AUTOMATION SPECIALIST
-          </div>
           <h1 className="animate-fade-up-delay-1 font-serif-dm text-[clamp(2.8rem,5vw,4.8rem)] leading-[1.05] text-foreground mb-6 transition-colors duration-300">
             Automate the<br />Build. <em className="italic text-primary">Trust</em><br />the Output.
           </h1>
-          <p className="animate-fade-up-delay-2 text-base leading-[1.7] text-ink-soft max-w-[42ch] mb-10 font-light">
+          <p className="animate-fade-up-delay-2 text-base leading-[1.7] text-ink-soft max-w-[42ch] font-light">
             I design the systems that turn messy processes into pipelines — then make sure what comes out the other end is actually right. Based in Manila, Philippines — open to remote and international opportunities.
           </p>
-          <div className="animate-fade-up-delay-3 flex gap-4 flex-wrap">
-            <button onClick={onOpenChat} className="bg-primary text-primary-foreground border-none py-3.5 px-7 text-[0.85rem] font-medium tracking-[0.05em] cursor-pointer inline-block transition-all duration-200 rounded-sm hover:brightness-110 hover:-translate-y-px">
-              Let's automate something
-            </button>
-            <Link to="/projects" className="bg-transparent text-foreground border-[1.5px] border-border py-3.5 px-7 text-[0.85rem] font-medium tracking-[0.05em] cursor-pointer inline-block no-underline transition-all duration-200 rounded-sm hover:border-primary hover:text-primary hover:-translate-y-px">
-              View my work
-            </Link>
-          </div>
         </div>
-        <div className="hidden md:block" />
       </div>
     </section>
   );

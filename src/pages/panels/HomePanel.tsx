@@ -1,10 +1,7 @@
-import { useOutletContext, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { siN8n, siGoogle } from "simple-icons";
 import { BarChart3, Grid3x3, ShieldCheck, FolderKanban, User, Mail, Layers } from "lucide-react";
 import Hero from "@/components/Hero";
-import Stats from "@/components/Stats";
-
-type ShellContext = { openChat: () => void };
 
 const BrandIcon = ({ hex, path }: { hex: string; path: string }) => (
   <svg viewBox="0 0 24 24" className="w-5 h-5" fill={`#${hex}`}>
@@ -63,11 +60,9 @@ const CARDS = [
 ];
 
 const HomePanel = () => {
-  const { openChat } = useOutletContext<ShellContext>();
   return (
     <div className="bg-background transition-colors duration-300">
-      <Hero onOpenChat={openChat} />
-      <Stats />
+      <Hero />
 
       <section className="px-[5vw] pb-16">
         {/* Daily Drivers */}

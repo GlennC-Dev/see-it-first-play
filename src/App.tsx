@@ -1,11 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import Index from "./pages/Index.tsx";
+import Shell from "./components/Shell.tsx";
+import Footer from "./components/Footer.tsx";
+import ChatWidget, { type ChatWidgetHandle } from "./components/ChatWidget.tsx";
+import HomePanel from "./pages/panels/HomePanel.tsx";
 import Projects from "./pages/Projects.tsx";
+import SkillsExperiencePanel from "./pages/panels/SkillsExperiencePanel.tsx";
+import AboutPanel from "./pages/panels/AboutPanel.tsx";
+import ContactPanel from "./pages/panels/ContactPanel.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 
@@ -168,20 +175,27 @@ const App = () => {
   }, []);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/projects" element={<Projects />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </QueryClientProvider>
+    <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+      <QueryClientProvider client={queryClient}>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Routes>
+              <Route element={<Shell />}>
+                <Route path="/" element={<HomePanel />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route path="/skills-experience" element={<SkillsExperiencePanel />} />
+                <Route path="/about" element={<AboutPanel />} />
+                <Route path="/contact" element={<ContactPanel />} />
+                <Route path="*" element={<NotFound />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </QueryClientProvider>
+    </ThemeProvider>
   );
 };
 

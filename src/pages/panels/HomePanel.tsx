@@ -64,9 +64,9 @@ const HomePanel = () => {
     <div className="bg-background transition-colors duration-300">
       <Hero />
 
-      <section className="px-[5vw] pb-16">
+      <section className="px-[5vw] pb-8">
         {/* Daily Drivers */}
-        <div className="rounded-xl border border-border bg-card p-4 flex items-center gap-6 overflow-x-auto mb-6">
+        <div className="rounded-xl border border-border bg-card p-3 flex items-center gap-6 overflow-x-auto mb-4">
           <div className="shrink-0 pr-6 border-r border-border">
             <p className="font-mono-dm text-[0.65rem] tracking-[0.14em] uppercase text-primary mb-0.5">
               Daily Drivers
@@ -84,12 +84,12 @@ const HomePanel = () => {
         </div>
 
         {/* Card grid: row 1 = 2 cards, row 2 = 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
           {CARDS.slice(0, 2).map((c) => (
             <HomeCard key={c.title} {...c} />
           ))}
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
           {CARDS.slice(2, 5).map((c) => (
             <HomeCard key={c.title} {...c} />
           ))}
@@ -112,12 +112,12 @@ const HomeCard = ({
 }) => (
   <Link
     to={to}
-    className="block rounded-xl border border-border bg-card p-6 hover:border-primary transition-colors duration-200 no-underline"
+    className="block rounded-xl border border-border bg-card p-4 hover:border-primary transition-colors duration-200 no-underline"
   >
-    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-4">
-      <Icon size={18} />
+    <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3">
+      <Icon size={16} />
     </div>
-    <h3 className="font-mono-dm text-[0.8rem] tracking-[0.08em] text-foreground mb-2">
+    <h3 className="font-mono-dm text-[0.8rem] tracking-[0.08em] text-foreground mb-1">
       {title}
     </h3>
     <p className="text-sm text-ink-soft font-light leading-[1.5]">{tagline}</p>

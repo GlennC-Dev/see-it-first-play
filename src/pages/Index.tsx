@@ -18,7 +18,7 @@ const Index = () => {
     <>
       <Navbar />
       <div className="bg-background transition-colors duration-300">
-        <Hero onOpenChat={openChat} />
+        <Hero />
         <Stats />
       </div>
       <Skills />

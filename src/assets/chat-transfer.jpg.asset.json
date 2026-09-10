@@ -1,11 +1,11 @@
 {
-  "version": 1,
   "asset_id": "e08facd8-680b-4665-92e9-11dcf7937fab",
-  "project_id": "82241fb4-ae8a-4ab5-a723-ad62fcdc14ad",
-  "url": "/__l5e/assets-v1/e08facd8-680b-4665-92e9-11dcf7937fab/chat-transfer.jpg",
-  "r2_key": "a/v1/82241fb4-ae8a-4ab5-a723-ad62fcdc14ad/e08facd8-680b-4665-92e9-11dcf7937fab/chat-transfer.jpg",
-  "original_filename": "chat-transfer.jpg",
-  "size": 185899,
   "content_type": "image/jpeg",
-  "created_at": "2026-07-25T05:46:05Z"
+  "created_at": "2026-07-25T05:46:05Z",
+  "original_filename": "chat-transfer.jpg",
+  "project_id": "6d776a5f-35ca-4567-9ea5-3977a7ec792c",
+  "r2_key": "a/v1/6d776a5f-35ca-4567-9ea5-3977a7ec792c/e08facd8-680b-4665-92e9-11dcf7937fab/chat-transfer.jpg",
+  "size": 185899,
+  "url": "/__l5e/assets-v1/e08facd8-680b-4665-92e9-11dcf7937fab/chat-transfer.jpg",
+  "version": 1
 }

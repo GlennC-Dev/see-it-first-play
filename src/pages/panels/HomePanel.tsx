@@ -66,7 +66,7 @@ const HomePanel = () => {
 
       <section className="px-[5vw] pb-8">
         {/* Daily Drivers */}
-        <div className="rounded-xl border border-border bg-card p-4 flex items-center gap-6 overflow-x-auto mb-5">
+        <div className="rounded-xl border border-border bg-card p-4 flex items-center gap-6 overflow-x-auto mb-4">
           <div className="shrink-0 pr-6 border-r border-border">
             <p className="font-mono-dm text-[0.65rem] tracking-[0.14em] uppercase text-primary mb-0.5">
               Daily Drivers
@@ -84,7 +84,7 @@ const HomePanel = () => {
         </div>
 
         {/* Card grid: row 1 = 2 cards, row 2 = 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
           {CARDS.slice(0, 2).map((c) => (
             <HomeCard key={c.title} {...c} />
           ))}

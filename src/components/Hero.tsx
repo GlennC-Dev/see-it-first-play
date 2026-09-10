@@ -2,7 +2,7 @@ const Hero = () => {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden pt-9 pb-9 bg-background transition-colors duration-300"
+      className="relative overflow-hidden pt-7 pb-7 bg-background transition-colors duration-300"
     >
       <div className="px-[5vw] grid grid-cols-1 items-center gap-10 md:gap-16 relative z-[1]">
         <div className="max-w-[75%] md:max-w-[75%]">

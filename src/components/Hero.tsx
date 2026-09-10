@@ -21,7 +21,7 @@ const Hero = ({ onOpenChat }: { onOpenChat: () => void }) => {
         <div>
           <div className="animate-fade-up inline-flex items-center gap-2 font-mono-dm text-[0.75rem] tracking-[0.12em] uppercase text-primary border border-primary rounded-sm px-3 py-1 mb-6">
             <span className="w-1.5 h-1.5 bg-primary rounded-full inline-block" />
-            DATA VISUALIZATION & AUTOMATION SPECIALIST (Claude push test)
+             DATA VISUALIZATION & AUTOMATION SPECIALIST
           </div>
           <h1 className="animate-fade-up-delay-1 font-serif-dm text-[clamp(2.8rem,5vw,4.8rem)] leading-[1.05] text-foreground mb-6 transition-colors duration-300">
             I don't just<br />analyze data —<br /><em className="italic text-primary">I automate</em><br />the work behind it.

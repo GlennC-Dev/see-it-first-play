@@ -4,8 +4,11 @@ import ScrollReveal from "@/components/ScrollReveal";
 interface Project {
   id: number;
   title: string;
+  slug?: string; // used in the browser-chrome gallery's fake URL bar
   desc: string;
   impact: string;
+  frequency?: string; // draft-extracted from desc, refine wording later
+  audience?: string; // draft-extracted from desc, refine wording later
   tags: string[];
   icon: string;
   photos: (string | null)[];
@@ -46,8 +49,11 @@ const PROJECTS: Project[] = [
   {
     id: 15,
     title: "Customer Experience Dashboard",
+    slug: "customer-experience-dashboard",
     desc: "A self-service Customer Experience Score dashboard suite spanning brand, chevron, team leader, and agent-day views — giving operations and team leaders direct visibility into CSAT, CES, and NPS trends without a single manual report request.",
     impact: "CX Performance at Every Grain — Without Asking for It",
+    frequency: "On-Demand (Self-Service)",
+    audience: "Operations & Team Leaders",
     tags: ["Tableau"],
     icon: "📊",
     photos: [
@@ -63,8 +69,11 @@ const PROJECTS: Project[] = [
   {
     id: 16,
     title: "Chat Operations Dashboard",
+    slug: "chat-operations-dashboard",
     desc: "A fully automated Chat Operations reporting suite covering queue health, transfer patterns, agent productivity, and bi-hourly intraday snapshots — delivered to operations leaders on schedule, every day, without a single manual pull.",
     impact: "Queue Health to Agent Grain — Delivered SOD",
+    frequency: "Daily + Bi-Hourly",
+    audience: "Operations Leaders",
     tags: ["Salesforce", "Tableau"],
     icon: "💬",
     photos: [
@@ -84,8 +93,11 @@ const PROJECTS: Project[] = [
   {
     id: 17,
     title: "Agent and TL Productivity Suite",
+    slug: "agent-and-tl-productivity-suite",
     desc: "A cascading D-1 productivity suite delivered daily — team leaders receive agent-level calls, AHT, occupancy, aux usage, and CES; program managers get the same rolled up to team level alongside queue health. Aux monitoring flags overages before they become a pattern.",
     impact: "Agent to Program Manager — Every Layer, Every Morning",
+    frequency: "Daily",
+    audience: "Team Leaders & Program Managers",
     tags: ["Tableau"],
     icon: "👥",
     photos: [
@@ -104,8 +116,11 @@ const PROJECTS: Project[] = [
   {
     id: 18,
     title: "Queue Intelligence",
+    slug: "queue-intelligence",
     desc: "A D-1 queue summary delivered every morning and a week-on-week view sent every Monday — giving operations managers a complete picture of call volume, SLA performance, abandon rates, and interval-level patterns across all business units, automatically, without a single manual pull.",
     impact: "Operational Pulse — Daily and Weekly, Before Anyone Asks",
+    frequency: "Daily + Weekly",
+    audience: "Operations Managers",
     tags: ["Tableau"],
     icon: "🗓️",
     photos: [
@@ -122,8 +137,11 @@ const PROJECTS: Project[] = [
   {
     id: 19,
     title: "Manager Reports",
+    slug: "manager-reports",
     desc: "A bi-monthly manager briefing built so that every question in a business review is answered before it's asked. Three LOB variants — Technical Support, Sales & Activations, and Customer Service — each surfacing queue health, productivity, shift utilization, and LOB-specific KPIs across two brands simultaneously. Eight independent data sources, one question: how did the business do?",
     impact: "Every LOB. Every Metric. One Report",
+    frequency: "Bi-Monthly",
+    audience: "Managers (3 LOB Variants)",
     tags: ["Tableau"],
     icon: "🧭",
     photos: [
@@ -397,6 +415,11 @@ const FILTERS = ["All", ...CATEGORIES.map((c) => c.key)];
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState("All");
   const [lightbox, setLightbox] = useState<{ projectIdx: number; photoIdx: number } | null>(null);
+  const [browserGallery, setBrowserGallery] = useState<{ projectId: number; photoIdx: number } | null>(null);
+
+  const openBrowserGallery = (projectId: number) => setBrowserGallery({ projectId, photoIdx: 0 });
+  const closeBrowserGallery = () => setBrowserGallery(null);
+  const bgProject = browserGallery ? PROJECTS.find((p) => p.id === browserGallery.projectId) : null;
 
   const filtered = activeFilter === "All" ? PROJECTS : PROJECTS.filter((p) => p.category === activeFilter);
 
@@ -450,6 +473,63 @@ const Projects = () => {
               </div>
             </div>
 
+            {group.key === "Tableau Visualizations" ? (
+              <div className="flex flex-col gap-5">
+                {group.projects.map((p, i) => (
+                  <ScrollReveal key={p.id} delay={i * 80}>
+                    <div className="bg-card border border-border rounded-[4px] overflow-hidden transition-all duration-200 flex flex-col md:flex-row hover:border-blue-dim">
+                      {/* Thumbnail — click opens the browser-chrome gallery */}
+                      <button
+                        onClick={() => openBrowserGallery(p.id)}
+                        className="relative w-full md:w-[280px] shrink-0 aspect-video md:aspect-auto bg-border overflow-hidden group cursor-pointer border-0 p-0"
+                      >
+                        {p.photos[0] ? (
+                          <img src={p.photos[0]} alt={p.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center text-[2.5rem] opacity-20">{p.icon}</div>
+                        )}
+                        <div className="absolute inset-0 bg-[rgba(0,0,0,0)] group-hover:bg-[rgba(0,0,0,0.15)] transition-colors duration-200 flex items-center justify-center">
+                          <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-200 font-mono-dm text-[0.68rem] tracking-[0.08em] text-white bg-[rgba(0,0,0,0.55)] px-3 py-1.5 rounded-sm">
+                            View gallery ({p.photos.length})
+                          </span>
+                        </div>
+                      </button>
+
+                      {/* Structured info */}
+                      <div className="p-6 flex-1">
+                        <div className="text-lg font-semibold text-foreground mb-2">{p.title}</div>
+                        <p className="text-[0.85rem] text-ink-soft leading-[1.65] font-light mb-4 max-w-[70ch]">{p.desc}</p>
+
+                        <div className="flex flex-wrap gap-x-8 gap-y-2 mb-4">
+                          {p.frequency && (
+                            <div>
+                              <div className="font-mono-dm text-[0.62rem] tracking-[0.12em] uppercase text-ink-muted mb-0.5">Frequency</div>
+                              <div className="text-[0.8rem] text-foreground font-medium">{p.frequency}</div>
+                            </div>
+                          )}
+                          {p.audience && (
+                            <div>
+                              <div className="font-mono-dm text-[0.62rem] tracking-[0.12em] uppercase text-ink-muted mb-0.5">Used By</div>
+                              <div className="text-[0.8rem] text-foreground font-medium">{p.audience}</div>
+                            </div>
+                          )}
+                          <div>
+                            <div className="font-mono-dm text-[0.62rem] tracking-[0.12em] uppercase text-ink-muted mb-0.5">The Story</div>
+                            <div className="text-[0.8rem] text-foreground font-medium">{p.impact}</div>
+                          </div>
+                        </div>
+
+                        <div className="flex flex-wrap gap-1.5">
+                          {p.tags.map((t) => (
+                            <span key={t} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-sm bg-border text-ink-muted">{t}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {group.projects.map((p, i) => (
                 <ScrollReveal key={p.id} delay={i * 80}>
@@ -482,6 +562,7 @@ const Projects = () => {
                 </ScrollReveal>
               ))}
             </div>
+            )}
           </ScrollReveal>
         ))}
       </div>
@@ -561,6 +642,93 @@ const Projects = () => {
                   className="flex-1 py-2.5 border-[1.5px] border-border rounded-sm bg-transparent font-mono-dm text-[0.72rem] tracking-[0.08em] cursor-pointer text-ink-soft hover:border-primary hover:text-primary transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
                 >Next project →</button>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Browser-chrome gallery modal (Tableau Visualizations) */}
+      {browserGallery && bgProject && (
+        <div
+          className="fixed inset-0 z-[1000] bg-[rgba(10,10,10,0.92)] flex items-center justify-center p-6 animate-in fade-in duration-200"
+          onClick={(e) => e.target === e.currentTarget && closeBrowserGallery()}
+        >
+          <div className="bg-card rounded-lg overflow-hidden max-w-[1000px] w-full max-h-[90vh] flex flex-col shadow-2xl">
+            {/* Fake browser chrome */}
+            <div className="flex items-center gap-4 px-4 py-3 bg-border/40 border-b border-border shrink-0">
+              <div className="flex gap-1.5">
+                <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                <span className="w-3 h-3 rounded-full bg-[#febc2e]" />
+                <span className="w-3 h-3 rounded-full bg-[#28c840]" />
+              </div>
+              <div className="flex-1 bg-background rounded-full px-4 py-1.5 text-[0.78rem] text-ink-soft font-mono-dm truncate">
+                topgitconsulting.tech/tableau/{bgProject.slug ?? "project"}
+              </div>
+              <button
+                onClick={closeBrowserGallery}
+                className="w-7 h-7 rounded-sm border border-border flex items-center justify-center text-ink-soft hover:border-foreground hover:text-foreground transition-colors duration-200 shrink-0"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Photo viewer */}
+            <div className="bg-[#111] relative flex flex-col items-center justify-center flex-1 min-h-[360px]">
+              <div className="relative flex items-center justify-center w-full flex-1">
+                {bgProject.photos[browserGallery.photoIdx] ? (
+                  <img
+                    src={bgProject.photos[browserGallery.photoIdx]!}
+                    alt={bgProject.title}
+                    className="w-full h-full object-contain max-h-[62vh]"
+                  />
+                ) : (
+                  <div className="text-[5rem] opacity-10">{bgProject.icon}</div>
+                )}
+                {bgProject.photos.length > 1 && (
+                  <>
+                    <button
+                      onClick={() =>
+                        setBrowserGallery({
+                          ...browserGallery,
+                          photoIdx: (browserGallery.photoIdx - 1 + bgProject.photos.length) % bgProject.photos.length,
+                        })
+                      }
+                      className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                    >
+                      ←
+                    </button>
+                    <button
+                      onClick={() =>
+                        setBrowserGallery({
+                          ...browserGallery,
+                          photoIdx: (browserGallery.photoIdx + 1) % bgProject.photos.length,
+                        })
+                      }
+                      className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-[rgba(255,255,255,0.12)] border border-[rgba(255,255,255,0.2)] text-[#fff] cursor-pointer flex items-center justify-center text-lg hover:bg-[rgba(255,255,255,0.22)] transition-colors z-[2]"
+                    >
+                      →
+                    </button>
+                  </>
+                )}
+              </div>
+              {bgProject.photoCaptions?.[browserGallery.photoIdx] && (
+                <div className="px-5 py-3 text-[0.75rem] italic text-[rgba(255,255,255,0.75)] text-center leading-[1.5] border-t border-[rgba(255,255,255,0.08)] w-full">
+                  {bgProject.photoCaptions[browserGallery.photoIdx]}
+                </div>
+              )}
+              {bgProject.photos.length > 1 && (
+                <div className="pb-3 flex gap-1.5">
+                  {bgProject.photos.map((_, i) => (
+                    <div
+                      key={i}
+                      onClick={() => setBrowserGallery({ ...browserGallery, photoIdx: i })}
+                      className={`w-[7px] h-[7px] rounded-full cursor-pointer transition-all duration-200 ${
+                        i === browserGallery.photoIdx ? "bg-[#fff] scale-[1.3]" : "bg-[rgba(255,255,255,0.35)]"
+                      }`}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>

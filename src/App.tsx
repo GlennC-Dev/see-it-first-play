@@ -9,7 +9,9 @@ import Shell from "./components/Shell.tsx";
 import Footer from "./components/Footer.tsx";
 import ChatWidget, { type ChatWidgetHandle } from "./components/ChatWidget.tsx";
 import HomePanel from "./pages/panels/HomePanel.tsx";
-import Projects from "./pages/Projects.tsx";
+import ProjectsHome from "./pages/ProjectsHome.tsx";
+import ProjectCategoryPage from "./pages/ProjectCategoryPage.tsx";
+import ProjectGalleryPage from "./pages/ProjectGalleryPage.tsx";
 import SkillsExperiencePanel from "./pages/panels/SkillsExperiencePanel.tsx";
 import AboutPanel from "./pages/panels/AboutPanel.tsx";
 import ContactPanel from "./pages/panels/ContactPanel.tsx";
@@ -185,7 +187,9 @@ const App = () => {
             <Routes>
               <Route element={<Shell />}>
                 <Route path="/" element={<HomePanel />} />
-                <Route path="/projects" element={<Projects />} />
+                <Route path="/projects" element={<ProjectsHome />} />
+                <Route path="/projects/:categorySlug" element={<ProjectCategoryPage />} />
+                <Route path="/projects/:categorySlug/:projectSlug" element={<ProjectGalleryPage />} />
                 <Route path="/skills-experience" element={<SkillsExperiencePanel />} />
                 <Route path="/about" element={<AboutPanel />} />
                 <Route path="/contact" element={<ContactPanel />} />

@@ -33,17 +33,31 @@ export const CATEGORIES: Category[] = [
     previewLayout: "row-list",
   },
   {
-    key: "Workflow Automation",
-    slug: "workflow-automation",
-    title: "Workflow Automation",
-    desc: "End-to-end automated systems across Google Workspace, Power Query, Apps Script, and n8n — replacing hours of manual work with pipelines that run themselves.",
-    previewLayout: "grid",
-  },
-  {
     key: "Case Study & Technical Writing",
     slug: "case-study-technical-writing",
     title: "Case Study & Technical\u00A0\nWriting",
     desc: "Process documentation, training curriculum design, and decision-support systems — turning complex workflows into clear, actionable frameworks.",
+    previewLayout: "grid",
+  },
+  {
+    key: "Apps Script",
+    slug: "apps-script",
+    title: "Apps Script\u00A0\nAutomated Reports",
+    desc: "Google Workspace automations built on Apps Script — scripted reports, form maintenance, and internal tooling that replace recurring manual work.",
+    previewLayout: "grid",
+  },
+  {
+    key: "Workflow Automations",
+    slug: "workflow-automations",
+    title: "n8n\u00A0\nWorkflow Automations",
+    desc: "End-to-end automated systems built on n8n — pipelines that trigger, process, and deliver without a person in the loop.",
+    previewLayout: "grid",
+  },
+  {
+    key: "Web Apps",
+    slug: "web-apps",
+    title: "Small Web\u00A0\nApps",
+    desc: "Standalone tools and apps built to solve a specific, real problem.",
     previewLayout: "grid",
   },
 ];
@@ -168,7 +182,7 @@ export const PROJECTS: Project[] = [
   // { id: 2, title: "Tableau Visualization Project 3", desc: "Placeholder project for an upcoming Tableau visualization. Details and screenshots will be added soon.", impact: "📊 Coming soon", tags: ["Tableau", "BI"], icon: "📊", photos: [null], category: "Data Visualizations" },
 
   // ============================================================
-  // Workflow Automation — 6 ported items + 1 placeholder
+  // Apps Script + Workflow Automations (n8n) — 5 ported items + 1 placeholder
   // To add another item: copy the PLACEHOLDER block at the bottom
   // of this section and edit the fields.
   // ============================================================
@@ -193,7 +207,7 @@ export const PROJECTS: Project[] = [
       "Duplicate removal algorithm with unique value tracking and automated cleanup",
       "Master checker function orchestrating the complete automation workflow",
     ],
-    category: "Workflow Automation",
+    category: "Apps Script",
   },
   {
     id: 4,
@@ -212,24 +226,7 @@ export const PROJECTS: Project[] = [
       "Live ENPS dashboard with real-time score calculation and breakdown",
       "Detailed ENPS analysis by category and department",
     ],
-    category: "Workflow Automation",
-  },
-  {
-    id: 5,
-    title: "JIRA Project Management",
-    desc: "Built and customized a JIRA project from scratch using self-guided tutorials, replicating operational workflows across departments to simulate real-world admin-level configuration. Includes custom workflows, issue types, and field configurations.",
-    impact: "🛠️ Admin-level config from scratch",
-    tags: ["JIRA", "Workflow Design"],
-    icon: "🗂️",
-    photos: [
-      "/lovable-uploads/0572075e-c8b8-4025-abc1-5fed2c95a2d4.png",
-      "/lovable-uploads/5e04d1bd-e0b2-4158-ba4c-2933fb0219e2.png",
-    ],
-    photoCaptions: [
-      "JIRA project configuration showing custom issue types and field management",
-      "Workflow diagram for customer service requests with status transitions and approval processes",
-    ],
-    category: "Workflow Automation",
+    category: "Apps Script",
   },
   {
     id: 6,
@@ -250,7 +247,7 @@ export const PROJECTS: Project[] = [
       "Automated response clearing logic with email notification system for form oversight",
       "Time-based triggers configuration for automated form monitoring and maintenance",
     ],
-    category: "Workflow Automation",
+    category: "Apps Script",
   },
   {
     id: 7,
@@ -271,7 +268,7 @@ export const PROJECTS: Project[] = [
       "Request processing automation with status tracking, range manipulation, and email notification system for database updates",
       "Version control tracking spreadsheet showing request status, dates, ticket references, and change history for database management",
     ],
-    category: "Workflow Automation",
+    category: "Apps Script",
   },
   {
     id: 8,
@@ -294,7 +291,7 @@ export const PROJECTS: Project[] = [
       "Current Events Module: Aggregates RSS feeds from multiple sources, filters by interests, and delivers curated news summaries through LLM chains",
       "Finance Analytics Module: Connects to Google Sheets for transaction tracking, forecasting, and personalized financial insights via AI agent",
     ],
-    category: "Workflow Automation",
+    category: "Workflow Automations",
   },
   // PLACEHOLDER — duplicate this block to add a new workflow automation project
   //{

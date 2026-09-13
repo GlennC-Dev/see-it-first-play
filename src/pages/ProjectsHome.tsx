@@ -44,15 +44,19 @@ const ProjectsHome = () => {
                       </div>
                       <p className="text-[0.85rem] text-ink-soft font-light leading-[1.6]">{cat.desc}</p>
                     </div>
-                    {previewPhoto && (
-                      <div className="relative w-full md:w-[220px] shrink-0 aspect-video md:aspect-auto overflow-hidden bg-border">
+                    <div className="relative w-full md:w-[220px] shrink-0 aspect-video md:aspect-auto overflow-hidden bg-border flex items-center justify-center">
+                      {previewPhoto ? (
                         <img
                           src={previewPhoto}
                           alt=""
                           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
                         />
-                      </div>
-                    )}
+                      ) : (
+                        <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-ink-muted px-3 text-center">
+                          Thumbnail coming soon
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </Link>
               </ScrollReveal>

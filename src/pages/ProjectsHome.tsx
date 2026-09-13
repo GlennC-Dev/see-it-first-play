@@ -52,7 +52,7 @@ const ProjectsHome = () => {
   return (
     <>
       <ScrollReveal>
-        <div className="pt-16 pb-20 px-[5vw] border-b border-border bg-card transition-colors duration-300">
+        <div className="pt-7 pb-7 px-[5vw] border-b border-border bg-card transition-colors duration-300">
           <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">
             // project gallery
           </div>

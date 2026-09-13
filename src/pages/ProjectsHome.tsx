@@ -56,10 +56,10 @@ const ProjectsHome = () => {
           <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">
             // project gallery
           </div>
-          <h1 className="font-serif-dm text-[clamp(2.5rem,5vw,4rem)] leading-[1.05] mb-4 text-foreground transition-colors duration-300">
+          <h1 className="font-serif-dm text-[clamp(2.4rem,3.6vw,3.2rem)] leading-[1.05] mb-4 text-foreground transition-colors duration-300">
             Real Builds. <em className="italic text-primary">Fully</em> Documented.
           </h1>
-          <p className="text-base text-ink-soft font-light max-w-[55ch] leading-[1.7]">
+          <p className="text-base text-ink-soft font-light max-w-[65ch] leading-[1.7]">
             Every project here shipped — dashboards, automations, and the systems behind them, laid out build by build.
           </p>
         </div>

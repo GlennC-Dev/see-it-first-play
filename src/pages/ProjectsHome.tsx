@@ -15,9 +15,7 @@ const ProjectCard = ({
   return (
     <Link
       to={`/projects/${cat.slug}`}
-      className={`group flex flex-col bg-card border border-border rounded-[4px] overflow-hidden no-underline transition-all duration-200 hover:border-blue-dim hover:shadow-[0_12px_40px_rgba(26,108,255,0.09)] hover:-translate-y-[3px] h-full ${
-        large ? "md:row-span-2" : ""
-      }`}
+      className="group flex flex-col bg-card border border-border rounded-[4px] overflow-hidden no-underline transition-all duration-200 hover:border-blue-dim hover:shadow-[0_12px_40px_rgba(26,108,255,0.09)] hover:-translate-y-[3px] h-full"
     >
       <div className={`relative w-full overflow-hidden bg-border flex items-center justify-center ${large ? "flex-1 min-h-[220px]" : "aspect-video"}`}>
         {previewPhoto ? (
@@ -69,7 +67,7 @@ const ProjectsHome = () => {
 
       <div className="px-[5vw] py-16 pb-24">
         <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 md:h-[680px]">
-          <ScrollReveal className="h-full">
+          <ScrollReveal className="h-full md:row-span-2">
             <ProjectCard cat={dataViz} large />
           </ScrollReveal>
           {rest.map((cat, i) => (

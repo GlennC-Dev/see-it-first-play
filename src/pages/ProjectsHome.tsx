@@ -65,7 +65,7 @@ const ProjectsHome = () => {
       </ScrollReveal>
 
       <div className="px-[5vw] py-16 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 md:h-[680px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <ScrollReveal className="h-full md:row-span-2">
             <ProjectCard cat={dataViz} large />
           </ScrollReveal>

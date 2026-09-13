@@ -28,22 +28,22 @@ export const CATEGORIES: Category[] = [
   {
     key: "Data Visualizations",
     slug: "data-visualizations",
-    title: "Self Service Analytics and\u00A0\nAutomated Reporting",
-    desc: "Tableau and PowerBI Dashboards engineered for self-service consumption and automated delivery\u00A0— so stakeholders get accurate, scheduled insights without a single manual touchpoint.",
+    title: "Data Visualizations",
+    desc: "Dashboards made for self-service consumption and automated delivery\u00A0",
     previewLayout: "row-list",
   },
   {
     key: "Case Study & Technical Writing",
     slug: "case-study-technical-writing",
     title: "Case Study & Technical\u00A0\nWriting",
-    desc: "Process documentation, training curriculum design, and decision-support systems — turning complex workflows into clear, actionable frameworks.",
+    desc: "Turning complex workflows into clear, actionable frameworks.",
     previewLayout: "grid",
   },
   {
     key: "Apps Script",
     slug: "apps-script",
     title: "Apps Script\u00A0\nAutomated Reports",
-    desc: "Google Workspace automations built on Apps Script — scripted reports, form maintenance, and internal tooling that replace recurring manual work.",
+    desc: "Scripted reports, form maintenance, and internal tooling that replace recurring manual work.",
     previewLayout: "grid",
   },
   {
@@ -57,7 +57,7 @@ export const CATEGORIES: Category[] = [
     key: "Web Apps",
     slug: "web-apps",
     title: "Small Web\u00A0\nApps",
-    desc: "Standalone tools and apps built to solve a specific, real problem.",
+    desc: "Standalone tools and apps.",
     previewLayout: "grid",
   },
 ];

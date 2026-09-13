@@ -1,6 +1,15 @@
 import { Link } from "react-router-dom";
+import { BarChart3, FileText, Code2, Workflow, LayoutGrid } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
 import { CATEGORIES, PROJECTS } from "@/data/projects";
+
+const CATEGORY_ICONS: Record<string, typeof BarChart3> = {
+  "Data Visualizations": BarChart3,
+  "Case Study & Technical Writing": FileText,
+  "Apps Script": Code2,
+  "Workflow Automations": Workflow,
+  "Web Apps": LayoutGrid,
+};
 
 const ProjectCard = ({
   cat,
@@ -10,7 +19,7 @@ const ProjectCard = ({
   large?: boolean;
 }) => {
   const projects = PROJECTS.filter((p) => p.category === cat.key);
-  const previewPhoto = projects.find((p) => p.photos[0])?.photos[0];
+  const Icon = CATEGORY_ICONS[cat.key] ?? LayoutGrid;
 
   return (
     <Link
@@ -30,18 +39,8 @@ const ProjectCard = ({
           {cat.desc}
         </p>
       </div>
-      <div className={`relative shrink-0 overflow-hidden bg-border flex items-center justify-center w-full aspect-video md:aspect-auto md:h-full ${large ? "md:w-[46%]" : "md:w-[40%]"}`}>
-        {previewPhoto ? (
-          <img
-            src={previewPhoto}
-            alt=""
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-          />
-        ) : (
-          <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-ink-muted px-3 text-center">
-            Thumbnail coming soon
-          </span>
-        )}
+      <div className={`shrink-0 flex items-center justify-center bg-border w-full h-[110px] md:h-full ${large ? "md:w-[46%]" : "md:w-[40%]"}`}>
+        <Icon className="text-ink-muted opacity-40" size={large ? 64 : 40} strokeWidth={1.25} />
       </div>
     </Link>
   );

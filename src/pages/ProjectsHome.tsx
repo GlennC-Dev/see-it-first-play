@@ -24,7 +24,7 @@ const ProjectCard = ({
   return (
     <Link
       to={`/projects/${cat.slug}`}
-      className="group flex flex-col md:flex-row bg-card border border-border rounded-[4px] overflow-hidden no-underline transition-all duration-200 hover:border-blue-dim hover:shadow-[0_12px_40px_rgba(26,108,255,0.09)] hover:-translate-y-[3px] h-full"
+      className="group flex flex-col md:flex-row items-stretch bg-card border border-border rounded-[4px] overflow-hidden no-underline transition-all duration-200 hover:border-blue-dim hover:shadow-[0_12px_40px_rgba(26,108,255,0.09)] hover:-translate-y-[3px]"
     >
       <div className={`flex flex-col justify-center flex-1 min-w-0 ${large ? "p-6" : "p-5"}`}>
         <div className="flex items-center justify-between gap-3 mb-2">
@@ -39,8 +39,8 @@ const ProjectCard = ({
           {cat.desc}
         </p>
       </div>
-      <div className={`shrink-0 flex items-center justify-center bg-border w-full h-[110px] md:h-full ${large ? "md:w-[46%]" : "md:w-[40%]"}`}>
-        <Icon className="text-ink-muted opacity-40" size={large ? 64 : 40} strokeWidth={1.25} />
+      <div className={`shrink-0 flex items-center justify-center bg-border h-20 md:h-auto ${large ? "md:w-28" : "md:w-20"}`}>
+        <Icon className="text-ink-muted opacity-40" size={large ? 40 : 28} strokeWidth={1.25} />
       </div>
     </Link>
   );
@@ -65,12 +65,12 @@ const ProjectsHome = () => {
       </ScrollReveal>
 
       <div className="px-[5vw] py-16 pb-24">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <ScrollReveal className="h-full md:row-span-2">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+          <ScrollReveal className="md:row-span-2">
             <ProjectCard cat={dataViz} large />
           </ScrollReveal>
           {rest.map((cat, i) => (
-            <ScrollReveal key={cat.key} delay={(i + 1) * 80} className="h-full">
+            <ScrollReveal key={cat.key} delay={(i + 1) * 80}>
               <ProjectCard cat={cat} />
             </ScrollReveal>
           ))}

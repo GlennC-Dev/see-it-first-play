@@ -30,7 +30,7 @@ const ProjectCard = ({
           {cat.desc}
         </p>
       </div>
-      <div className={`relative shrink-0 overflow-hidden bg-border flex items-center justify-center w-full aspect-video md:aspect-auto md:h-auto ${large ? "md:w-[46%]" : "md:w-[40%]"}`}>
+      <div className={`relative shrink-0 overflow-hidden bg-border flex items-center justify-center w-full aspect-video md:aspect-auto md:h-full ${large ? "md:w-[46%]" : "md:w-[40%]"}`}>
         {previewPhoto ? (
           <img
             src={previewPhoto}

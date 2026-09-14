@@ -5,7 +5,7 @@ const Hero = () => {
       /* bg-card (not bg-background) is deliberate — matches the Projects page's banner-vs-body
          two-tone effect: bg-card is a slightly lighter shade than the bg-background used below
          (in HomePanel's wrapping div), creating the same visible step/banding Projects has. */
-      className="relative overflow-hidden pt-7 pb-7 bg-card transition-colors duration-300"
+      className="relative overflow-hidden pt-7 pb-7 border-b border-border bg-card transition-colors duration-300"
     >
       <div className="px-[5vw] grid grid-cols-1 items-center gap-10 md:gap-16 relative z-[1]">
         <div className="max-w-[75%] md:max-w-[75%]">

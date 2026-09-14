@@ -64,7 +64,9 @@ const HomePanel = () => {
     <div className="bg-background transition-colors duration-300">
       <Hero />
 
-      <section className="px-[5vw] pb-8">
+      {/* pt-6 pushes this whole section (Daily Drivers + cards) down away from the Hero above.
+          Raise pt-6 to push it further down, lower it to bring it closer. */}
+      <section className="px-[5vw] pt-6 pb-8">
         {/* Daily Drivers */}
         <div className="rounded-xl border border-border bg-card p-4 flex items-center gap-6 overflow-x-auto mb-4">
           <div className="shrink-0 pr-6 border-r border-border">

@@ -42,7 +42,8 @@ const ProjectCategoryPage = () => {
                   to={`/projects/${category.slug}/${p.slug ?? p.id}`}
                   className="bg-card border border-border rounded-[4px] overflow-hidden transition-all duration-200 flex flex-col md:flex-row hover:border-blue-dim no-underline group"
                 >
-                  <div className="relative w-full md:w-[280px] shrink-0 aspect-video md:aspect-auto bg-border overflow-hidden">
+                  {/* 👈 Fixed thumbnail height so all 5 rows match regardless of each screenshot's native aspect ratio. 303px = Chat Operations Dashboard's thumbnail at 280px wide (1200x1300 native). Tune to taste. */}
+                  <div className="relative w-full md:w-[280px] shrink-0 aspect-video md:aspect-auto md:h-[303px] bg-border overflow-hidden">
                     {p.photos[0] ? (
                       <img src={p.photos[0]} alt={p.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
                     ) : (

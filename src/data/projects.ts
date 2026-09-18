@@ -47,14 +47,16 @@ export const CATEGORIES: Category[] = [
     slug: "apps-script",
     title: "Apps Script\u00A0\nAutomated Reports",
     desc: "Scripted reports, form maintenance, and internal tooling that replace recurring manual work.",
-    previewLayout: "grid",
+    previewLayout: "row-list",
+    thumbnailHeight: 151, // avg of the 3 landscape screenshots (Report Gen, ENPS, DBMS). Google Forms Maintenance's photo is portrait (689x1217) and will crop hard until a wider cover image replaces it — same situation as SIP101 in Case Study.
   },
   {
     key: "Workflow Automations",
     slug: "workflow-automations",
     title: "n8n\u00A0\nWorkflow Automations",
     desc: "End-to-end automated systems built on n8n — pipelines that trigger, process, and deliver without a person in the loop.",
-    previewLayout: "grid",
+    previewLayout: "row-list",
+    thumbnailHeight: 198, // matches N8N-Powered Personal Assistant's own ratio (1065x752) exactly — only 1 project right now, so zero crop. Recalculate once more projects are added with different ratios.
   },
   {
     key: "Web Apps",

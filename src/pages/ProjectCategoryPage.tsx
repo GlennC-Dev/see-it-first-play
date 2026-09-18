@@ -35,14 +35,29 @@ const ProjectCategoryPage = () => {
 
       <div className="px-[5vw] xl:px-[4vw] py-16 pb-24">
         {category.previewLayout === "row-list" ? (
+          /* 👈 gap-5 = vertical spacing BETWEEN rows. Doesn't affect a single row's own height. */
           <div className="flex flex-col gap-5">
             {projects.map((p, i) => (
               <ScrollReveal key={p.id} delay={i * 80}>
+                {/*
+                  👈 ROW ANATOMY (read this before tuning row heights/sizing):
+                  - This <Link> is `flex md:flex-row` — two children side by side on desktop: the thumbnail box, then the text column.
+                  - The OVERALL ROW HEIGHT is NOT set anywhere directly. It's just "however tall the taller of the two children turns out to be."
+                  - The THUMBNAIL BOX has an explicit height (md:h-[303px] below), so it never changes size and never stretches — it's a fixed passenger.
+                  - The TEXT COLUMN (p-6 flex-1 below) has no explicit height — it's exactly as tall as its content (title + description + fields + tags) needs.
+                  - So in practice: if a project's description/tags make the text column taller than 303px, THAT project's row grows taller than the others,
+                    and the thumbnail (still fixed at 303px) ends up pinned to the top of that taller row with empty space below it — it does NOT stretch to fill it.
+                  - TO MAKE ALL ROWS THE EXACT SAME HEIGHT (thumbnail height matching card height 1:1 every time), the fix would be to either:
+                    (a) trim description/tag copy so every project's text column fits within ~303px, or
+                    (b) cap the text column's height explicitly and let overflow scroll/truncate, or
+                    (c) stop trying to match — accept that longer write-ups make taller cards.
+                  Pick (a) if you want tight visual uniformity with the copy you already have; (b)/(c) are code changes if you want that path instead.
+                */}
                 <Link
                   to={`/projects/${category.slug}/${p.slug ?? p.id}`}
                   className="bg-card border border-border rounded-[4px] overflow-hidden transition-all duration-200 flex flex-col md:flex-row hover:border-blue-dim no-underline group"
                 >
-                  {/* 👈 Fixed thumbnail height so all 5 rows match regardless of each screenshot's native aspect ratio. 303px = Chat Operations Dashboard's thumbnail at 280px wide (1200x1300 native). Tune to taste. */}
+                  {/* 👈 THUMBNAIL BOX — fixed size, independent of text column. 303px = Chat Operations Dashboard's thumbnail at 280px wide (1200x1300 native ratio). Change this one number to resize ALL 5 thumbnails at once. */}
                   <div className="relative w-full md:w-[280px] shrink-0 aspect-video md:aspect-auto md:h-[303px] bg-border overflow-hidden">
                     {p.photos[0] ? (
                       <img src={p.photos[0]} alt={p.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
@@ -56,10 +71,13 @@ const ProjectCategoryPage = () => {
                     </div>
                   </div>
 
+                  {/* 👈 TEXT COLUMN — this is what actually drives each row's height (see ROW ANATOMY note above the thumbnail). Everything below grows the card taller the more of it there is. */}
                   <div className="p-6 flex-1">
                     <div className="text-lg font-semibold text-foreground mb-2">{p.title}</div>
+                    {/* 👈 max-w-[70ch] controls where the description wraps — narrower value = more lines = taller card. This is the single biggest lever on row height since desc is usually the longest block. */}
                     <p className="text-[0.85rem] text-ink-soft leading-[1.65] font-light mb-4 max-w-[70ch]">{p.desc}</p>
 
+                    {/* 👈 Frequency / Used By / The Story fields — flex-wrap means these drop to a 2nd line on narrower cards, adding height. Fewer/shorter field values = shorter card. */}
                     <div className="flex flex-wrap gap-x-8 gap-y-2 mb-4">
                       {p.frequency && (
                         <div>
@@ -79,6 +97,7 @@ const ProjectCategoryPage = () => {
                       </div>
                     </div>
 
+                    {/* 👈 Tags row — also wraps to multiple lines if a project has many/long tags, adding height. Currently all Data Viz projects have 1-2 tags so this rarely matters here, but Salesforce+Tableau (Chat Operations) is the closest to wrapping. */}
                     <div className="flex flex-wrap gap-1.5">
                       {p.tags.map((t) => (
                         <span key={t} className="text-[0.7rem] font-medium px-2.5 py-1 rounded-sm bg-border text-ink-muted">{t}</span>

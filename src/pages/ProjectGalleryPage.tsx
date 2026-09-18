@@ -97,7 +97,21 @@ const ProjectGalleryPage = () => {
 
         {/* Project details */}
         <div className="p-6">
-          <div className="font-serif-dm text-[1.4rem] leading-[1.15] mb-3 text-foreground">{project.title}</div>
+          <div className="flex items-center gap-3 mb-3">
+            <div className="font-serif-dm text-[1.4rem] leading-[1.15] text-foreground">{project.title}</div>
+            {/* 👈 External reference link (Google Doc/Slides etc). Only renders when project.link is set in projects.ts. */}
+            {project.link && (
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                title={project.linkLabel ?? "View full resource"}
+                className="shrink-0 w-7 h-7 rounded-full border border-border flex items-center justify-center text-ink-soft hover:text-primary hover:border-primary transition-colors duration-200 no-underline"
+              >
+                ↗
+              </a>
+            )}
+          </div>
           <p className="text-[0.875rem] text-ink-soft leading-[1.7] font-light mb-5">{project.desc}</p>
           <div className="flex flex-wrap gap-x-8 gap-y-2 mb-5">
             {project.frequency && (

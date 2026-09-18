@@ -22,6 +22,7 @@ export interface Category {
   title: string;
   desc: string;
   previewLayout: "row-list" | "grid"; // row-list = Data Viz treatment, grid = default lightbox grid
+  thumbnailHeight?: number; // 👈 row-list only. Fixed px height of each row's thumbnail box at the 280px desktop width. Pick per-category based on that category's typical image ratio — see comment above the thumbnail box in ProjectCategoryPage.tsx for the full explanation.
 }
 
 export const CATEGORIES: Category[] = [
@@ -31,13 +32,15 @@ export const CATEGORIES: Category[] = [
     title: "Data Visualizations",
     desc: "Dashboards made for self-service consumption and automated delivery\u00A0",
     previewLayout: "row-list",
+    thumbnailHeight: 303, // Chat Operations Dashboard's ratio (1200x1300) at 280px wide
   },
   {
     key: "Case Study & Technical Writing",
     slug: "case-study-technical-writing",
     title: "Case Study & Technical\u00A0\nWriting",
     desc: "Turning complex workflows into clear, actionable frameworks.",
-    previewLayout: "grid",
+    previewLayout: "row-list",
+    thumbnailHeight: 157, // ~16:9, matches the 3 landscape slide screenshots (SIP101's portrait diagram will be cropped until its own cover image is supplied)
   },
   {
     key: "Apps Script",

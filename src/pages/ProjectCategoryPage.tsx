@@ -1,4 +1,5 @@
 import { useState } from "react";
+import type { CSSProperties } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import ScrollReveal from "@/components/ScrollReveal";
 import { CATEGORIES, PROJECTS } from "@/data/projects";
@@ -43,12 +44,15 @@ const ProjectCategoryPage = () => {
                   👈 ROW ANATOMY (read this before tuning row heights/sizing):
                   - This <Link> is `flex md:flex-row` — two children side by side on desktop: the thumbnail box, then the text column.
                   - The OVERALL ROW HEIGHT is NOT set anywhere directly. It's just "however tall the taller of the two children turns out to be."
-                  - The THUMBNAIL BOX has an explicit height (md:h-[303px] below), so it never changes size and never stretches — it's a fixed passenger.
+                  - The THUMBNAIL BOX has an explicit height on desktop, driven by category.thumbnailHeight in projects.ts (via the --thumb-h CSS variable below)
+                    — so it never changes size and never stretches, it's a fixed passenger. EACH CATEGORY sets its own thumbnailHeight to match that
+                    category's typical image ratio (e.g. Data Viz's dashboard screenshots vs. Case Study's landscape slide decks). Change the number in
+                    projects.ts to resize a whole category's thumbnails at once — no code change needed for that.
                   - The TEXT COLUMN (p-6 flex-1 below) has no explicit height — it's exactly as tall as its content (title + description + fields + tags) needs.
-                  - So in practice: if a project's description/tags make the text column taller than 303px, THAT project's row grows taller than the others,
-                    and the thumbnail (still fixed at 303px) ends up pinned to the top of that taller row with empty space below it — it does NOT stretch to fill it.
+                  - So in practice: if a project's description/tags make the text column taller than thumbnailHeight, THAT project's row grows taller than
+                    the others, and the thumbnail (still fixed height) ends up pinned to the top of that taller row with empty space below it — it does NOT stretch to fill it.
                   - TO MAKE ALL ROWS THE EXACT SAME HEIGHT (thumbnail height matching card height 1:1 every time), the fix would be to either:
-                    (a) trim description/tag copy so every project's text column fits within ~303px, or
+                    (a) trim description/tag copy so every project's text column fits within thumbnailHeight, or
                     (b) cap the text column's height explicitly and let overflow scroll/truncate, or
                     (c) stop trying to match — accept that longer write-ups make taller cards.
                   Pick (a) if you want tight visual uniformity with the copy you already have; (b)/(c) are code changes if you want that path instead.
@@ -57,8 +61,11 @@ const ProjectCategoryPage = () => {
                   to={`/projects/${category.slug}/${p.slug ?? p.id}`}
                   className="bg-card border border-border rounded-[4px] overflow-hidden transition-all duration-200 flex flex-col md:flex-row hover:border-blue-dim no-underline group"
                 >
-                  {/* 👈 THUMBNAIL BOX — fixed size, independent of text column. 303px = Chat Operations Dashboard's thumbnail at 280px wide (1200x1300 native ratio). Change this one number to resize ALL 5 thumbnails at once. */}
-                  <div className="relative w-full md:w-[280px] shrink-0 aspect-video md:aspect-auto md:h-[303px] bg-border overflow-hidden">
+                  {/* 👈 THUMBNAIL BOX — fixed size, independent of text column. Height comes from category.thumbnailHeight (projects.ts) via --thumb-h. Falls back to aspect-video (16:9) if a category doesn't set one. */}
+                  <div
+                    className="relative w-full md:w-[280px] shrink-0 aspect-video md:aspect-auto md:h-[var(--thumb-h)] bg-border overflow-hidden"
+                    style={category.thumbnailHeight ? ({ "--thumb-h": `${category.thumbnailHeight}px` } as CSSProperties) : undefined}
+                  >
                     {p.photos[0] ? (
                       <img src={p.photos[0]} alt={p.title} className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" />
                     ) : (

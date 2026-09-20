@@ -73,8 +73,16 @@ const Skills = () => (
             </div>
 
             <div className="text-base font-semibold text-foreground mb-1.5">{c.title}</div>
-            <p className="text-[0.8rem] italic text-ink-soft font-light leading-[1.5] mb-3">{c.tagline}</p>
+            {/* 👈 min-h-[2.4rem] reserves space for exactly 2 lines of tagline (0.8rem × 1.5 line-height × 2) regardless of whether
+                this card's tagline actually wraps to 1 or 2 lines — this is what keeps the blue pill below starting at the same
+                y-position across all 4 cards. If you ever change the tagline font size or line-height, recalculate this number
+                the same way (font-size × line-height × 2) or the pills will drift out of alignment again. */}
+            <p className="text-[0.8rem] italic text-ink-soft font-light leading-[1.5] mb-3 min-h-[2.4rem]">{c.tagline}</p>
 
+            {/* 👈 Heads-up: the pills THEMSELVES now start level (fixed above), but "PRACTICAL, NOT RECKLESS" and
+                "LESS WASTE, MORE OUTPUT" still wrap to 2 lines while the other two don't — so the pill's BOTTOM
+                edge (and the bullets starting below it) will still be uneven between cards. Same fix pattern
+                would apply here (a min-h on this div) if that starts to bother you too. */}
             <div className="inline-block font-mono-dm text-[0.62rem] tracking-[0.1em] px-2.5 py-1 rounded-sm bg-blue-dim text-primary mb-4">
               {c.badge}
             </div>

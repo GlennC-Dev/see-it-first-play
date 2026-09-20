@@ -7,7 +7,8 @@ const SkillsExperiencePanel = () => {
   return (
     <div className="bg-background transition-colors duration-300">
       <ScrollReveal>
-        {/* 👈 Page header banner — same treatment as Home's Hero and the Projects gallery header (bg-card, border-b, mono label + headline + subhead). */}
+        {/* 👈 Page header banner — same treatment as Home's Hero and the Projects gallery header (bg-card, border-b, mono label + headline + subhead).
+             pt-5/pb-5 = padding of this banner only, independent of the py-14 values in Approach/Skills/Experience below. */}
         <div className="pt-5 pb-5 px-[5vw] border-b border-border bg-card transition-colors duration-300">
           <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-3">
             // skills & experience

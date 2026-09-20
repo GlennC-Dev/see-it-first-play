@@ -72,7 +72,8 @@ const hiddenExperience: ExpItem[] = [
 ];
 
 const ExpEntry = ({ item }: { item: ExpItem }) => (
-  <div className="relative mb-12 pb-12 border-b border-border last:border-b-0 last:mb-0 last:pb-0 transition-colors duration-300">
+  // 👈 mb-8/pb-8 = space AFTER each work-history entry (before the next one's divider line). Applies to every entry — raise/lower both together to keep them matching.
+  <div className="relative mb-8 pb-8 border-b border-border last:border-b-0 last:mb-0 last:pb-0 transition-colors duration-300">
     <div className={`absolute -left-[2.4rem] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-background ${item.muted ? "bg-ink-muted shadow-[0_0_0_1px_hsl(var(--ink-muted))]" : "bg-primary shadow-[0_0_0_1px_hsl(var(--primary))]"} transition-colors duration-300`} />
     <div className="flex items-baseline justify-between flex-wrap gap-2 mb-1.5">
       <span className="text-[1.1rem] font-semibold text-foreground transition-colors duration-300">{item.role}</span>
@@ -95,10 +96,12 @@ const Experience = () => {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <section id="experience" className="py-24 px-[5vw] bg-background transition-colors duration-300">
+    // 👈 py-14 = top+bottom padding for this ENTIRE section. Biggest lever on the gap above/below the whole Experience block.
+    <section id="experience" className="py-14 px-[5vw] bg-background transition-colors duration-300">
       <ScrollReveal>
         <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// work history</div>
-        <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-12 text-foreground transition-colors duration-300">Experience</h2>
+        {/* 👈 mb-10 = space between headline and the timeline below it. */}
+        <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-10 text-foreground transition-colors duration-300">Experience</h2>
       </ScrollReveal>
       <ScrollReveal>
         <div className="relative pl-8">
@@ -109,7 +112,8 @@ const Experience = () => {
           {expanded && hiddenExperience.map((item, i) => (
             <ExpEntry key={`h-${i}`} item={item} />
           ))}
-          <div className="mt-8">
+          {/* 👈 mt-6 = space between the last timeline entry and the "See full experience" button. */}
+          <div className="mt-6">
             <button
               onClick={() => setExpanded(!expanded)}
               className="inline-flex items-center gap-2 font-mono-dm text-[0.75rem] tracking-[0.1em] uppercase text-ink-soft border-[1.5px] border-border px-5 py-2.5 rounded-sm bg-transparent cursor-pointer hover:border-primary hover:text-primary transition-colors duration-200"

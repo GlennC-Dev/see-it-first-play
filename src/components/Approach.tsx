@@ -26,18 +26,20 @@ const steps = [
 ];
 
 const Approach = () => (
-  <section id="approach" className="py-24 px-[5vw] bg-background transition-colors duration-300">
+  // 👈 py-14 = top+bottom padding for this ENTIRE section. This is the single biggest lever on the
+  // gap above/below "The Approach" block. Raise/lower this one number to give the whole section more/less breathing room.
+  <section id="approach" className="py-14 px-[5vw] bg-background transition-colors duration-300">
     <ScrollReveal>
       <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// the approach</div>
-      {/* 👈 Two-line headline, line 1 bright, line 2 muted — matches the reference image's "Catch. Brew. Pour. / Always in that order." treatment. */}
-      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-14 text-foreground transition-colors duration-300">
+      {/* 👈 mb-10 = space between headline and the 3 cards below it. Two-line headline, line 1 bright, line 2 muted — matches the reference image's "Catch. Brew. Pour. / Always in that order." treatment. */}
+      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-10 text-foreground transition-colors duration-300">
         Probe. Build. Automate.
         <br />
         <span className="text-ink-soft">Always in that order.</span>
       </h2>
     </ScrollReveal>
 
-    {/* 👈 3-card row. On desktop, a dashed connector + dot sits between cards (absolute-positioned track behind the icons) — hidden on mobile since cards stack. */}
+    {/* 👈 3-card row. gap-6 = space BETWEEN cards (not around the row). On desktop, a dashed connector + dot sits between cards (absolute-positioned track behind the icons) — hidden on mobile since cards stack. */}
     <div className="relative grid grid-cols-1 md:grid-cols-3 gap-6">
       {/* Connector track — desktop only. Positioned to cross through the icon row (top-[2.75rem] ≈ vertical center of the icon boxes). Adjust top-[] if icon box size changes. */}
       <div

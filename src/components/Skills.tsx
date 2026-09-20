@@ -53,15 +53,17 @@ const capabilities = [
 ];
 
 const Skills = () => (
-  <section id="skills" className="py-24 px-[5vw] bg-card border-t border-b border-border transition-colors duration-300">
+  // 👈 py-14 = top+bottom padding for this ENTIRE section. Biggest lever on the gap above/below the whole capabilities block.
+  <section id="skills" className="py-14 px-[5vw] bg-card border-t border-b border-border transition-colors duration-300">
     <ScrollReveal>
       <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// capabilities</div>
-      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-12 text-foreground transition-colors duration-300">
+      {/* 👈 mb-10 = space between headline and the 4 cards below it. */}
+      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-10 text-foreground transition-colors duration-300">
         What I can do for you.
       </h2>
     </ScrollReveal>
 
-    {/* 👈 4-card row on desktop, stacks on mobile. Single-icon style to match the rest of the site (Approach section, tools bar) — reference image used colorful multi-icon clusters, intentionally not replicated yet. */}
+    {/* 👈 4-card row on desktop, stacks on mobile. gap-5 = space BETWEEN cards. Single-icon style to match the rest of the site (Approach section, tools bar) — reference image used colorful multi-icon clusters, intentionally not replicated yet. */}
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
       {capabilities.map((c, i) => (
         <ScrollReveal key={c.title} delay={i * 100}>

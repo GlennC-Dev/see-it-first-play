@@ -60,7 +60,12 @@ const Approach = () => (
             </div>
 
             <div className="relative z-[1] text-lg font-semibold text-foreground mb-2">{step.title}</div>
-            <p className="relative z-[1] text-[0.85rem] leading-[1.65] text-ink-soft font-light mb-5">{step.desc}</p>
+            {/* 👈 min-h-[4.2rem] reserves space for ~3 lines of description (0.85rem × 1.65 line-height × 3) so the tag pills below
+                start at the same y-position across all 3 cards, regardless of how long each step's description is. This is an
+                ESTIMATE based on Probe/Build's descriptions being noticeably longer than Automate's — I can't see the actual
+                rendered line count, so check this live: if the pills are still off, adjust the number (font-size × line-height ×
+                however many lines the longest description actually wraps to). Same fix pattern as the capability card pills above it. */}
+            <p className="relative z-[1] text-[0.85rem] leading-[1.65] text-ink-soft font-light mb-5 min-h-[4.2rem]">{step.desc}</p>
 
             <div className="relative z-[1] flex flex-wrap gap-1.5">
               {step.tags.map((t) => (

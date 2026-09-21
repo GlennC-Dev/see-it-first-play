@@ -17,7 +17,7 @@ const SkillsExperiencePanel = () => {
             What I bring. <em className="italic text-primary">How</em> I've applied it.
           </h1>
           <p className="text-sm text-ink-soft font-light max-w-[65ch] leading-[1.7]">
-            Practical capability, built through years of hands-on delivery — not theory.
+            Backed by years of actually being the one who had to fix things by hand.
           </p>
         </div>
       </ScrollReveal>

@@ -58,9 +58,13 @@ const Skills = () => (
     <ScrollReveal>
       <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// capabilities</div>
       {/* 👈 mb-10 = space between headline and the 4 cards below it. */}
-      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-10 text-foreground transition-colors duration-300">
+      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-3 text-foreground transition-colors duration-300">
         What I can do for you.
       </h2>
+      {/* 👈 mb-10 = space between subhead and the 4 cards below it. Styled to match the page-level subhead / Approach's subhead for consistency. */}
+      <p className="text-sm text-ink-soft font-light leading-[1.7] max-w-[65ch] mb-10">
+        Pick one, stack a few, or leave it to me.
+      </p>
     </ScrollReveal>
 
     {/* 👈 4-card row on desktop, stacks on mobile. gap-5 = space BETWEEN cards. Single-icon style to match the rest of the site (Approach section, tools bar) — reference image used colorful multi-icon clusters, intentionally not replicated yet. */}

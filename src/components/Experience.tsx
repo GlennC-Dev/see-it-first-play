@@ -28,7 +28,8 @@ const mainExperience: ExpItem[] = [
     period: "OCT 2022 — AUG 2023",
     company: "Acquire BPO",
     bullets: [
-      "Engineered QRAW — a fully self-sustaining offline activity tracking system built on Google Forms, Apps Script, and Google Sheets — solving a critical blind spot in the phone system's inbound-only visibility. Overlaying QRAW data with existing phone system outputs produced the org's first-ever true agent utilization and efficiency metrics, driving 90% staff utilization and 92% employee efficiency across multiple business units. Adopted org-wide across all offline-facing campaigns.",
+      "Engineered QRAW — a self-sustaining offline activity tracking system built on Google Forms, Apps Script, and Sheets — solving the phone system's inbound-only blind spot.",
+      "Overlaid QRAW with phone system data to produce the org's first true utilization metrics, driving 90% staff utilization and 92% efficiency across multiple business units — results that got it adopted org-wide.",
       "Deployed an automated eNPS system that reduced processing time <strong>from weeks to near real-time</strong>, enabling immediate insights.",
     ],
   },

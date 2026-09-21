@@ -31,12 +31,14 @@ const Approach = () => (
   <section id="approach" className="py-14 px-[5vw] bg-background transition-colors duration-300">
     <ScrollReveal>
       <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-4">// the approach</div>
-      {/* 👈 mb-10 = space between headline and the 3 cards below it. Two-line headline, line 1 bright, line 2 muted — matches the reference image's "Catch. Brew. Pour. / Always in that order." treatment. */}
-      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-10 text-foreground transition-colors duration-300">
+      {/* 👈 mb-3 = space between headline and the subhead line below it. Single-line headline now (was previously 2-line with "Always in that order" as line 2). */}
+      <h2 className="font-serif-dm text-[clamp(2rem,3.5vw,3rem)] leading-[1.1] mb-3 text-foreground transition-colors duration-300">
         Probe. Build. Automate.
-        <br />
-        <span className="text-ink-soft">Always in that order.</span>
       </h2>
+      {/* 👈 mb-10 = space between subhead and the 3 cards below it. Styled to match the page-level subhead in SkillsExperiencePanel.tsx (text-sm text-ink-soft font-light leading-[1.7]) for consistency. */}
+      <p className="text-sm text-ink-soft font-light leading-[1.7] max-w-[65ch] mb-10">
+        A well-built system solves one problem — everything else stems from getting that one right.
+      </p>
     </ScrollReveal>
 
     {/* 👈 3-card row. gap-6 = space BETWEEN cards (not around the row). On desktop, a dashed connector + dot sits between cards (absolute-positioned track behind the icons) — hidden on mobile since cards stack. */}

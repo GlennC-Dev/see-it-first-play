@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import ScrollReveal from "./ScrollReveal";
 
 interface ExpItem {
@@ -92,8 +93,53 @@ const ExpEntry = ({ item }: { item: ExpItem }) => (
   </div>
 );
 
+const AccordionEntry = ({ item, isOpen, onToggle }: { item: ExpItem; isOpen: boolean; onToggle: () => void }) => (
+  // 👈 Same mb-8/pb-8 spacing as ExpEntry above, so the two most recent (always-open) roles and these
+  // older (click-to-open) roles stay visually consistent in the timeline regardless of open/closed state.
+  <div className="relative mb-8 pb-8 border-b border-border last:border-b-0 last:mb-0 last:pb-0 transition-colors duration-300">
+    <div className="absolute -left-[2.4rem] top-1.5 w-2.5 h-2.5 rounded-full border-2 border-background bg-ink-muted shadow-[0_0_0_1px_hsl(var(--ink-muted))] transition-colors duration-300" />
+    <button
+      onClick={onToggle}
+      aria-expanded={isOpen}
+      className="w-full flex items-start justify-between gap-3 text-left bg-transparent border-none p-0 cursor-pointer group"
+    >
+      <div>
+        <div className="flex items-baseline gap-2 flex-wrap mb-1.5">
+          <span className="text-[1.1rem] font-semibold text-foreground group-hover:text-primary transition-colors duration-200">{item.role}</span>
+          <span className="font-mono-dm text-[0.72rem] text-ink-muted tracking-[0.08em]">{item.period}</span>
+        </div>
+        {/* 👈 Company name stays visible even when collapsed, so the row is still scannable before clicking. Only the bullets hide/show. */}
+        <div className="text-[0.85rem] text-primary font-medium">{item.company}</div>
+      </div>
+      <ChevronDown
+        className={`w-4 h-4 text-ink-muted shrink-0 mt-1.5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+        strokeWidth={2}
+      />
+    </button>
+    {isOpen && item.bullets && (
+      <ul className="list-none flex flex-col gap-2.5 mt-4">
+        {item.bullets.map((b, i) => (
+          <li key={i} className="text-[0.9rem] text-ink-soft leading-[1.65] pl-5 relative font-light before:content-['→'] before:absolute before:left-0 before:text-primary before:text-[0.8rem]">
+            <span dangerouslySetInnerHTML={{ __html: b }} />
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
+);
+
 const Experience = () => {
-  const [expanded, setExpanded] = useState(false);
+  // 👈 Tracks which of the 4 OLDER roles are individually expanded (by index within hiddenExperience).
+  // The 2 most recent roles (mainExperience) always show their bullets — no state needed for those.
+  const [openIndices, setOpenIndices] = useState<Set<number>>(new Set());
+  const toggleIndex = (i: number) => {
+    setOpenIndices((prev) => {
+      const next = new Set(prev);
+      if (next.has(i)) next.delete(i);
+      else next.add(i);
+      return next;
+    });
+  };
 
   return (
     // 👈 py-14 = top+bottom padding for this ENTIRE section. Biggest lever on the gap above/below the whole Experience block.
@@ -109,18 +155,11 @@ const Experience = () => {
           {mainExperience.map((item, i) => (
             <ExpEntry key={i} item={item} />
           ))}
-          {expanded && hiddenExperience.map((item, i) => (
-            <ExpEntry key={`h-${i}`} item={item} />
+          {/* 👈 mb-6 = space between the last always-open role and this divider label. Purely a text label, not a timeline dot. */}
+          <div className="mb-6 font-mono-dm text-[0.7rem] tracking-[0.15em] uppercase text-ink-muted">Earlier roles</div>
+          {hiddenExperience.map((item, i) => (
+            <AccordionEntry key={`h-${i}`} item={item} isOpen={openIndices.has(i)} onToggle={() => toggleIndex(i)} />
           ))}
-          {/* 👈 mt-6 = space between the last timeline entry and the "See full experience" button. */}
-          <div className="mt-6">
-            <button
-              onClick={() => setExpanded(!expanded)}
-              className="inline-flex items-center gap-2 font-mono-dm text-[0.75rem] tracking-[0.1em] uppercase text-ink-soft border-[1.5px] border-border px-5 py-2.5 rounded-sm bg-transparent cursor-pointer hover:border-primary hover:text-primary transition-colors duration-200"
-            >
-              {expanded ? "Collapse experience ↑" : "See full experience ↓"}
-            </button>
-          </div>
         </div>
       </ScrollReveal>
     </section>

@@ -256,15 +256,17 @@ const Contact = () => {
                 {status === "error" && (
                   <div className="text-[0.8rem] text-destructive">Something went wrong. Please try again.</div>
                 )}
-                {/* 👈 Button copy ("Work in Progress") + caption line copied straight from the inspo
-                    screenshot as placeholders per your call — swap both whenever you're ready. */}
+                {/* 👈 Caption line still copied straight from the inspo screenshot as a placeholder —
+                    swap it whenever you're ready. Button now reads "Submit" and fires through the
+                    exact same window.__contactFormHandler({ name, email, message }) call the old
+                    modal form used, so your n8n hook doesn't need any changes on its end. */}
                 <div className="flex items-center gap-4 flex-wrap">
                   <button
                     type="submit"
                     disabled={status === "sending"}
                     className="inline-flex items-center gap-2 bg-primary text-primary-foreground border-none px-6 py-3 text-[0.85rem] font-medium cursor-pointer rounded-full hover:brightness-110 transition-all duration-200 disabled:opacity-60"
                   >
-                    {status === "sending" ? "Sending…" : "Work in Progress →"}
+                    {status === "sending" ? "Sending…" : "Submit"}
                   </button>
                   <span className="text-[0.78rem] text-ink-muted font-light">
                     One business day. No newsletter, no drip.

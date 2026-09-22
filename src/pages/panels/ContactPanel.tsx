@@ -23,18 +23,6 @@ const ContactPanel = () => {
       </ScrollReveal>
 
       <Contact />
-
-      <section className="py-16 px-[5vw]">
-        <ScrollReveal>
-          <div className="font-mono-dm text-[0.7rem] tracking-[0.14em] uppercase text-ink-muted mb-4">
-            FAQ
-          </div>
-          <div className="rounded-[4px] border border-dashed border-border p-8 text-ink-muted text-sm font-light">
-            No FAQ content yet — add common questions here once you know
-            what people tend to ask. (Placeholder slot.)
-          </div>
-        </ScrollReveal>
-      </section>
     </div>
   );
 };

@@ -93,14 +93,17 @@ const Contact = () => {
   return (
     <section className="py-14 px-[5vw]">
       <ScrollReveal>
-        {/* 👈 Two-panel card, same wrapping pattern as the About page card: one rounded-xl bordered
-            container, split into a fixed-dark left panel and a theme-aware light right panel. The
-            left panel is forced dark in both light AND dark mode (bg-foreground happens to resolve
-            dark in light mode; dark:bg-[#0a0a09] pins it dark in dark mode too) — same trick the old
-            single-panel Contact section used, kept intentionally so it doesn't wash out. */}
-        <div className="rounded-xl border border-border overflow-hidden grid grid-cols-1 lg:grid-cols-2">
-          {/* Left: "What happens next" panel */}
-          <div className="bg-foreground dark:bg-[#0a0a09] text-[#f0f0ee] p-8 md:p-10 flex flex-col transition-colors duration-300">
+        {/* 👈 Nested-card layout: outer "shell" card (rounded-2xl border, bg-card, padded) just
+            frames and spaces the two real cards inside it — the shell itself has no other job.
+            The two inner cards each get their own full border + rounded corners and sit side by
+            side via grid-cols-2, forced from md up so they read as beside-each-other on desktop;
+            below md they'll still stack for now until the dedicated mobile pass happens. */}
+        <div className="rounded-2xl border border-border bg-card p-3 transition-colors duration-300">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            {/* Left card: "What happens next" — forced dark in both light AND dark mode
+                (bg-foreground happens to resolve dark in light mode; dark:bg-[#0a0a09] pins it
+                dark in dark mode too) so it doesn't wash out against the theme-aware shell. */}
+            <div className="rounded-xl border border-[rgba(255,255,255,0.14)] bg-foreground dark:bg-[#0a0a09] text-[#f0f0ee] p-8 md:p-10 flex flex-col transition-colors duration-300">
             <div className="font-mono-dm text-[0.68rem] tracking-[0.16em] uppercase text-primary mb-4">
               What happens next
             </div>
@@ -201,8 +204,9 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Right: inline form (was a modal before — now sits directly on the page per your call) */}
-          <div className="bg-card p-8 md:p-10 transition-colors duration-300">
+          {/* Right card: inline form (was a modal before — now sits directly on the page per your
+              call). bg-background (not bg-card) so it reads as visually distinct from the bg-card shell. */}
+          <div className="rounded-xl border border-border bg-background p-8 md:p-10 transition-colors duration-300">
             {status === "sent" ? (
               <div className="h-full flex flex-col items-center justify-center text-center py-12">
                 <div className="text-2xl mb-2">✓</div>
@@ -274,6 +278,7 @@ const Contact = () => {
                 </div>
               </form>
             )}
+          </div>
           </div>
         </div>
       </ScrollReveal>

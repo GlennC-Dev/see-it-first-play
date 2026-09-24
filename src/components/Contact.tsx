@@ -21,23 +21,22 @@ const SOCIAL_LINKS = {
   github: "https://github.com/REPLACE_WITH_YOUR_HANDLE", // 👈 swap in your real GitHub URL
 };
 
-// 👈 "What happens next" 3-step copy — pulled straight from the brewedops inspo screenshot as a
-// placeholder (still in his register: "leads", etc.). Swap in your own process/wording whenever.
+// "What happens next" 3-step copy — locked.
 const STEPS = [
   {
     n: "01",
-    title: "You write.",
-    body: "Four fields. What is eating your week is enough.",
+    title: "You reach out.",
+    body: "Tell me what's on your mind. A rough description is enough.",
   },
   {
     n: "02",
-    title: "I read it the same day.",
-    body: "A real reply, not an autoresponder. One business day, usually faster.",
+    title: "We talk.",
+    body: "I ask questions. You'll probably get a few you didn't expect. That's the process.",
   },
   {
     n: "03",
-    title: "You get a plan or a straight no.",
-    body: "If I can automate it you get the plan. If I cannot, I will say so.",
+    title: "Then we figure out what to build.",
+    body: "Or whether to build anything at all. Either way, you'll have a clearer picture.",
   },
 ];
 
@@ -109,7 +108,7 @@ const Contact = () => {
             </div>
             <h2 className="font-serif-dm text-[clamp(1.5rem,2.5vw,2rem)] leading-[1.15] mb-8">
               <span className="block text-[#f0f0ee]">Three steps.</span>
-              <span className="block text-[#8a8a86]">No sales call to sit through.</span>
+              <span className="block text-[#8a8a86]">No assumptions, no unsolicited plans.</span>
             </h2>
 
             <div className="flex flex-col divide-y divide-[rgba(255,255,255,0.1)] border-t border-[rgba(255,255,255,0.1)] mb-8">

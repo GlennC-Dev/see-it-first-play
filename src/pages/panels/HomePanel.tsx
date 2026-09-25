@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { siN8n, siGoogle } from "simple-icons";
-import { BarChart3, Grid3x3, ShieldCheck, FolderKanban, User, Mail, Layers } from "lucide-react";
+import { BarChart3, Grid3x3, ShieldCheck, FolderKanban, User, Mail, Layers, Image as ImageIcon } from "lucide-react";
 import Hero from "@/components/Hero";
 
 const BrandIcon = ({ hex, path }: { hex: string; path: string }) => (
@@ -25,6 +25,43 @@ const TOOLS_GENERIC = [
 ];
 
 const TOOLS = [TOOLS_WITH_LOGOS[0], TOOLS_GENERIC[0], TOOLS_WITH_LOGOS[1], TOOLS_GENERIC[1], TOOLS_GENERIC[2]];
+
+// 👈 Mobile-only compact stats row (Kenneth's "11 yrs / #7009 / GMT+8" shape). LSSGB has no
+// number attached yet — you said you'd add the credential ID as a pill on the About page later.
+const STATS = [
+  { value: "12 Yrs", caption: "In Ops" },
+  { value: "LSSGB", caption: "Certified" },
+  { value: "GMT+8", caption: "Manila" },
+];
+
+// 👈 Mobile-only "Explore" cards (his swipeable-carousel section, adapted as a horizontal
+// scroll-snap row — no carousel library, just overflow-x-auto + snap classes). Each thumbnail is
+// a placeholder box for now; swap for a real image whenever you have one (Projects = a shot of a
+// manager view; About = a real photo). "to" carries a hash for Services/Work History so they
+// land directly on the relevant section of the Skills & Experience page (ScrollToTop.tsx handles
+// the hash-scroll on navigation).
+const EXPLORE_CARDS = [
+  {
+    title: "Projects",
+    blurb: "Dashboards, automations, and the builds behind them.",
+    to: "/projects",
+  },
+  {
+    title: "Services",
+    blurb: "How I work: probe, build, automate.",
+    to: "/skills-experience#approach",
+  },
+  {
+    title: "Work History",
+    blurb: "10+ years, frontline support through to BI.",
+    to: "/skills-experience#experience",
+  },
+  {
+    title: "About",
+    blurb: "Background, approach, and what drives the work.",
+    to: "/about",
+  },
+];
 
 const CARDS = [
   {
@@ -64,6 +101,17 @@ const HomePanel = () => {
     <div className="bg-background transition-colors duration-300">
       <Hero />
 
+      {/* 👈 Mobile-only stats strip — hidden md:flex hides it entirely on desktop (no equivalent
+          section there). gap-x-6 / py-5 control spacing; adjust freely without touching desktop. */}
+      <div className="flex md:hidden items-center justify-center gap-x-8 px-[5vw] py-5 border-b border-border">
+        {STATS.map((s) => (
+          <div key={s.caption} className="flex flex-col items-center text-center">
+            <div className="font-serif-dm text-[1.15rem] leading-none text-primary mb-1">{s.value}</div>
+            <div className="font-mono-dm text-[0.6rem] tracking-[0.1em] uppercase text-ink-muted">{s.caption}</div>
+          </div>
+        ))}
+      </div>
+
       {/* pt-6 pushes this whole section (Daily Drivers + cards) down away from the Hero above.
           Raise pt-6 to push it further down, lower it to bring it closer. */}
       <section className="px-[5vw] pt-6 pb-8">
@@ -80,21 +128,39 @@ const HomePanel = () => {
           {TOOLS.map(({ name, icon }) => (
             <div key={name} className="flex items-center gap-2 shrink-0 text-ink-soft">
               {icon}
-              <span className="text-sm font-medium whitespace-nowrap">{name}</span>
+              {/* 👈 Tool names are icon-only on mobile (hidden below sm) per your call — full
+                  name + icon stays on desktop. */}
+              <span className="hidden sm:inline text-sm font-medium whitespace-nowrap">{name}</span>
             </div>
           ))}
         </div>
 
-        {/* Card grid: row 1 = 2 cards, row 2 = 3 cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
-          {CARDS.slice(0, 2).map((c) => (
-            <HomeCard key={c.title} {...c} />
-          ))}
+        {/* 👈 Desktop card grid — hidden on mobile now that Explore (below) replaces it there. */}
+        <div className="hidden md:block">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-3">
+            {CARDS.slice(0, 2).map((c) => (
+              <HomeCard key={c.title} {...c} />
+            ))}
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {CARDS.slice(2, 5).map((c) => (
+              <HomeCard key={c.title} {...c} />
+            ))}
+          </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {CARDS.slice(2, 5).map((c) => (
-            <HomeCard key={c.title} {...c} />
-          ))}
+
+        {/* 👈 Mobile-only "Explore" row — horizontal scroll-snap, no carousel library. w-[78vw] on
+            each card controls how much of the next card peeks in from the edge; adjust to taste. */}
+        <div className="md:hidden">
+          <div className="flex items-center justify-between mb-3">
+            <span className="font-semibold text-sm text-foreground">Explore</span>
+            <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-primary">Swipe →</span>
+          </div>
+          <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-[5vw] px-[5vw]">
+            {EXPLORE_CARDS.map((c) => (
+              <ExploreCard key={c.title} {...c} />
+            ))}
+          </div>
         </div>
       </section>
     </div>
@@ -123,6 +189,33 @@ const HomeCard = ({
       {title}
     </h3>
     <p className="text-sm text-ink-soft font-light leading-[1.5]">{tagline}</p>
+  </Link>
+);
+
+const ExploreCard = ({
+  title,
+  blurb,
+  to,
+}: {
+  title: string;
+  blurb: string;
+  to: string;
+}) => (
+  <Link
+    to={to}
+    className="shrink-0 w-[78vw] snap-start rounded-xl border border-border bg-card overflow-hidden no-underline hover:border-primary transition-colors duration-200"
+  >
+    {/* 👈 Placeholder thumbnail — swap this div for a real <img> once you have the asset
+        (h-36 controls the thumbnail height; keep it the same across all 4 cards for now). */}
+    <div className="h-36 bg-blue-dim flex items-center justify-center text-primary/50">
+      <ImageIcon size={28} />
+    </div>
+    <div className="p-4">
+      <h3 className="font-mono-dm text-[0.8rem] tracking-[0.08em] text-foreground mb-1 uppercase">
+        {title}
+      </h3>
+      <p className="text-sm text-ink-soft font-light leading-[1.5]">{blurb}</p>
+    </div>
   </Link>
 );
 

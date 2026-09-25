@@ -23,11 +23,11 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarProvider,
-  SidebarTrigger,
   SidebarInset,
 } from "@/components/ui/sidebar";
 import Footer from "@/components/Footer";
 import ChatWidget, { type ChatWidgetHandle } from "@/components/ChatWidget";
+import BottomNav from "@/components/BottomNav";
 
 const NAV_ITEMS = [
   { to: "/", label: "Home", icon: Home, end: true },
@@ -124,18 +124,16 @@ const Shell = () => {
       </Sidebar>
 
       <SidebarInset>
-        <header className="sticky top-0 z-10 flex items-center gap-3 border-b border-border bg-background/90 backdrop-blur-[12px] px-4 py-3 md:hidden">
-          <SidebarTrigger />
-          <span className="font-mono-dm text-[0.75rem] tracking-[0.1em] uppercase text-foreground">
-            Glenn Charifa
-          </span>
-        </header>
-        <main className="flex-1 bg-background">
+        {/* 👈 pb-24 clears the fixed BottomNav on mobile so page content (and the Footer) never
+            sits underneath it; md:pb-0 removes that padding on desktop where BottomNav is hidden
+            and the sidebar is used instead. */}
+        <main className="flex-1 bg-background pb-24 md:pb-0">
           <Outlet context={{ openChat }} />
         </main>
         <Footer />
       </SidebarInset>
       <ChatWidget ref={chatRef} />
+      <BottomNav />
     </SidebarProvider>
   );
 };

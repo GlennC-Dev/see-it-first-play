@@ -102,22 +102,24 @@ const HomePanel = () => {
       <Hero />
 
       {/* 👈 Mobile-only stats strip — hidden md:flex hides it entirely on desktop (no equivalent
-          section there). gap-x-6 / py-5 control spacing; adjust freely without touching desktop. */}
-      <div className="flex md:hidden items-center justify-center gap-x-8 px-[5vw] py-5 border-b border-border">
+          section there). Bumped from the first pass: bigger value/caption text and more vertical
+          padding so it reads as a real mobile section instead of shrunk desktop text. */}
+      <div className="flex md:hidden items-center justify-center gap-x-10 px-[5vw] py-6 border-b border-border">
         {STATS.map((s) => (
           <div key={s.caption} className="flex flex-col items-center text-center">
-            <div className="font-serif-dm text-[1.15rem] leading-none text-primary mb-1">{s.value}</div>
-            <div className="font-mono-dm text-[0.6rem] tracking-[0.1em] uppercase text-ink-muted">{s.caption}</div>
+            <div className="font-serif-dm text-[1.4rem] leading-none text-primary mb-1.5">{s.value}</div>
+            <div className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-ink-muted">{s.caption}</div>
           </div>
         ))}
       </div>
 
       {/* pt-6 pushes this whole section (Daily Drivers + cards) down away from the Hero above.
-          Raise pt-6 to push it further down, lower it to bring it closer. */}
-      <section className="px-[5vw] pt-6 pb-8">
+          👈 pt-9 pb-10 on mobile (more breathing room now that everything stacks in one column) vs
+          the original pt-6 pb-8 kept for desktop. */}
+      <section className="px-[5vw] pt-9 pb-10 md:pt-6 md:pb-8">
         {/* Daily Drivers */}
-        <div className="rounded-xl border border-border bg-card p-4 flex items-center gap-6 overflow-x-auto mb-4">
-          <div className="shrink-0 pr-6 border-r border-border">
+        <div className="rounded-xl border border-border bg-card p-4 flex items-center gap-5 md:gap-6 overflow-x-auto mb-6 md:mb-4">
+          <div className="shrink-0 pr-5 md:pr-6 border-r border-border">
             <p className="font-mono-dm text-[0.65rem] tracking-[0.14em] uppercase text-primary mb-0.5">
               Daily Drivers
             </p>
@@ -150,10 +152,11 @@ const HomePanel = () => {
         </div>
 
         {/* 👈 Mobile-only "Explore" row — horizontal scroll-snap, no carousel library. w-[78vw] on
-            each card controls how much of the next card peeks in from the edge; adjust to taste. */}
+            each card controls how much of the next card peeks in from the edge; adjust to taste.
+            Header bumped to text-base (was text-sm) so it reads as a proper section title on mobile. */}
         <div className="md:hidden">
-          <div className="flex items-center justify-between mb-3">
-            <span className="font-semibold text-sm text-foreground">Explore</span>
+          <div className="flex items-center justify-between mb-4">
+            <span className="font-semibold text-base text-foreground">Explore</span>
             <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-primary">Swipe →</span>
           </div>
           <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-[5vw] px-[5vw]">
@@ -206,15 +209,15 @@ const ExploreCard = ({
     className="shrink-0 w-[78vw] snap-start rounded-xl border border-border bg-card overflow-hidden no-underline hover:border-primary transition-colors duration-200"
   >
     {/* 👈 Placeholder thumbnail — swap this div for a real <img> once you have the asset
-        (h-36 controls the thumbnail height; keep it the same across all 4 cards for now). */}
-    <div className="h-36 bg-blue-dim flex items-center justify-center text-primary/50">
-      <ImageIcon size={28} />
+        (h-40 controls the thumbnail height; keep it the same across all 4 cards for now). */}
+    <div className="h-40 bg-blue-dim flex items-center justify-center text-primary/50">
+      <ImageIcon size={30} />
     </div>
     <div className="p-4">
-      <h3 className="font-mono-dm text-[0.8rem] tracking-[0.08em] text-foreground mb-1 uppercase">
+      <h3 className="font-mono-dm text-[0.85rem] tracking-[0.08em] text-foreground mb-1.5 uppercase">
         {title}
       </h3>
-      <p className="text-sm text-ink-soft font-light leading-[1.5]">{blurb}</p>
+      <p className="text-[0.9rem] text-ink-soft font-light leading-[1.55]">{blurb}</p>
     </div>
   </Link>
 );

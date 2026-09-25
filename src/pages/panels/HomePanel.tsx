@@ -151,23 +151,23 @@ const HomePanel = () => {
           </div>
         </div>
 
-        {/* 👈 TEMPORARILY DISABLED to test whether this section (specifically the horizontal
-            scroll-snap row with negative margins) is causing the mobile page to render zoomed-out.
-            Re-enable by removing this comment wrapper once confirmed either way. Original block,
-            unchanged, kept below for easy restore:
-
+        {/* 👈 Mobile-only "Explore" row — horizontal scroll-snap, no carousel library. Rewritten to
+            avoid vw-based negative-margin bleed (the earlier -mx-[5vw]/w-[78vw] combo was widening
+            the actual document past the viewport on mobile, which broke the fixed bottom nav and
+            made the whole page render "zoomed out"). This version stays fully inside the section's
+            existing px-[5vw] padding — no negative margins, no vw units on the cards — using
+            percentage widths instead, which are bounded by the parent and can't overflow it. */}
         <div className="md:hidden">
           <div className="flex items-center justify-between mb-4">
             <span className="font-semibold text-base text-foreground">Explore</span>
             <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-primary">Swipe →</span>
           </div>
-          <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-[5vw] px-[5vw]">
+          <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 max-w-full">
             {EXPLORE_CARDS.map((c) => (
               <ExploreCard key={c.title} {...c} />
             ))}
           </div>
         </div>
-        */}
       </section>
     </div>
   );
@@ -209,7 +209,10 @@ const ExploreCard = ({
 }) => (
   <Link
     to={to}
-    className="shrink-0 w-[78vw] snap-start rounded-xl border border-border bg-card overflow-hidden no-underline hover:border-primary transition-colors duration-200"
+    // 👈 w-[82%] (was w-[78vw]) — percentage of the scroll container, which is itself bounded by
+    // the section's padding, so this can never push past the actual viewport the way a raw vw
+    // value could. min-w-[240px] keeps cards from getting too narrow on very small phones.
+    className="shrink-0 w-[82%] min-w-[240px] snap-start rounded-xl border border-border bg-card overflow-hidden no-underline hover:border-primary transition-colors duration-200"
   >
     {/* 👈 Placeholder thumbnail — swap this div for a real <img> once you have the asset
         (h-40 controls the thumbnail height; keep it the same across all 4 cards for now). */}

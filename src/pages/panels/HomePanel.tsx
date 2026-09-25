@@ -151,9 +151,11 @@ const HomePanel = () => {
           </div>
         </div>
 
-        {/* 👈 Mobile-only "Explore" row — horizontal scroll-snap, no carousel library. w-[78vw] on
-            each card controls how much of the next card peeks in from the edge; adjust to taste.
-            Header bumped to text-base (was text-sm) so it reads as a proper section title on mobile. */}
+        {/* 👈 TEMPORARILY DISABLED to test whether this section (specifically the horizontal
+            scroll-snap row with negative margins) is causing the mobile page to render zoomed-out.
+            Re-enable by removing this comment wrapper once confirmed either way. Original block,
+            unchanged, kept below for easy restore:
+
         <div className="md:hidden">
           <div className="flex items-center justify-between mb-4">
             <span className="font-semibold text-base text-foreground">Explore</span>
@@ -165,6 +167,7 @@ const HomePanel = () => {
             ))}
           </div>
         </div>
+        */}
       </section>
     </div>
   );

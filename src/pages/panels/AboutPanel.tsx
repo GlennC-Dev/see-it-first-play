@@ -1,6 +1,7 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { siN8n, siClaude, siGooglegemini, siGoogleappsscript } from "simple-icons";
 import { BarChart3, Cloud, Filter, Award, MapPin } from "lucide-react";
+import aboutIllustration from "@/assets/about-illustration.png.asset.json";
 
 const BrandIcon = ({ hex, path }: { hex: string; path: string }) => (
   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill={`#${hex}`}>
@@ -120,15 +121,17 @@ const AboutPanel = () => {
               </div>
             </div>
 
-            {/* 👈 Right 3/8 photo slot. Drop a transparent-background PNG into /public (e.g.
-                /public/about-photo.png) and swap the src below. This column has no background of its
-                own on purpose — the card's bg-card color shows through the transparent areas of the
-                photo and follows the light/dark toggle automatically, no separate image treatment needed.
+            {/* 👈 Right 3/8 illustration slot. Transparent PNG served from the CDN asset pointer —
+                the card's bg-card color shows through the transparent areas, so it follows the
+                light/dark toggle automatically. The dark: utilities below soften brightness/contrast
+                slightly in dark mode so the flat-vector art doesn't glare against the dark card.
                 Hidden below md since there's no room to split the card on mobile. */}
             <div className="hidden md:flex md:col-span-3 items-end justify-center p-6">
-              <div className="w-full h-full min-h-[16rem] flex items-end justify-center text-ink-muted text-xs font-light text-center border border-dashed border-border rounded-[4px] p-4">
-                Photo slot — drop a transparent PNG in here (see comment above)
-              </div>
+              <img
+                src={aboutIllustration.url}
+                alt="Illustration of Glenn at a laptop surrounded by dashboards, charts and AI panels"
+                className="w-full h-auto max-h-[22rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
+              />
             </div>
           </div>
         </ScrollReveal>

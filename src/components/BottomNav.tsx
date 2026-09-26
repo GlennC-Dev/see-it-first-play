@@ -78,9 +78,10 @@ const BottomNav = ({ onOpenChat }: { onOpenChat: () => void }) => {
               aria-label="Contact page"
               className={`absolute bottom-0 left-1/2 w-11 h-11 rounded-full bg-card border border-border text-foreground flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-200 ${
                 expanded
-                  ? "opacity-100 scale-100 -translate-x-[1.9rem] -translate-y-[4.1rem]"
+                  ? "opacity-100 scale-100 translate-x-[calc(-50%-1.7rem)] -translate-y-[3.5rem]"
                   : "opacity-0 scale-50 translate-x-[-50%] translate-y-0 pointer-events-none"
               }`}
+
             >
               <Mail size={18} />
             </button>
@@ -91,9 +92,10 @@ const BottomNav = ({ onOpenChat }: { onOpenChat: () => void }) => {
               aria-label="Open chat"
               className={`absolute bottom-0 left-1/2 w-11 h-11 rounded-full bg-card border border-border text-foreground flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-200 delay-75 ${
                 expanded
-                  ? "opacity-100 scale-100 translate-x-[1.9rem] -translate-y-[4.1rem]"
+                  ? "opacity-100 scale-100 translate-x-[calc(-50%+1.7rem)] -translate-y-[3.5rem]"
                   : "opacity-0 scale-50 translate-x-[-50%] translate-y-0 pointer-events-none"
               }`}
+
             >
               <MessageCircle size={18} />
             </button>

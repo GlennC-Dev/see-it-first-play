@@ -24,7 +24,7 @@ const Index = () => {
       <Skills />
       <Experience />
       <ProjectsSection />
-      <Contact onOpenChat={openChat} />
+      <Contact />
       <Footer />
       <ChatWidget ref={chatRef} />
     </>

@@ -102,6 +102,16 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
               Online now
             </div>
           </div>
+          {/* 👈 Explicit close button — needed now that the floating trigger (which used to double
+              as the ✕ when open) is hidden on mobile. Shown on both breakpoints since it's harmless
+              on desktop too (just an extra way to close, alongside the existing trigger button). */}
+          <button
+            onClick={toggleChat}
+            aria-label="Close chat"
+            className="shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-primary-foreground/80 hover:text-primary-foreground hover:bg-[rgba(255,255,255,0.15)] transition-colors duration-150 border-none bg-transparent cursor-pointer text-base"
+          >
+            ✕
+          </button>
         </div>
 
         {/* Messages */}

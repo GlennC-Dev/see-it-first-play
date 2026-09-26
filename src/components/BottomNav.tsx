@@ -69,25 +69,29 @@ const BottomNav = ({ onOpenChat }: { onOpenChat: () => void }) => {
             {/* Envelope — pops up-left. translate/opacity/scale are what animate; duration/delay
                 control the pop timing. Second button (chat) has a slightly longer delay so they
                 stagger instead of appearing at the exact same instant. */}
+            {/* 👈 Positioned at ~115° on an imaginary circle around the main button (0°=right,
+                90°=straight up) — mostly-vertical fan, tilted slightly left. -translate-x-[1.9rem]
+                -translate-y-[4.1rem] is that angle at a ~4.5rem radius; increase the radius (scale
+                both numbers together) to detach it further from the center button. */}
             <button
               onClick={goToContact}
               aria-label="Contact page"
               className={`absolute bottom-0 left-1/2 w-11 h-11 rounded-full bg-card border border-border text-foreground flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-200 ${
                 expanded
-                  ? "opacity-100 scale-100 -translate-x-[4.2rem] -translate-y-2"
+                  ? "opacity-100 scale-100 -translate-x-[1.9rem] -translate-y-[4.1rem]"
                   : "opacity-0 scale-50 translate-x-[-50%] translate-y-0 pointer-events-none"
               }`}
             >
               <Mail size={18} />
             </button>
 
-            {/* Chat bubble — pops up-right */}
+            {/* Chat bubble — mirrored at ~65° */}
             <button
               onClick={openChatAndCollapse}
               aria-label="Open chat"
               className={`absolute bottom-0 left-1/2 w-11 h-11 rounded-full bg-card border border-border text-foreground flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.2)] transition-all duration-200 delay-75 ${
                 expanded
-                  ? "opacity-100 scale-100 translate-x-[1.8rem] -translate-y-2"
+                  ? "opacity-100 scale-100 translate-x-[1.9rem] -translate-y-[4.1rem]"
                   : "opacity-0 scale-50 translate-x-[-50%] translate-y-0 pointer-events-none"
               }`}
             >

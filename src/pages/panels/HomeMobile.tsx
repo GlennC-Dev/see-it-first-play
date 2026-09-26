@@ -1,9 +1,8 @@
 import { Link } from "react-router-dom";
-import { FolderKanban, Layers, User, Image as ImageIcon } from "lucide-react";
+import { FolderKanban, Layers, User } from "lucide-react";
 import { TOOLS, STATS } from "./homeData";
 
-// 👈 Explore tiles — same 4 destinations as before, now a vertical list instead of a horizontal
-// scroll row. "to" carries a hash for Services/Work History so they land directly on the
+// 👈 Explore tiles — same 4 destinations as before, horizontal scroll-snap row. "to" carries a hash for Services/Work History so they land directly on the
 // relevant section of the Skills & Experience page (ScrollToTop.tsx handles the hash-scroll).
 // Still worth revisiting: Projects/Services/About overlap with the bottom nav's own items —
 // flag if you want this trimmed down to just the non-duplicate entries (Work History).
@@ -34,7 +33,7 @@ const EXPLORE_ITEMS = [
   },
 ];
 
-const ExploreRow = ({
+const ExploreCard = ({
   icon: Icon,
   title,
   blurb,
@@ -47,19 +46,22 @@ const ExploreRow = ({
 }) => (
   <Link
     to={to}
-    className="flex items-center gap-4 rounded-xl border border-border bg-card p-3 no-underline hover:border-primary transition-colors duration-200"
+    // 👈 The actual fix, borrowed from how the reference repo avoids this bug: a FIXED height
+    // (h-[290px], not auto) so flexbox can't stretch/distort the card, and a width bounded by
+    // BOTH a fixed px AND a vw cap via CSS min() — w-[min(236px,66vw)] — instead of a raw vw
+    // value alone, which is what let the card push past the real viewport before.
+    className="shrink-0 snap-start w-[min(236px,66vw)] h-[290px] flex flex-col rounded-xl border border-border bg-card overflow-hidden no-underline hover:border-primary transition-colors duration-200"
   >
-    {/* 👈 Fixed w-20 h-20 square thumbnail — deliberately NOT flex-stretched or intrinsic-sized
-        (that's what caused the earlier bug where cards rendered way taller than intended).
-        Swap for a real <img> once you have thumbnails; icon is just a placeholder. */}
-    <div className="w-20 h-20 shrink-0 rounded-lg bg-blue-dim flex items-center justify-center text-primary/50">
-      <ImageIcon size={24} />
+    {/* 👈 Fixed h-[170px] thumbnail (matches the reference's proportions) — swap for a real
+        <img className="w-full h-[170px] object-cover" /> once you have thumbnails. */}
+    <div className="h-[170px] shrink-0 bg-blue-dim flex items-center justify-center text-primary/50">
+      <Icon size={32} />
     </div>
-    <div className="min-w-0">
-      <h3 className="font-mono-dm text-[0.78rem] tracking-[0.06em] text-foreground mb-1 uppercase">
+    <div className="p-4 flex-1 min-w-0">
+      <h3 className="font-mono-dm text-[0.8rem] tracking-[0.06em] text-foreground mb-1.5 uppercase">
         {title}
       </h3>
-      <p className="text-[0.85rem] text-ink-soft font-light leading-[1.45]">{blurb}</p>
+      <p className="text-[0.82rem] text-ink-soft font-light leading-[1.45]">{blurb}</p>
     </div>
   </Link>
 );
@@ -98,13 +100,17 @@ const HomeMobile = () => {
           ))}
         </div>
 
-        {/* Explore — stacked vertically, no horizontal scroll */}
+        {/* 👈 Explore — horizontal scroll-snap, brought back after fixing the actual bug (see
+            ExploreCard comment above). Bleed uses the same -mx-[5vw]/px-[5vw] trick as before,
+            which is safe now that cards have a real bounded width and fixed height — it was never
+            the bleed math itself causing the overflow, it was the unbounded card next to it. */}
         <div className="flex items-center justify-between mb-4">
           <span className="font-semibold text-base text-foreground">Explore</span>
+          <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-primary">Swipe →</span>
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-[5vw] px-[5vw] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [overscroll-behavior-x:contain]">
           {EXPLORE_ITEMS.map((item) => (
-            <ExploreRow key={item.title} {...item} />
+            <ExploreCard key={item.title} {...item} />
           ))}
         </div>
       </section>

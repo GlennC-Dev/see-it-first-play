@@ -10,10 +10,14 @@ const Hero = () => {
       className="relative overflow-hidden pt-9 pb-8 md:pt-7 md:pb-7 border-b border-border bg-card transition-colors duration-300"
     >
       <div className="px-[5vw] grid grid-cols-1 items-center gap-10 md:gap-16 relative z-[1]">
-        {/* 👈 max-w-full on mobile (was max-w-[75%] on all sizes — that's what was forcing the
+        {/* 👈 min-w-0 is the real fix (found by comparing against Kenneth's reference repo) — grid
+            items default to min-width: auto, which lets them refuse to shrink below their own
+            content's natural width even with whitespace-normal set. Without this, the headline
+            was still forcing the grid track wide on mobile regardless of the wrap setting below.
+            max-w-full on mobile (was max-w-[75%] on all sizes — that's what was forcing the
             headline into a too-narrow column on phones); md:max-w-[75%] restores the original
             desktop proportion untouched. */}
-        <div className="max-w-full md:max-w-[75%]">
+        <div className="min-w-0 max-w-full md:max-w-[75%]">
           {/* "// home" LABEL — matches the "// project gallery" label style on the Projects page.
               Change the text here, or the classes below, to adjust size/color/spacing. */}
           <div className="font-mono-dm text-[0.72rem] tracking-[0.18em] uppercase text-primary mb-3">

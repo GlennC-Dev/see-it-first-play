@@ -1,31 +1,36 @@
 import { Link } from "react-router-dom";
-import { FolderKanban, Layers, User } from "lucide-react";
+import { FolderKanban, Layers, User, ArrowUpRight } from "lucide-react";
 import { TOOLS, STATS } from "./homeData";
 
-// 👈 Explore tiles — same 4 destinations as before, horizontal scroll-snap row. "to" carries a hash for Services/Work History so they land directly on the
-// relevant section of the Skills & Experience page (ScrollToTop.tsx handles the hash-scroll).
-// Still worth revisiting: Projects/Services/About overlap with the bottom nav's own items —
-// flag if you want this trimmed down to just the non-duplicate entries (Work History).
+// 👈 Explore tiles — same 4 destinations as before. "to" carries a hash for Services/Work History
+// so they land directly on the relevant section of the Skills & Experience page (ScrollToTop.tsx
+// handles the hash-scroll). Still worth revisiting: Projects/Services/About overlap with the
+// bottom nav's own items — flag if you want this trimmed down to just the non-duplicate entries
+// (Work History).
 const EXPLORE_ITEMS = [
   {
+    n: "01",
     icon: FolderKanban,
     title: "Projects",
     blurb: "Dashboards, automations, and the builds behind them.",
     to: "/projects",
   },
   {
+    n: "02",
     icon: Layers,
     title: "Services",
     blurb: "How I work: probe, build, automate.",
     to: "/skills-experience#approach",
   },
   {
+    n: "03",
     icon: Layers,
     title: "Work History",
     blurb: "10+ years, frontline support through to BI.",
     to: "/skills-experience#experience",
   },
   {
+    n: "04",
     icon: User,
     title: "About",
     blurb: "Background, approach, and what drives the work.",
@@ -34,11 +39,13 @@ const EXPLORE_ITEMS = [
 ];
 
 const ExploreCard = ({
+  n,
   icon: Icon,
   title,
   blurb,
   to,
 }: {
+  n: string;
   icon: typeof FolderKanban;
   title: string;
   blurb: string;
@@ -46,22 +53,32 @@ const ExploreCard = ({
 }) => (
   <Link
     to={to}
-    // 👈 The actual fix, borrowed from how the reference repo avoids this bug: a FIXED height
-    // (h-[290px], not auto) so flexbox can't stretch/distort the card, and a width bounded by
-    // BOTH a fixed px AND a vw cap via CSS min() — w-[min(236px,66vw)] — instead of a raw vw
-    // value alone, which is what let the card push past the real viewport before.
-    className="shrink-0 snap-start w-[min(236px,66vw)] h-[290px] flex flex-col rounded-xl border border-border bg-card overflow-hidden no-underline hover:border-primary transition-colors duration-200"
+    // 👈 Back to stacked (flex-col in the parent below), so no fixed height/width tricks needed
+    // this time — plain block layout, sized by its own content, can't overflow the same way a
+    // flex ROW of fixed-size siblings could.
+    className="block rounded-2xl border border-border bg-card p-3 no-underline hover:border-primary transition-colors duration-200"
   >
-    {/* 👈 Fixed h-[170px] thumbnail (matches the reference's proportions) — swap for a real
-        <img className="w-full h-[170px] object-cover" /> once you have thumbnails. */}
-    <div className="h-[170px] shrink-0 bg-blue-dim flex items-center justify-center text-primary/50">
-      <Icon size={32} />
+    <div className="relative">
+      {/* 👈 Numbered badge overlapping the thumbnail's top-left corner — top-3 left-3 controls how
+          far it sits from the corner. Placeholder thumbnail below; swap the div for a real <img
+          className="w-full h-48 object-cover rounded-xl" /> once you have one. */}
+      <div className="absolute top-3 left-3 z-[1] inline-flex items-center gap-1.5 rounded-full bg-foreground text-background px-3 py-1.5">
+        <span className="font-mono-dm text-[0.68rem] tracking-[0.1em]">{n}</span>
+        <span className="font-mono-dm text-[0.68rem] tracking-[0.1em] uppercase">{title}</span>
+      </div>
+      <div className="h-48 rounded-xl bg-blue-dim flex items-center justify-center text-primary/50">
+        <Icon size={32} />
+      </div>
     </div>
-    <div className="p-4 flex-1 min-w-0">
-      <h3 className="font-mono-dm text-[0.8rem] tracking-[0.06em] text-foreground mb-1.5 uppercase">
-        {title}
-      </h3>
-      <p className="text-[0.82rem] text-ink-soft font-light leading-[1.45]">{blurb}</p>
+
+    <div className="relative pt-4 pb-1 pr-14">
+      <h3 className="font-serif-dm text-[1.15rem] leading-[1.2] text-foreground mb-1.5">{title}</h3>
+      <p className="text-[0.88rem] text-ink-soft font-light leading-[1.5]">{blurb}</p>
+      {/* 👈 Circular arrow CTA, bottom-right of the text block — bottom-1 right-0 positions it;
+          w-10 h-10 controls its size. */}
+      <div className="absolute bottom-1 right-0 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center">
+        <ArrowUpRight size={18} />
+      </div>
     </div>
   </Link>
 );
@@ -100,15 +117,13 @@ const HomeMobile = () => {
           ))}
         </div>
 
-        {/* 👈 Explore — horizontal scroll-snap, brought back after fixing the actual bug (see
-            ExploreCard comment above). Bleed uses the same -mx-[5vw]/px-[5vw] trick as before,
-            which is safe now that cards have a real bounded width and fixed height — it was never
-            the bleed math itself causing the overflow, it was the unbounded card next to it. */}
+        {/* 👈 Explore — stacked vertically (reverted from horizontal scroll, which broke the UI
+            when tested live). New card style: numbered badge over a thumbnail, headline +
+            description below, circular arrow CTA. */}
         <div className="flex items-center justify-between mb-4">
           <span className="font-semibold text-base text-foreground">Explore</span>
-          <span className="font-mono-dm text-[0.65rem] tracking-[0.1em] uppercase text-primary">Swipe →</span>
         </div>
-        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory pb-2 -mx-[5vw] px-[5vw] [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden [overscroll-behavior-x:contain]">
+        <div className="flex flex-col gap-4">
           {EXPLORE_ITEMS.map((item) => (
             <ExploreCard key={item.title} {...item} />
           ))}

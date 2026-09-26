@@ -12,7 +12,6 @@ import ChatWidget, { type ChatWidgetHandle } from "@/components/ChatWidget";
 const Index = () => {
   const chatRef = useRef<ChatWidgetHandle>(null);
 
-  const openChat = () => chatRef.current?.open();
 
   return (
     <>

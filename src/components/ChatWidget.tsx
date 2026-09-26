@@ -78,14 +78,19 @@ const ChatWidget = forwardRef<ChatWidgetHandle>((_, ref) => {
 
   return (
     <>
+      {/* 👈 hidden md:flex — this floating trigger overlapped the new mobile bottom nav (both sit
+          in the bottom-right corner). On mobile, chat now opens via the bottom nav's chat icon
+          instead (see BottomNav.tsx); this button stays exactly as-is on desktop. */}
       <button
         onClick={toggleChat}
         aria-label="Open chat"
-        className="fixed bottom-8 right-8 z-[1000] w-14 h-14 rounded-full bg-primary text-primary-foreground flex items-center justify-center cursor-pointer border-none shadow-[0_4px_24px_rgba(26,108,255,0.4)] hover:scale-[1.08] transition-transform duration-200 text-xl"
+        className="hidden md:flex fixed bottom-8 right-8 z-[1000] w-14 h-14 rounded-full bg-primary text-primary-foreground items-center justify-center cursor-pointer border-none shadow-[0_4px_24px_rgba(26,108,255,0.4)] hover:scale-[1.08] transition-transform duration-200 text-xl"
       >
         {isOpen ? "✕" : "💬"}
       </button>
 
+      {/* 👈 bottom-[6.5rem] on mobile lifts the panel clear of the bottom nav bar; md:bottom-[6.5rem]
+          keeps the original desktop position (measured from the now-hidden trigger button above). */}
       <div className={`fixed bottom-[6.5rem] right-8 z-[999] w-[360px] max-w-[calc(100vw-2rem)] max-h-[min(540px,calc(100vh-8rem))] bg-card rounded-xl border border-border shadow-[0_16px_64px_rgba(0,0,0,0.25)] flex flex-col overflow-hidden transition-all duration-[250ms] ${isOpen ? "translate-y-0 scale-100 opacity-100 pointer-events-auto" : "translate-y-4 scale-[0.97] opacity-0 pointer-events-none"}`}>
         {/* Header */}
         <div className="bg-primary text-primary-foreground p-4 flex items-center gap-3 flex-shrink-0">

@@ -133,7 +133,7 @@ const Shell = () => {
         <Footer />
       </SidebarInset>
       <ChatWidget ref={chatRef} />
-      <BottomNav />
+      <BottomNav onOpenChat={openChat} />
     </SidebarProvider>
   );
 };

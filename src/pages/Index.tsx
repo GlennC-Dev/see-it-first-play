@@ -12,7 +12,6 @@ import ChatWidget, { type ChatWidgetHandle } from "@/components/ChatWidget";
 const Index = () => {
   const chatRef = useRef<ChatWidgetHandle>(null);
 
-  const openChat = () => chatRef.current?.open();
 
   return (
     <>
@@ -24,7 +23,7 @@ const Index = () => {
       <Skills />
       <Experience />
       <ProjectsSection />
-      <Contact onOpenChat={openChat} />
+      <Contact />
       <Footer />
       <ChatWidget ref={chatRef} />
     </>

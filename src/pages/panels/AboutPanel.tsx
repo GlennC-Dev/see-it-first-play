@@ -105,7 +105,7 @@ const AboutPanel = () => {
                   "CREDENTIAL ID" text in each for the real ID/name once you have them, or delete
                   any you don't end up needing. */}
               <div className="mt-8 flex flex-wrap items-center gap-2 mb-3">
-                {["CREDENTIAL ID", "CREDENTIAL ID", "CREDENTIAL ID"].map((label, i) => (
+                {["CREDENTIAL ID"].map((label, i) => (
                   <div
                     key={i}
                     className="inline-flex items-center gap-2 font-mono-dm text-[0.68rem] tracking-[0.1em] uppercase px-3 py-2 rounded-sm bg-blue-dim text-primary"

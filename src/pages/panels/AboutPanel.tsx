@@ -61,9 +61,10 @@ const AboutPanel = () => {
 
       <section className="py-14 px-[5vw]">
         <ScrollReveal>
-          {/* 👈 Card split: even 4:4 on desktop so the illustration gets half the card.
-              Collapses to a single stacked column on mobile — no room to split it there,
-              so the photo slot is hidden below md rather than squeezed. */}
+          {/* 👈 Card split: even 4:4 on desktop so the illustration gets half the card. On mobile
+              it stacks into one column, but the illustration now shows there too (order-first
+              below md puts it above the bio text visually, while staying second in the actual DOM
+              order via md:order-none — keeps the bio as the first thing a screen reader hits). */}
           <div className="rounded-xl border border-border bg-card overflow-hidden grid grid-cols-1 md:grid-cols-8">
             <div className="md:col-span-4 p-6 md:p-8">
               <p className="text-base text-foreground font-light leading-[1.7] mb-5">
@@ -122,17 +123,23 @@ const AboutPanel = () => {
               </div>
             </div>
 
-            {/* 👈 Right half illustration slot. Transparent PNG served from the CDN asset pointer —
-                the card's bg-card color shows through the transparent areas, so it follows the
+            {/* 👈 Illustration slot. Transparent PNG served from the CDN asset pointer — the
+                card's bg-card color shows through the transparent areas, so it follows the
                 light/dark toggle automatically. The dark: utilities below soften brightness/contrast
                 slightly in dark mode so the flat-vector art doesn't glare against the dark card.
-                Hidden below md since there's no room to split the card on mobile. */}
-            <div className="hidden md:flex md:col-span-4 items-end justify-center p-4">
+                order-first md:order-none: on mobile this renders above the bio text (visually —
+                DOM order is unchanged, bio stays first for screen readers); on desktop it resets
+                to normal order so it stays on the right where it's always been.
+                max-h values: mobile max-h-[13rem] keeps it compact above the text; desktop
+                max-h-[16rem] is a real reduction from the original 26rem specifically so the card
+                fits within a normal viewport height without needing to scroll — I can't preview
+                this live, so treat it as a first guess and tell me if it needs to go smaller/bigger. */}
+            <div className="flex md:col-span-4 items-end justify-center p-4 order-first md:order-none">
 
               <img
               src="/about-illustration.png"
               alt="Illustration of Glenn at a laptop surrounded by dashboards, charts and AI panels"
-              className="w-full h-auto max-h-[26rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
+              className="w-full h-auto max-h-[13rem] md:max-h-[16rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
               />
               
             </div>

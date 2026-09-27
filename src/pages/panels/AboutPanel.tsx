@@ -60,11 +60,11 @@ const AboutPanel = () => {
 
       <section className="py-14 px-[5vw]">
         <ScrollReveal>
-          {/* 👈 Card split: grid-cols-8 on desktop gives 5 cols to text, 3 to the photo (the 5/8 : 3/8
-              split requested). Collapses to a single stacked column on mobile — no room to split it there,
+          {/* 👈 Card split: even 4:4 on desktop so the illustration gets half the card.
+              Collapses to a single stacked column on mobile — no room to split it there,
               so the photo slot is hidden below md rather than squeezed. */}
           <div className="rounded-xl border border-border bg-card overflow-hidden grid grid-cols-1 md:grid-cols-8">
-            <div className="md:col-span-5 p-6 md:p-8">
+            <div className="md:col-span-4 p-6 md:p-8">
               <p className="text-base text-foreground font-light leading-[1.7] mb-5">
                 <span className="font-semibold">I came up through the phones.</span> That's
                 where I learned that bad data costs more than no data. Everything
@@ -121,16 +121,16 @@ const AboutPanel = () => {
               </div>
             </div>
 
-            {/* 👈 Right 3/8 illustration slot. Transparent PNG served from the CDN asset pointer —
+            {/* 👈 Right half illustration slot. Transparent PNG served from the CDN asset pointer —
                 the card's bg-card color shows through the transparent areas, so it follows the
                 light/dark toggle automatically. The dark: utilities below soften brightness/contrast
                 slightly in dark mode so the flat-vector art doesn't glare against the dark card.
                 Hidden below md since there's no room to split the card on mobile. */}
-            <div className="hidden md:flex md:col-span-3 items-end justify-center p-6">
+            <div className="hidden md:flex md:col-span-4 items-end justify-center p-4">
               <img
                 src={aboutIllustration.url}
                 alt="Illustration of Glenn at a laptop surrounded by dashboards, charts and AI panels"
-                className="w-full h-auto max-h-[22rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
+                className="w-full h-auto max-h-[26rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
               />
             </div>
           </div>

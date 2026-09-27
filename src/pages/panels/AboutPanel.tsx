@@ -1,7 +1,8 @@
 import ScrollReveal from "@/components/ScrollReveal";
 import { siN8n, siClaude, siGooglegemini, siGoogleappsscript } from "simple-icons";
 import { BarChart3, Cloud, Filter, Award, MapPin } from "lucide-react";
-import aboutIllustration from "@/assets/about-illustration.png.asset.json";
+
+// import aboutIllustration from "@/assets/about-illustration.png.asset.json";
 
 const BrandIcon = ({ hex, path }: { hex: string; path: string }) => (
   <svg viewBox="0 0 24 24" className="w-3.5 h-3.5" fill={`#${hex}`}>
@@ -127,11 +128,13 @@ const AboutPanel = () => {
                 slightly in dark mode so the flat-vector art doesn't glare against the dark card.
                 Hidden below md since there's no room to split the card on mobile. */}
             <div className="hidden md:flex md:col-span-4 items-end justify-center p-4">
+
               <img
-                src={aboutIllustration.url}
-                alt="Illustration of Glenn at a laptop surrounded by dashboards, charts and AI panels"
-                className="w-full h-auto max-h-[26rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
+              src="/about-illustration.png"
+              alt="Illustration of Glenn at a laptop surrounded by dashboards, charts and AI panels"
+              className="w-full h-auto max-h-[26rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
               />
+              
             </div>
           </div>
         </ScrollReveal>

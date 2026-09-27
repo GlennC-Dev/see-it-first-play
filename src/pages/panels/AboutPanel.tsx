@@ -123,23 +123,21 @@ const AboutPanel = () => {
               </div>
             </div>
 
-            {/* 👈 Illustration slot. Transparent PNG served from the CDN asset pointer — the
-                card's bg-card color shows through the transparent areas, so it follows the
-                light/dark toggle automatically. The dark: utilities below soften brightness/contrast
-                slightly in dark mode so the flat-vector art doesn't glare against the dark card.
-                order-first md:order-none: on mobile this renders above the bio text (visually —
-                DOM order is unchanged, bio stays first for screen readers); on desktop it resets
-                to normal order so it stays on the right where it's always been.
-                max-h values: mobile max-h-[13rem] keeps it compact above the text; desktop
-                max-h-[16rem] is a real reduction from the original 26rem specifically so the card
-                fits within a normal viewport height without needing to scroll — I can't preview
-                this live, so treat it as a first guess and tell me if it needs to go smaller/bigger. */}
+            {/* 👈 Right half illustration slot on desktop; on mobile it now shows too, reordered
+                above the bio text via order-first (DOM order is unchanged — bio stays first for
+                screen readers — md:order-none resets to normal order on desktop where it's always
+                been on the right). Desktop sizing/behavior is exactly as it was before —
+                only the mobile visibility + ordering is new here. Transparent PNG served from the
+                CDN asset pointer — the card's bg-card color shows through the transparent areas, so
+                it follows the light/dark toggle automatically. The dark: utilities below soften
+                brightness/contrast slightly in dark mode so the flat-vector art doesn't glare
+                against the dark card. */}
             <div className="flex md:col-span-4 items-end justify-center p-4 order-first md:order-none">
 
               <img
               src="/about-illustration.png"
               alt="Illustration of Glenn at a laptop surrounded by dashboards, charts and AI panels"
-              className="w-full h-auto max-h-[13rem] md:max-h-[16rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
+              className="w-full h-auto max-h-[13rem] md:max-h-[26rem] object-contain object-bottom transition-all duration-300 dark:brightness-90 dark:contrast-[0.95] dark:saturate-[0.9]"
               />
               
             </div>

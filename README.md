@@ -2,7 +2,7 @@
 
 build this for me would you. we'll do modifications once built. i want to see what this looks like first.
 
-This project was built with [Lovable](https://lovable.dev).
+This project was built with [Lovable](https://lovable.dev) and claude.
 
 ## Build with Lovable
 

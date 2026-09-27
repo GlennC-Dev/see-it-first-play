@@ -59,13 +59,20 @@ const AboutPanel = () => {
         </div>
       </ScrollReveal>
 
+      {/* 👈 py-14 = space above/below the card (between it and the header banner / page bottom);
+          px-[5vw] = left/right page margin, matches every other page's convention. */}
       <section className="py-14 px-[5vw]">
         <ScrollReveal>
           {/* 👈 Card split: even 4:4 on desktop so the illustration gets half the card. On mobile
               it stacks into one column, but the illustration now shows there too (order-first
               below md puts it above the bio text visually, while staying second in the actual DOM
-              order via md:order-none — keeps the bio as the first thing a screen reader hits). */}
+              order via md:order-none — keeps the bio as the first thing a screen reader hits).
+              No gap-* class on this grid, so the two halves butt up against each other — their own
+              padding (below) is the only thing separating them. Add e.g. gap-4 here if you want a
+              visible gap between the two halves instead. */}
           <div className="rounded-xl border border-border bg-card overflow-hidden grid grid-cols-1 md:grid-cols-8">
+            {/* 👈 Text column padding — p-6 on mobile, p-8 on desktop. Controls the space between
+                this column's content and the card's border on all sides. */}
             <div className="md:col-span-4 p-6 md:p-8">
               <p className="text-base text-foreground font-light leading-[1.7] mb-5">
                 <span className="font-semibold">I came up through the phones.</span> That's
@@ -131,7 +138,8 @@ const AboutPanel = () => {
                 CDN asset pointer — the card's bg-card color shows through the transparent areas, so
                 it follows the light/dark toggle automatically. The dark: utilities below soften
                 brightness/contrast slightly in dark mode so the flat-vector art doesn't glare
-                against the dark card. */}
+                against the dark card. p-4 below controls this column's own padding — same on
+                mobile and desktop right now (no md: override), so changing it affects both. */}
             <div className="flex md:col-span-4 items-end justify-center p-4 order-first md:order-none">
 
               <img

@@ -16,9 +16,10 @@ const IMG_WIDTH = "w-[50%] md:w-[50%]"; // 👈 how much of the card the image l
 const TEXT_MAX_W = "max-w-[62%] md:max-w-[52%]"; // 👈 caps the text column so it doesn't run under the image (phone / md and up)
 const IMG_OPACITY = "opacity-[0.9] dark:opacity-[0.55]"; // 👈 image strength: light theme / dark theme (white screenshots glare on dark cards, so dark is lower)
 const FADE_ANGLE = "115deg"; // 👈 direction of the fade edge. 90deg = straight vertical edge; higher = more slanted
-const FADE_START = "0%"; // 👈 where the image is still fully transparent (left edge of the image layer)
-const FADE_FULL = "45%"; // 👈 where the image reaches full strength. Lower = harder edge, higher = softer, longer fade
-const FADE_MASK = `linear-gradient(${FADE_ANGLE}, transparent ${FADE_START}, black ${FADE_FULL})`;
+const FADE_FULL_LIGHT = "45%"; // 👈 LIGHT theme: where the image reaches full strength (0% = fully transparent at the layer's left edge). Lower = harder edge, higher = softer, longer fade
+const FADE_FULL_DARK = "80%"; // 👈 DARK theme: same idea, but longer/softer so the bright screenshot melts into the dark card. Raise for more fade, lower for less
+const FADE_MASK_LIGHT = `linear-gradient(${FADE_ANGLE}, transparent 0%, black ${FADE_FULL_LIGHT})`;
+const FADE_MASK_DARK = `linear-gradient(${FADE_ANGLE}, transparent 0%, black ${FADE_FULL_DARK})`;
 
 const ProjectsHome = () => {
   return (
@@ -88,8 +89,8 @@ const ProjectCard = ({ cat, grow }: { cat: Category; grow?: "up" | "down" }) => 
       {cat.cardImage && (
         <div
           aria-hidden
-          className={`pointer-events-none absolute inset-y-0 right-0 ${IMG_WIDTH}`}
-          style={{ WebkitMaskImage: FADE_MASK, maskImage: FADE_MASK }}
+          className={`card-fade pointer-events-none absolute inset-y-0 right-0 ${IMG_WIDTH}`}
+          style={{ "--fade-light": FADE_MASK_LIGHT, "--fade-dark": FADE_MASK_DARK } as React.CSSProperties}
         >
           <img
             src={cat.cardImage}

@@ -156,3 +156,14 @@
   0%, 60%, 100% { transform: translateY(0); }
   30% { transform: translateY(-6px); }
 }
+
+/* Card image fade (Projects cards). The two gradients are set inline from ProjectsHome.tsx so they can be tuned there;
+   this only decides which one applies: light theme uses --fade-light, dark theme uses --fade-dark. */
+.card-fade {
+  -webkit-mask-image: var(--fade-light);
+  mask-image: var(--fade-light);
+}
+.dark .card-fade {
+  -webkit-mask-image: var(--fade-dark);
+  mask-image: var(--fade-dark);
+}

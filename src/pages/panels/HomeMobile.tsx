@@ -14,6 +14,8 @@ const EXPLORE_ITEMS = [
     title: "Projects",
     blurb: "Dashboards, automations, and the builds behind them.",
     to: "/projects",
+    thumbnail: "/project-photos/projects_dataviz_2_sfchat_1.jpg",
+    thumbnailPosition: "50% 24%", // 👈 lands on the Answered vs Abandoned bar/line chart — same crop as the Home desktop Projects card
   },
   {
     n: "02",
@@ -21,6 +23,7 @@ const EXPLORE_ITEMS = [
     title: "Services",
     blurb: "How I work: probe, build, automate.",
     to: "/skills-experience#approach",
+    // 👈 no thumbnail yet — falls back to the icon placeholder below
   },
   {
     n: "03",
@@ -28,6 +31,7 @@ const EXPLORE_ITEMS = [
     title: "Work History",
     blurb: "10+ years, frontline support through to BI.",
     to: "/skills-experience#experience",
+    // 👈 no thumbnail yet — falls back to the icon placeholder below
   },
   {
     n: "04",
@@ -35,6 +39,8 @@ const EXPLORE_ITEMS = [
     title: "About",
     blurb: "Background, approach, and what drives the work.",
     to: "/about",
+    thumbnail: "/about-illustration.png",
+    thumbnailPosition: "50% 45%", // 👈 same crop as the Home desktop About card
   },
 ];
 
@@ -44,12 +50,16 @@ const ExploreCard = ({
   title,
   blurb,
   to,
+  thumbnail,
+  thumbnailPosition,
 }: {
   n: string;
   icon: typeof FolderKanban;
   title: string;
   blurb: string;
   to: string;
+  thumbnail?: string;
+  thumbnailPosition?: string;
 }) => (
   <Link
     to={to}
@@ -66,9 +76,18 @@ const ExploreCard = ({
         <span className="font-mono-dm text-[0.68rem] tracking-[0.1em]">{n}</span>
         <span className="font-mono-dm text-[0.68rem] tracking-[0.1em] uppercase">{title}</span>
       </div>
-      <div className="h-48 rounded-xl bg-blue-dim flex items-center justify-center text-primary/50">
-        <Icon size={32} />
-      </div>
+      {thumbnail ? (
+        <img
+          src={thumbnail}
+          alt=""
+          className="w-full h-48 object-cover rounded-xl"
+          style={{ objectPosition: thumbnailPosition ?? "50% 50%" }}
+        />
+      ) : (
+        <div className="h-48 rounded-xl bg-blue-dim flex items-center justify-center text-primary/50">
+          <Icon size={32} />
+        </div>
+      )}
     </div>
 
     <div className="relative pt-4 pb-1 pr-14">

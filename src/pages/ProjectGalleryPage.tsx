@@ -57,13 +57,17 @@ const ProjectGalleryPage = () => {
         </div>
 
         {/* Photo viewer */}
-        <div className="bg-[#111] relative flex flex-col items-center justify-center min-h-[420px]">
-          <div className="relative flex items-center justify-center w-full flex-1">
+        {/* 👈 h-[62vh] gives this box a DEFINITE height for the image to measure against — the
+            previous min-h-only + w-full/h-full-on-the-img combo left the image's box height
+            undefined on some mobile browsers, so it rendered near native pixel size and got
+            clipped by this card's overflow-hidden instead of shrinking to fit. */}
+        <div className="bg-[#111] relative flex flex-col items-center justify-center h-[62vh] min-h-[420px]">
+          <div className="relative flex items-center justify-center w-full flex-1 min-h-0">
             {project.photos[photoIdx] ? (
               <img
                 src={project.photos[photoIdx]!}
                 alt={project.title}
-                className="w-full h-full object-contain max-h-[62vh]"
+                className="max-w-full max-h-full object-contain"
               />
             ) : (
               <div className="text-[5rem] opacity-10">{project.icon}</div>

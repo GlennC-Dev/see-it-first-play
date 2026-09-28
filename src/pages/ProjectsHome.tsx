@@ -11,6 +11,15 @@ const CATEGORY_ICONS: Record<string, typeof BarChart3> = {
   "Web Apps": LayoutGrid,
 };
 
+// ── DIAGONAL CARD IMAGE TUNABLES (only used by categories that set cardImage in projects.ts) ──
+const IMG_WIDTH = "w-[50%] md:w-[50%]"; // 👈 how much of the card the image layer covers: first = phone, second = md and up
+const TEXT_MAX_W = "max-w-[62%] md:max-w-[52%]"; // 👈 caps the text column so it doesn't run under the image (phone / md and up)
+const IMG_OPACITY = "opacity-[0.9] dark:opacity-[0.55]"; // 👈 image strength: light theme / dark theme (white screenshots glare on dark cards, so dark is lower)
+const FADE_ANGLE = "115deg"; // 👈 direction of the fade edge. 90deg = straight vertical edge; higher = more slanted
+const FADE_START = "0%"; // 👈 where the image is still fully transparent (left edge of the image layer)
+const FADE_FULL = "45%"; // 👈 where the image reaches full strength. Lower = harder edge, higher = softer, longer fade
+const FADE_MASK = `linear-gradient(${FADE_ANGLE}, transparent ${FADE_START}, black ${FADE_FULL})`;
+
 const ProjectsHome = () => {
   return (
     <>
@@ -72,8 +81,25 @@ const ProjectCard = ({ cat, grow }: { cat: Category; grow?: "up" | "down" }) => 
   return (
     <Link
       to={`/projects/${cat.slug}`}
-      className={`block rounded-xl border border-border bg-card hover:border-primary transition-colors duration-200 no-underline ${paddingClass}`}
+      className={`block relative overflow-hidden rounded-xl border border-border bg-card hover:border-primary transition-colors duration-200 no-underline ${paddingClass}`}
     >
+      {/* Diagonal image layer: absolute, so it can never change the card's height. Fades to transparent on its left edge,
+          so the card's own background shows through (works in light + dark with no hardcoded colors). */}
+      {cat.cardImage && (
+        <div
+          aria-hidden
+          className={`pointer-events-none absolute inset-y-0 right-0 ${IMG_WIDTH}`}
+          style={{ WebkitMaskImage: FADE_MASK, maskImage: FADE_MASK }}
+        >
+          <img
+            src={cat.cardImage}
+            alt=""
+            className={`w-full h-full object-cover ${IMG_OPACITY}`}
+            style={{ objectPosition: cat.cardImagePosition ?? "50% 50%" }}
+          />
+        </div>
+      )}
+      <div className={`relative z-10 ${cat.cardImage ? TEXT_MAX_W : ""}`}>
       <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3">
         <Icon size={16} />
       </div>
@@ -86,6 +112,7 @@ const ProjectCard = ({ cat, grow }: { cat: Category; grow?: "up" | "down" }) => 
         </span>
       </div>
       <p className="text-sm text-ink-soft font-light leading-[1.5]">{cat.desc}</p>
+      </div>
     </Link>
   );
 };

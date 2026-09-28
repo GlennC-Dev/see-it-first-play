@@ -22,6 +22,8 @@ export interface Category {
   title: string;
   desc: string;
   previewLayout: "row-list" | "grid"; // row-list = Data Viz treatment, grid = default lightbox grid
+  cardImage?: string; // 👈 optional. Image shown on the right side of this category's card on the Projects page, fading diagonally into the card. Omit = plain card.
+  cardImagePosition?: string; // 👈 optional CSS object-position for that image (crop focus), e.g. "50% 58%" = centered horizontally, 58% down. Raise the 2nd number to show lower parts of the image.
   thumbnailHeight?: number; // 👈 row-list only. Fixed px height of each row's thumbnail box at the 280px desktop width. Pick per-category based on that category's typical image ratio — see comment above the thumbnail box in ProjectCategoryPage.tsx for the full explanation.
 }
 
@@ -32,6 +34,8 @@ export const CATEGORIES: Category[] = [
     title: "Data Visualizations",
     desc: "Dashboards made for self-service consumption and automated delivery\u00A0",
     previewLayout: "row-list",
+    cardImage: "/project-photos/projects_dataviz_3_dailyrpt_1.jpg", // pilot: Agent Productivity dashboard
+    cardImagePosition: "50% 56%", // 👈 crop focus: lands on the donut + stacked bars
     thumbnailHeight: 303, // Chat Operations Dashboard's ratio (1200x1300) at 280px wide
   },
   {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Hero from "@/components/Hero";
+import ProfileHeader from "@/components/ProfileHeader";
 import HomeDesktop from "./HomeDesktop";
 import HomeMobile from "./HomeMobile";
 import { useIsPhone } from "@/hooks/useMediaQuery";
@@ -19,7 +20,7 @@ const ViewDebugWidget = ({
   override: ViewOverride;
   setOverride: (v: ViewOverride) => void;
 }) => (
-  <div className="fixed top-3 right-3 z-30 flex items-center gap-1 rounded-full border border-dashed border-primary bg-card/95 backdrop-blur-[8px] p-1 text-[0.65rem] font-mono-dm uppercase shadow-md">
+  <div className="fixed top-[5rem] right-3 z-30 flex items-center gap-1 rounded-full border border-dashed border-primary bg-card/95 backdrop-blur-[8px] p-1 text-[0.65rem] font-mono-dm uppercase shadow-md">
     {(["auto", "mobile", "desktop"] as ViewOverride[]).map((v) => (
       <button
         key={v}
@@ -42,6 +43,9 @@ const HomePanel = () => {
   return (
     <div className="bg-background transition-colors duration-300">
       <ViewDebugWidget override={override} setOverride={setOverride} />
+      {/* 👈 Mobile-only: avatar/name/positioning/theme-toggle header at the very top. On desktop
+          this identity block lives in the sidebar instead (see Shell.tsx). */}
+      {isPhone && <ProfileHeader />}
       <Hero />
       {isPhone ? <HomeMobile /> : <HomeDesktop />}
     </div>

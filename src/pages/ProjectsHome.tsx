@@ -12,10 +12,10 @@ const CATEGORY_ICONS: Record<string, typeof BarChart3> = {
 };
 
 // ── DIAGONAL CARD IMAGE TUNABLES (only used by categories that set cardImage in projects.ts) ──
-const IMG_WIDTH = "w-[50%] md:w-[50%]"; // 👈 how much of the card the image layer covers: first = phone, second = md and up
-const TEXT_MAX_W = "max-w-[62%] md:max-w-[52%]"; // 👈 caps the text column so it doesn't run under the image (phone / md and up)
+const IMG_WIDTH = "w-[40%] md:w-[40%]"; // 👈 how much of the card the image layer covers: first = phone, second = md and up
+const TEXT_MAX_W = "max-w-[56%] md:max-w-[56%]"; // 👈 caps the text column so it doesn't run under the image (phone / md and up)
 const IMG_OPACITY = "opacity-[0.9] dark:opacity-[0.55]"; // 👈 image strength: light theme / dark theme (white screenshots glare on dark cards, so dark is lower)
-const FADE_ANGLE = "115deg"; // 👈 direction of the fade edge. 90deg = straight vertical edge; higher = more slanted
+const FADE_ANGLE = "90deg"; // 👈 direction of the fade edge. 90deg = straight vertical edge; higher = more slanted
 const FADE_FULL_LIGHT = "45%"; // 👈 LIGHT theme: where the image reaches full strength (0% = fully transparent at the layer's left edge). Lower = harder edge, higher = softer, longer fade
 const FADE_FULL_DARK = "80%"; // 👈 DARK theme: same idea, but longer/softer so the bright screenshot melts into the dark card. Raise for more fade, lower for less
 const FADE_MASK_LIGHT = `linear-gradient(${FADE_ANGLE}, transparent 0%, black ${FADE_FULL_LIGHT})`;

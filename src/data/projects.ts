@@ -82,8 +82,8 @@ export const PROJECTS: Project[] = [
     tags: ["Tableau"],
     icon: "📊",
     photos: [
-      "/__l5e/assets-v1/2a15514e-1ce1-488f-ab51-f0f4ec5436d7/ces-summary.jpg",
-      "/__l5e/assets-v1/3112bf16-ea8f-4a34-b32f-9b7c30ceb716/agent-summary.jpg",
+      "/project-photos/projects_dataviz_1_ces_1.jpg",
+      "/project-photos/projects_dataviz_1_ces_2.jpg",
     ],
     photoCaptions: [
       "Per Brand and Per Chevron CES View",
@@ -102,10 +102,10 @@ export const PROJECTS: Project[] = [
     tags: ["Salesforce", "Tableau"],
     icon: "💬",
     photos: [
-      "/__l5e/assets-v1/bcb8685c-f1aa-43e8-87ef-6bf775bf995a/chat-queue.jpg",
-      "/__l5e/assets-v1/e08facd8-680b-4665-92e9-11dcf7937fab/chat-transfer.jpg",
-      "/__l5e/assets-v1/564ea05e-637a-4409-8a7e-6b2727f782d2/chat-agent-productivity.png",
-      "/__l5e/assets-v1/c67a73dd-da1d-473c-8974-027f17d32eca/ops-chat.jpg",
+      "/project-photos/projects_dataviz_2_sfchat_1.jpg",
+      "/project-photos/projects_dataviz_2_sfchat_2.jpg",
+      "/project-photos/projects_dataviz_2_sfchat_3.png",
+      "/project-photos/projects_dataviz_2_sfchat_4.jpg",
     ],
     photoCaptions: [
       "Chat Queue Performance Report",
@@ -126,9 +126,9 @@ export const PROJECTS: Project[] = [
     tags: ["Tableau"],
     icon: "👥",
     photos: [
-      "/__l5e/assets-v1/e44df178-1f31-41af-bac3-0daecd6af070/ops-1-2.jpg",
-      "/__l5e/assets-v1/355faae6-573b-4646-b9e0-2eb54cedd9d0/ops-2-2.jpg",
-      "/__l5e/assets-v1/30d94da5-edb3-4c4a-a91f-448fdcb28b47/ops-5.jpg",
+      "/project-photos/projects_dataviz_3_dailyrpt_1.jpg",
+      "/project-photos/projects_dataviz_3_dailyrpt_2.jpg",
+      "/project-photos/projects_dataviz_3_dailyrpt_3.jpg",
     ],
     photoCaptions: [
       "Agent Productivity Report for Team Leaders",
@@ -149,8 +149,8 @@ export const PROJECTS: Project[] = [
     tags: ["Tableau"],
     icon: "🗓️",
     photos: [
-      "/__l5e/assets-v1/d463df1d-a70b-498e-a63f-2c3adfd3be12/ops-3-2.jpg",
-      "/__l5e/assets-v1/63fb73ad-4edc-46c0-9f56-3d51a9cfb1b6/ops-4.jpg",
+      "/project-photos/projects_dataviz_4_queuerpt_1.jpg",
+      "/project-photos/projects_dataviz_4_queuerpt_2.jpg",
     ],
     photoCaptions: [
       "Queue Performance Report for Yesterday",
@@ -170,9 +170,9 @@ export const PROJECTS: Project[] = [
     tags: ["Tableau"],
     icon: "🧭",
     photos: [
-      "/__l5e/assets-v1/beb9651e-6210-4ee9-bcc0-c85c19b44e47/mgr-1-3.jpg",
-      "/__l5e/assets-v1/dc0a6a20-b85b-458b-9bf6-925f5d90efba/mgr-2-3.jpg",
-      "/__l5e/assets-v1/cdc915ff-49f8-4746-a31a-52e20bffbb76/mgr-3-3.jpg",
+      "/project-photos/projects_dataviz_5_mgrview_1.jpg",
+      "/project-photos/projects_dataviz_5_mgrview_2.jpg",
+      "/project-photos/projects_dataviz_5_mgrview_3.jpg",
     ],
     photoCaptions: [
       "Manager View for Technical Support Campaign",
@@ -199,11 +199,11 @@ export const PROJECTS: Project[] = [
     tags: ["Apps Script", "Google Sheets"],
     icon: "📊",
     photos: [
-      "/lovable-uploads/a737e0bf-ca8d-465b-a1ed-59c528ddc573.png",
-      "/lovable-uploads/3e9f78c1-acea-4fd3-8dd5-62ed5cbacb35.png",
-      "/lovable-uploads/40bd7441-88e5-4417-8db8-98c456091cca.png",
-      "/lovable-uploads/ae323709-74a6-4981-82e8-8f6f31f3b9ca.png",
-      "/lovable-uploads/70580fba-0ee6-42ca-af20-278084b2390f.png",
+      "/project-photos/projects_appscript_1_reportgeneration_1.png",
+      "/project-photos/projects_appscript_1_reportgeneration_2.png",
+      "/project-photos/projects_appscript_1_reportgeneration_3.png",
+      "/project-photos/projects_appscript_1_reportgeneration_4.png",
+      "/project-photos/projects_appscript_1_reportgeneration_5.png",
     ],
     photoCaptions: [
       "Apps Script function for automated data replacement and cell updating with processing counter",
@@ -222,9 +222,9 @@ export const PROJECTS: Project[] = [
     tags: ["Apps Script", "Google Workspace"],
     icon: "📬",
     photos: [
-      "/lovable-uploads/f3a360d0-8a74-4a99-b2c2-77ddae39f9a8.png",
-      "/lovable-uploads/ad346f37-c2d1-4c5d-a9e0-1d1b2dae4de1.png",
-      "/lovable-uploads/65527ee2-75a8-4c13-afc6-7ade896d0eaf.png",
+      "/project-photos/projects_appscript_2_enps_1.png",
+      "/project-photos/projects_appscript_2_enps_2.png",
+      "/project-photos/projects_appscript_2_enps_3.png",
     ],
     photoCaptions: [
       "Apps Script automation code for ENPS data processing",
@@ -241,10 +241,10 @@ export const PROJECTS: Project[] = [
     tags: ["Apps Script", "Google Workspace"],
     icon: "📋",
     photos: [
-      "/lovable-uploads/8343aa5d-877e-46af-a94f-25ded19011d7.png",
-      "/lovable-uploads/3eb1fdb2-12e9-4fc9-bbb1-0b1715cfbff3.png",
-      "/lovable-uploads/b36c299e-accf-4e5c-b342-b49ff6f282e6.png",
-      "/lovable-uploads/c8d40977-2e76-4e14-b652-ca62897cab64.png",
+      "/project-photos/projects_appscript_3_oversight_1.png",
+      "/project-photos/projects_appscript_3_oversight_2.png",
+      "/project-photos/projects_appscript_3_oversight_3.png",
+      "/project-photos/projects_appscript_3_oversight_4.png",
     ],
     photoCaptions: [
       "Automated workflow diagram for Google Forms response monitoring and maintenance",
@@ -262,10 +262,10 @@ export const PROJECTS: Project[] = [
     tags: ["Apps Script", "Google Workspace"],
     icon: "🗃️",
     photos: [
-      "/lovable-uploads/8b8f6ca2-9dd4-4a35-b743-2cd1fae1cc50.png",
-      "/lovable-uploads/8fb6f209-3b1c-4399-a77d-ecca2001dad3.png",
-      "/lovable-uploads/072b11fd-2030-4070-b161-88a524beebba.png",
-      "/lovable-uploads/2ac587d0-ceca-4814-a979-0ac42a4901ed.png",
+      "/project-photos/projects_appscript_4_dbms_1.png",
+      "/project-photos/projects_appscript_4_dbms_2.png",
+      "/project-photos/projects_appscript_4_dbms_3.png",
+      "/project-photos/projects_appscript_4_dbms_4.png",
     ],
     photoCaptions: [
       "Apps Script function for database error handling and input validation with automated notification system",
@@ -283,11 +283,11 @@ export const PROJECTS: Project[] = [
     tags: ["n8n", "API's", "RSS Feeds", "Google Workspace"],
     icon: "🧠",
     photos: [
-      "/lovable-uploads/n8n-workflow-overview.png",
-      "/lovable-uploads/n8n-telegram-trigger.png",
-      "/lovable-uploads/n8n-weather-module.png",
-      "/lovable-uploads/n8n-news-module.png",
-      "/lovable-uploads/n8n-finance-module.png",
+      "/project-photos/projects_workflowautomation_n8npa_1.png",
+      "/project-photos/projects_workflowautomation_n8npa_2.png",
+      "/project-photos/projects_workflowautomation_n8npa_3.png",
+      "/project-photos/projects_workflowautomation_n8npa_4.png",
+      "/project-photos/projects_workflowautomation_n8npa_5.png",
     ],
     photoCaptions: [
       "Complete n8n workflow architecture showing modular design with Telegram trigger, AI agents, and specialized modules for weather, news, and finance analytics",
@@ -323,13 +323,13 @@ export const PROJECTS: Project[] = [
     tags: ["Lean Six Sigma", "Stakeholder Management", "MS365"],
     icon: "🧮",
     photos: [
-      "/lovable-uploads/2f1d9041-059a-4f11-9653-919c3fff6018.png",
-      "/lovable-uploads/cb5eaa9b-eb68-4297-8294-b8514bc4579c.png",
-      "/lovable-uploads/97922668-30ac-4553-9533-2db62c4d7cc2.png",
-      "/lovable-uploads/bb22afa5-94ce-4303-9973-d641859c164f.png",
-      "/lovable-uploads/d2cf294c-1e29-439e-b863-3c186d9337d5.png",
-      "/lovable-uploads/2c311872-e2aa-4768-b86a-74f2087633fd.png",
-      "/lovable-uploads/c69851d7-984a-4534-805c-51aa29982dec.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_1.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_2.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_3.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_4.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_5.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_6.png",
+      "/project-photos/projects_casetechwriting_1_lssgb_7.png",
     ],
     photoCaptions: [
       "DEFINE: Risk Assessment and Response Plan — comprehensive risk matrix identifying financial challenges and mitigation strategies",
@@ -350,9 +350,9 @@ export const PROJECTS: Project[] = [
     tags: ["Training", "Project Management"],
     icon: "🎓",
     photos: [
-      "/lovable-uploads/1b3f7872-ed8b-4046-a4f7-9e0d69386b3d.png",
-      "/lovable-uploads/210c13ce-6684-489a-91d3-ad58432ab7b9.png",
-      "/lovable-uploads/6f3201aa-b2f1-4d27-8066-09aaf66edf94.png",
+      "/project-photos/projects_casetechwriting_2_timemgmt_1.png",
+      "/project-photos/projects_casetechwriting_2_timemgmt_2.png",
+      "/project-photos/projects_casetechwriting_2_timemgmt_3.png",
     ],
     photoCaptions: [
       "Title slide: Mastering the Art of Time — Professional Techniques for Effective Time Management",
@@ -371,9 +371,9 @@ export const PROJECTS: Project[] = [
     tags: ["Training", "Lovable.dev", "GitHub", "Prompt Engineering"],
     icon: "🧰",
     photos: [
-      "/lovable-uploads/3af5696e-3da1-4d80-a7e3-2abc61e97f87.png",
-      "/lovable-uploads/6eef3621-65c7-4ada-82f4-395829308ae6.png",
-      "/lovable-uploads/cc9dbf2d-ffab-41d6-bfeb-e706c6865811.png",
+      "/project-photos/projects_casetechwriting_3_portfoliobuilding_1.png",
+      "/project-photos/projects_casetechwriting_3_portfoliobuilding_2.png",
+      "/project-photos/projects_casetechwriting_3_portfoliobuilding_3.png",
     ],
     photoCaptions: [
       "Title slide: Building Online Portfolios for Business Insights Analysts using AI, Lovable.dev and GitHub",
@@ -392,9 +392,9 @@ export const PROJECTS: Project[] = [
     tags: ["Technical Writing", "VoIP", "SIP", "Training"],
     icon: "📡",
     photos: [
-      "/lovable-uploads/ca38b033-480b-4a83-bbeb-b743cf88aecb.png",
-      "/lovable-uploads/c80d89d2-63f6-4e64-8f7b-c1339be8a031.png",
-      "/lovable-uploads/9c4470f5-d67f-45bf-9937-0d7aa1ecf717.png",
+      "/project-photos/projects_casetechwriting_4_sip_1.png",
+      "/project-photos/projects_casetechwriting_4_sip_2.png",
+      "/project-photos/projects_casetechwriting_4_sip_3.png",
     ],
     photoCaptions: [
       "SIP Call Flow: diagram illustrating SIP trapezoid architecture with proxy servers and user agent communication",

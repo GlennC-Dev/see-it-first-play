@@ -2,6 +2,16 @@ import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { CATEGORIES, PROJECTS } from "@/data/projects";
 
+// 👈 Builds the fake address-bar path from the photo filename convention:
+//    projects_<category>_[order_]<project>_<n>.ext  ->  projects/<category>/<project>
+//    e.g. projects_dataviz_2_sfchat_1.jpg -> projects/dataviz/sfchat
+//    If a filename doesn't match, it falls back to the real route slugs so nothing ever breaks.
+const fakeAddressPath = (firstPhoto: string | null | undefined, fallback: string) => {
+  const file = firstPhoto?.split("/").pop()?.replace(/\.[^.]+$/, "") ?? "";
+  const m = file.match(/^projects_([a-z0-9]+)_(?:\d+_)?([a-z0-9]+)_\d+$/i);
+  return m ? `projects/${m[1]}/${m[2]}` : fallback;
+};
+
 const ProjectGalleryPage = () => {
   const { categorySlug, projectSlug } = useParams<{ categorySlug: string; projectSlug: string }>();
   const [photoIdx, setPhotoIdx] = useState(0);
@@ -42,7 +52,7 @@ const ProjectGalleryPage = () => {
             <span className="w-3 h-3 rounded-full bg-[#28c840]" />
           </div>
           <div className="flex-1 bg-background rounded-full px-4 py-1.5 text-[0.78rem] text-ink-soft font-mono-dm truncate">
-            topgitconsulting.tech/tableau/{project.slug ?? project.id}
+            topgitconsulting.tech/{fakeAddressPath(project.photos[0], `projects/${category.slug}/${project.slug ?? project.id}`)}
           </div>
         </div>
 

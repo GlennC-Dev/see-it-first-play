@@ -44,6 +44,8 @@ export const CATEGORIES: Category[] = [
     title: "Case Study & Technical\u00A0\nWriting",
     desc: "Turning complex workflows into clear, actionable frameworks.",
     previewLayout: "row-list",
+    cardImage: "/project-photos/projects_casetechwriting_1_lssgb_2.png", // LSSGB Measure flowchart, middle section (decision diamonds)
+    cardImagePosition: "55% 50%", // 👈 crop focus: first number = left/right, second = up/down
     thumbnailHeight: 157, // ~16:9, matches the 3 landscape slide screenshots (SIP101's portrait diagram will be cropped until its own cover image is supplied)
   },
   {
@@ -52,6 +54,8 @@ export const CATEGORIES: Category[] = [
     title: "Apps Script\u00A0\nAutomated Reports",
     desc: "Scripted reports, form maintenance, and internal tooling that replace recurring manual work.",
     previewLayout: "row-list",
+    cardImage: "/project-photos/projects_appscript_1_reportgeneration_1.png", // Apps Script editor, code section
+    cardImagePosition: "45% 40%", // 👈 crop focus: first number = left/right, second = up/down
     thumbnailHeight: 151, // avg of the 3 landscape screenshots (Report Gen, ENPS, DBMS). Google Forms Maintenance's photo is portrait (689x1217) and will crop hard until a wider cover image replaces it — same situation as SIP101 in Case Study.
   },
   {
@@ -60,6 +64,8 @@ export const CATEGORIES: Category[] = [
     title: "n8n\u00A0\nWorkflow Automations",
     desc: "End-to-end automated systems built on n8n — pipelines that trigger, process, and deliver without a person in the loop.",
     previewLayout: "row-list",
+    cardImage: "/project-photos/projects_workflowautomation_n8npa_4.png", // n8n Current Events Module, RSS + Merge nodes
+    cardImagePosition: "42% 45%", // 👈 crop focus: first number = left/right, second = up/down
     thumbnailHeight: 198, // matches N8N-Powered Personal Assistant's own ratio (1065x752) exactly — only 1 project right now, so zero crop. Recalculate once more projects are added with different ratios.
   },
   {

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ScrollReveal from "./ScrollReveal";
+import { SOCIAL_LINKS } from "@/data/socials";
 import { Facebook, Linkedin, Github, FileDown, ChevronDown, Mail } from "lucide-react";
 import {
   DropdownMenu,
@@ -15,11 +16,7 @@ const RESUME_ATS_URL = "https://drive.google.com/file/d/REPLACE_WITH_ATS_FILE_ID
 // 👈 Contact info placeholders — swap these for your real details. Kept as plain constants up
 // top (instead of scattered inline) so they're easy to find and edit in one place.
 const CONTACT_EMAIL = "you@example.com"; // 👈 swap for your real email
-const SOCIAL_LINKS = {
-  facebook: "https://facebook.com/REPLACE_WITH_YOUR_HANDLE", // 👈 swap in your real Facebook URL
-  linkedin: "https://linkedin.com/in/REPLACE_WITH_YOUR_HANDLE", // 👈 swap in your real LinkedIn URL
-  github: "https://github.com/REPLACE_WITH_YOUR_HANDLE", // 👈 swap in your real GitHub URL
-};
+
 
 // "What happens next" 3-step copy — locked.
 const STEPS = [

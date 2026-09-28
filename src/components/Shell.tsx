@@ -6,6 +6,9 @@ import {
   Layers,
   User,
   Mail,
+  Facebook,
+  Linkedin,
+  Github,
 } from "lucide-react";
 import {
   Sidebar,
@@ -24,6 +27,7 @@ import Footer from "@/components/Footer";
 import ChatWidget, { type ChatWidgetHandle } from "@/components/ChatWidget";
 import BottomNav from "@/components/BottomNav";
 import ThemeToggle from "@/components/ThemeToggle";
+import { SOCIAL_LINKS } from "@/data/socials";
 
 const NAV_ITEMS = [
   { to: "/", label: "Home", icon: Home, end: true },
@@ -41,27 +45,52 @@ const Shell = () => {
     <SidebarProvider>
       <Sidebar collapsible="icon">
         <SidebarHeader className="p-4">
-          {/* 👈 Avatar + name + positioning + theme toggle. Social icons (LinkedIn/GitHub) were
-              removed from here — socials live on the Contact page. w-11 h-11 = avatar size;
-              gap-3 = space between avatar and text. In collapsed-icon mode only the avatar shows. */}
-          <div className="flex items-center gap-3 group-data-[collapsible=icon]:justify-center">
-            <div className="w-11 h-11 rounded-full bg-blue-dim overflow-hidden shrink-0 border border-border">
+          {/* 👈 Expanded sidebar: large cutout avatar, name, positioning, then one row of round
+              buttons (3 socials + theme toggle), then a divider above the nav. Modeled on the
+              reference layout, with your own values. Hidden entirely when the sidebar collapses
+              to icons — the small circle avatar below takes over there. */}
+          <div className="flex flex-col items-center text-center group-data-[collapsible=icon]:hidden">
+            {/* Avatar size: w-[clamp(120px,18vh,160px)] = min / preferred (18% of viewport height)
+                / max. Tied to viewport height so it doesn't push the nav off short screens. */}
+            <span className="relative block w-[clamp(120px,18vh,160px)] aspect-square">
+              {/* Soft glow behind the figure — bg-primary/25 = glow strength, blur-2xl = spread */}
+              <span className="absolute inset-x-[4%] top-[18%] bottom-0 rounded-full bg-primary/25 blur-2xl pointer-events-none" />
+              {/* The mask fades the bottom edge and shoulders into the sidebar while the head stays
+                  fully opaque. 50% = where the fade starts; raise it for a later/softer fade. */}
               <img
                 src="/avatar.png"
                 alt="Glenn Charifa"
-                className="w-full h-full object-cover object-top"
+                className="relative block w-full h-full object-contain object-bottom [mask-image:radial-gradient(ellipse_80%_86%_at_50%_24%,#000_50%,transparent_100%)] [-webkit-mask-image:radial-gradient(ellipse_80%_86%_at_50%_24%,#000_50%,transparent_100%)]"
               />
+            </span>
+            <span className="mt-4 font-semibold text-lg leading-tight text-foreground">Glenn Charifa</span>
+            <span className="mt-1 text-[0.8rem] text-ink-muted">Data and Automation</span>
+
+            {/* Round-button row. w-9 h-9 = button size (change here AND the size prop on
+                ThemeToggle below together); gap-2.5 = spacing between buttons; mt-4 = space above. */}
+            <div className="mt-4 flex items-center gap-2.5">
+              <a href={SOCIAL_LINKS.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-ink-soft hover:border-primary hover:text-primary transition-colors duration-200">
+                <Facebook size={15} />
+              </a>
+              <a href={SOCIAL_LINKS.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-ink-soft hover:border-primary hover:text-primary transition-colors duration-200">
+                <Linkedin size={15} />
+              </a>
+              <a href={SOCIAL_LINKS.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                className="w-9 h-9 rounded-full border border-border flex items-center justify-center text-ink-soft hover:border-primary hover:text-primary transition-colors duration-200">
+                <Github size={15} />
+              </a>
+              <ThemeToggle size="w-9 h-9" />
             </div>
-            <div className="flex flex-col min-w-0 flex-1 group-data-[collapsible=icon]:hidden">
-              <span className="font-semibold text-sm text-foreground truncate">
-                Glenn Charifa
-              </span>
-              <span className="text-xs text-ink-muted truncate">
-                Data and Automation
-              </span>
-            </div>
-            <div className="group-data-[collapsible=icon]:hidden">
-              <ThemeToggle />
+            {/* Divider above the nav — mt-4 = space between the buttons and the line */}
+            <div className="mt-4 h-px w-full bg-border" />
+          </div>
+
+          {/* Collapsed (icon-only) sidebar: just a small round avatar */}
+          <div className="hidden group-data-[collapsible=icon]:flex justify-center">
+            <div className="w-8 h-8 rounded-full bg-blue-dim overflow-hidden border border-border">
+              <img src="/avatar.png" alt="Glenn Charifa" className="w-full h-full object-cover object-top" />
             </div>
           </div>
         </SidebarHeader>

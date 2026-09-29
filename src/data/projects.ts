@@ -14,6 +14,10 @@ export interface Project {
   category: string;
   link?: string;
   linkLabel?: string;
+  photoViewerScroll?: boolean; // 👈 PILOT (CES only for now). true = show the photo at full natural
+  // width and let a tall screenshot scroll vertically inside a fixed-height window, like a real
+  // browser on a page taller than the viewport. Omit/false = old shrink-to-fit behavior. See
+  // ProjectGalleryPage.tsx for the two render paths.
 }
 
 export interface Category {
@@ -100,6 +104,7 @@ export const PROJECTS: Project[] = [
       "Team-Agent Performance View",
     ],
     category: "Data Visualizations",
+    photoViewerScroll: true, // 👈 pilot — see the field comment on the Project interface above
   },
   {
     id: 16,

@@ -57,26 +57,47 @@ const ProjectGalleryPage = () => {
         </div>
 
         {/* Photo viewer */}
-        {/* 👈 aspect-[4/3] is the actual fix: it makes this box's height a direct function of its
-            width (spec-guaranteed, no ambiguity), matching the reference repo's own convention for
-            every image-in-a-box case (see .pain-stack__thumb etc in the reference's extensions.css) —
-            aspect-ratio + object-fit, no Flexbox/Grid involved. The two previous attempts (Flexbox
-            percentage-height, then CSS Grid auto-track) both failed the same way: something in the
-            chain was sizing against an INDEFINITE value (an unset height, or a track auto-sized to
-            the image's own intrinsic width), so a percentage/max-width cap became a no-op. This
-            removes that category of bug entirely rather than working around it. 4/3 is a plain
-            guess at a reasonable frame shape — tune it here, it only affects how much letterbox
-            space shows (object-contain never crops, so correctness doesn't depend on this number). */}
+        {/* 👈 Two render paths, chosen by project.photoViewerScroll:
+            - false/omitted (default, every project except the CES pilot): "fit" mode — aspect-[4/3]
+              box + object-contain. Makes the box's height a direct function of its width (spec-
+              guaranteed, no ambiguity) — this is what finally fixed the earlier cross-browser
+              clipping bug (Flexbox percentage-height and CSS Grid auto-track both failed because
+              something in the chain sized against an INDEFINITE value).
+            - true (CES pilot): "scroll" mode — image at natural full width, tall screenshots scroll
+              vertically inside a fixed-height window, the way a real browser handles a page taller
+              than its viewport. This is the closer match to the reference repo's actual fake-browser
+              pattern (a real, reflowable page in a scrollable frame) — ours are static screenshots
+              so they can't reflow, but "show at natural size, scroll for the rest" is the same idea
+              applied to a raster image. width:100% height:auto is about the most bulletproof CSS
+              sizing there is — no fit/shrink math, so none of the three previous bugs can recur here.
+            Buttons live OUTSIDE the scrolling/fitting inner box (as siblings, in this shared relative
+            wrapper) so they stay fixed on screen in both modes instead of scrolling away with content. */}
         <div className="bg-[#111] flex flex-col items-center">
-          <div className="relative w-full aspect-[4/3] overflow-hidden">
-            {project.photos[photoIdx] ? (
-              <img
-                src={project.photos[photoIdx]!}
-                alt={project.title}
-                className="w-full h-full object-contain"
-              />
+          <div className="relative w-full">
+            {project.photoViewerScroll ? (
+              <div className="w-full h-[clamp(360px,70vh,640px)] overflow-y-auto overflow-x-hidden">
+                {project.photos[photoIdx] ? (
+                  <img
+                    src={project.photos[photoIdx]!}
+                    alt={project.title}
+                    className="w-full h-auto block"
+                  />
+                ) : (
+                  <div className="text-[5rem] opacity-10 flex items-center justify-center h-full">{project.icon}</div>
+                )}
+              </div>
             ) : (
-              <div className="text-[5rem] opacity-10">{project.icon}</div>
+              <div className="w-full aspect-[4/3] overflow-hidden">
+                {project.photos[photoIdx] ? (
+                  <img
+                    src={project.photos[photoIdx]!}
+                    alt={project.title}
+                    className="w-full h-full object-contain"
+                  />
+                ) : (
+                  <div className="text-[5rem] opacity-10 flex items-center justify-center h-full">{project.icon}</div>
+                )}
+              </div>
             )}
             {photoCount > 1 && (
               <>

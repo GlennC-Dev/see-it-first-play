@@ -57,17 +57,21 @@ const ProjectGalleryPage = () => {
         </div>
 
         {/* Photo viewer */}
-        {/* 👈 h-[62vh] gives this box a DEFINITE height for the image to measure against — the
-            previous min-h-only + w-full/h-full-on-the-img combo left the image's box height
-            undefined on some mobile browsers, so it rendered near native pixel size and got
-            clipped by this card's overflow-hidden instead of shrinking to fit. */}
-        <div className="bg-[#111] relative flex flex-col items-center justify-center h-[62vh] min-h-[420px]">
-          <div className="relative flex items-center justify-center w-full flex-1 min-h-0">
+        {/* 👈 Stage height: clamp(floor, vw-scale, ceiling) — vw-driven, not vh. Tuned to match the
+            reference repo's .ext-card__stage pattern (same fake-browser-window idea), which is what
+            actually adapts correctly across mobile browsers. Two numbers to hand-tune: the vw
+            multiplier (how fast it grows with screen width) and the ceiling (max height on wide
+            screens/desktop). Floor stops it collapsing too small on narrow phones. */}
+        <div className="bg-[#111] flex flex-col items-center">
+          <div className="relative grid place-items-center w-full h-[clamp(360px,88vw,560px)] overflow-hidden">
             {project.photos[photoIdx] ? (
               <img
                 src={project.photos[photoIdx]!}
                 alt={project.title}
-                className="max-w-full max-h-full object-contain"
+                // 👈 w-auto/h-auto + max-w/max-h is the part Flexbox handled inconsistently across
+                // mobile browsers (a replaced element's default shrink behavior in a flex box is
+                // browser-dependent); Grid + explicit auto sizing is unambiguous everywhere.
+                className="w-auto h-auto max-w-full max-h-full object-contain"
               />
             ) : (
               <div className="text-[5rem] opacity-10">{project.icon}</div>

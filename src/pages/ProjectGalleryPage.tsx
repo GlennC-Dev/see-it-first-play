@@ -57,21 +57,23 @@ const ProjectGalleryPage = () => {
         </div>
 
         {/* Photo viewer */}
-        {/* 👈 Stage height: clamp(floor, vw-scale, ceiling) — vw-driven, not vh. Tuned to match the
-            reference repo's .ext-card__stage pattern (same fake-browser-window idea), which is what
-            actually adapts correctly across mobile browsers. Two numbers to hand-tune: the vw
-            multiplier (how fast it grows with screen width) and the ceiling (max height on wide
-            screens/desktop). Floor stops it collapsing too small on narrow phones. */}
+        {/* 👈 aspect-[4/3] is the actual fix: it makes this box's height a direct function of its
+            width (spec-guaranteed, no ambiguity), matching the reference repo's own convention for
+            every image-in-a-box case (see .pain-stack__thumb etc in the reference's extensions.css) —
+            aspect-ratio + object-fit, no Flexbox/Grid involved. The two previous attempts (Flexbox
+            percentage-height, then CSS Grid auto-track) both failed the same way: something in the
+            chain was sizing against an INDEFINITE value (an unset height, or a track auto-sized to
+            the image's own intrinsic width), so a percentage/max-width cap became a no-op. This
+            removes that category of bug entirely rather than working around it. 4/3 is a plain
+            guess at a reasonable frame shape — tune it here, it only affects how much letterbox
+            space shows (object-contain never crops, so correctness doesn't depend on this number). */}
         <div className="bg-[#111] flex flex-col items-center">
-          <div className="relative grid place-items-center w-full h-[clamp(360px,88vw,560px)] overflow-hidden">
+          <div className="relative w-full aspect-[4/3] overflow-hidden">
             {project.photos[photoIdx] ? (
               <img
                 src={project.photos[photoIdx]!}
                 alt={project.title}
-                // 👈 w-auto/h-auto + max-w/max-h is the part Flexbox handled inconsistently across
-                // mobile browsers (a replaced element's default shrink behavior in a flex box is
-                // browser-dependent); Grid + explicit auto sizing is unambiguous everywhere.
-                className="w-auto h-auto max-w-full max-h-full object-contain"
+                className="w-full h-full object-contain"
               />
             ) : (
               <div className="text-[5rem] opacity-10">{project.icon}</div>

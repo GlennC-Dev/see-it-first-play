@@ -87,7 +87,7 @@ export const PROJECTS: Project[] = [
   // ============================================================
   {
     id: 15,
-    title: "Customer Experience Dashboard",
+    title: "CES Dashboard",
     slug: "customer-experience-dashboard",
     desc: "A self-service Customer Experience Score dashboard suite spanning brand, chevron, team leader, and agent-day views — giving operations and team leaders direct visibility into CSAT, CES, and NPS trends without a single manual report request.",
     impact: "CX Performance at Every Grain — Without Asking for It",

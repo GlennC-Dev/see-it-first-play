@@ -45,7 +45,11 @@ const ProjectGalleryPage = () => {
       </div>
 
       <div className="bg-card border border-border rounded-lg overflow-hidden max-w-[1000px] mx-auto shadow-lg">
-        {/* Fake browser chrome */}
+        {/* Fake browser chrome — skipped for the iframe pilot: .ppanel--frame below is the
+            reference's own self-contained unit (its own FrameBar + stage, nothing wrapping it).
+            Rendering both was exactly the "browser within a browser" bug — stacking our chrome
+            around their self-contained component instead of letting it stand alone. */}
+        {!project.photoViewerIframe && (
         <div className="flex items-center gap-4 px-4 py-3 bg-border/40 border-b border-border">
           <div className="flex gap-1.5">
             <span className="w-3 h-3 rounded-full bg-[#ff5f57]" />
@@ -56,6 +60,7 @@ const ProjectGalleryPage = () => {
             topgitconsulting.tech/{fakeAddressPath(project.photos[0], `projects/${category.slug}/${project.slug ?? project.id}`)}
           </div>
         </div>
+        )}
 
         {/* Photo viewer */}
         {/* 👈 Two render paths, chosen by project.photoViewerScroll:

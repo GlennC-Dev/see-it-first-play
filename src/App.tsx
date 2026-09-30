@@ -15,6 +15,7 @@ import ProjectGalleryPage from "./pages/ProjectGalleryPage.tsx";
 import SkillsExperiencePanel from "./pages/panels/SkillsExperiencePanel.tsx";
 import AboutPanel from "./pages/panels/AboutPanel.tsx";
 import ContactPanel from "./pages/panels/ContactPanel.tsx";
+import ReferenceTest from "./pages/ReferenceTest.tsx";
 import NotFound from "./pages/NotFound.tsx";
 import ScrollToTop from "./components/ScrollToTop.tsx";
 
@@ -193,6 +194,7 @@ const App = () => {
                 <Route path="/skills-experience" element={<SkillsExperiencePanel />} />
                 <Route path="/about" element={<AboutPanel />} />
                 <Route path="/contact" element={<ContactPanel />} />
+                <Route path="/reference-test" element={<ReferenceTest />} />
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>

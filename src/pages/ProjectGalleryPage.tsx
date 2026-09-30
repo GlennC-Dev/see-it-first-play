@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { CATEGORIES, PROJECTS } from "@/data/projects";
+import { FrameBar, LiveFrame } from "@/components/LiveFrame";
 
 // 👈 Builds the fake address-bar path from the photo filename convention:
 //    projects_<category>_[order_]<project>_<n>.ext  ->  projects/<category>/<project>
@@ -74,7 +75,23 @@ const ProjectGalleryPage = () => {
             wrapper) so they stay fixed on screen in both modes instead of scrolling away with content. */}
         <div className="bg-[#111] flex flex-col items-center">
           <div className="relative w-full">
-            {project.photoViewerScroll ? (
+            {project.photoViewerIframe ? (
+              // 👈 Pilot #2 — the reference repo's actual mechanism, ported directly (see
+              // src/components/LiveFrame.tsx and src/styles/ppanel.css, both copied verbatim from
+              // portfolio-template). An <iframe>'s own box is sized purely by its own width/height
+              // CSS, with no competing intrinsic-content-size the way an <img> has, so the earlier
+              // cropping bug structurally can't recur here.
+              <div className="ppanel ppanel--frame ppanel--pilot-inline">
+                <FrameBar
+                  host="topgitconsulting.tech"
+                  path={`/${fakeAddressPath(project.photos[photoIdx], `projects/${category.slug}/${project.slug ?? project.id}`)}`}
+                />
+                <LiveFrame
+                  src={`/photo-frame.html?src=${encodeURIComponent(project.photos[photoIdx] ?? "")}`}
+                  title={project.title}
+                />
+              </div>
+            ) : project.photoViewerScroll ? (
               <div className="w-full h-[clamp(360px,70vh,640px)] overflow-y-auto overflow-x-hidden">
                 {project.photos[photoIdx] ? (
                   <img

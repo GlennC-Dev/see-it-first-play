@@ -17,7 +17,12 @@ export interface Project {
   photoViewerScroll?: boolean; // 👈 PILOT (CES only for now). true = show the photo at full natural
   // width and let a tall screenshot scroll vertically inside a fixed-height window, like a real
   // browser on a page taller than the viewport. Omit/false = old shrink-to-fit behavior. See
-  // ProjectGalleryPage.tsx for the two render paths.
+  // ProjectGalleryPage.tsx for the render paths.
+  photoViewerIframe?: boolean; // 👈 PILOT #2 — loads the photo inside public/photo-frame.html via a
+  // real <iframe> instead of an <img> tag. Ports the reference repo's actual mechanism (LiveFrame in
+  // ProjectPanels.tsx): an iframe's box is sized purely by its own width/height CSS, with no
+  // competing intrinsic-content-size the way an <img> has, so none of the earlier cropping bugs can
+  // recur here. Takes priority over photoViewerScroll if both are somehow set.
 }
 
 export interface Category {
@@ -105,6 +110,27 @@ export const PROJECTS: Project[] = [
     ],
     category: "Data Visualizations",
     photoViewerScroll: true, // 👈 pilot — see the field comment on the Project interface above
+  },
+  {
+    id: 20,
+    title: "CES Dashboard (iframe pilot)",
+    slug: "ces-iframe-pilot",
+    desc: "Same two CES screenshots as the CES Dashboard project above, rendered through a different mechanism: each photo loads inside public/photo-frame.html via a real <iframe>, ported from the reference repo's LiveFrame pattern — for comparing directly against the scroll-mode version.",
+    impact: "Pilot — compare against CES Dashboard",
+    frequency: "On-Demand (Self-Service)",
+    audience: "Operations & Team Leaders",
+    tags: ["Tableau"],
+    icon: "🧪",
+    photos: [
+      "/project-photos/projects_dataviz_1_ces_1.jpg",
+      "/project-photos/projects_dataviz_1_ces_2.jpg",
+    ],
+    photoCaptions: [
+      "Per Brand and Per Chevron CES View",
+      "Team-Agent Performance View",
+    ],
+    category: "Data Visualizations",
+    photoViewerIframe: true, // 👈 pilot #2 — see the field comment on the Project interface above
   },
   {
     id: 16,
